@@ -1,0 +1,17 @@
+Package: caRecall
+Title: Government of Canada Vehicle Recalls Database API Wrapper
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Nathan",
+           family = "Smith",
+           role = c("aut", "cre"),
+           email = "temp@example.com")
+Description: API wrapper for the Government of Canada Vehicle Recalls Database <'https://tc.api.canada.ca/en/detail?api=VRDB'>
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
