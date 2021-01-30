@@ -7,7 +7,7 @@
 get_vrd_api()
 }
 \value{
-a string that contains your VRD api key
+A string that is your VRD_API key
 }
 \description{
 get_vrd_api
