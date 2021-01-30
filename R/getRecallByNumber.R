@@ -12,11 +12,11 @@
 get_recall_by_number <- function(recall_number) {
 
     # format the url string
-    u <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/recall-number/"
-    u <- paste(u, toString(recall_number), sep="")
+    url_ <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/recall-number/"
+    url_ <- paste(url_, toString(recall_number), sep="")
 
     # query the api
-    r <- GET(u, add_headers("user-key"=Sys.getenv("VRD_API")))
-    c <- content(r)
-    return(c)
+    response <- GET(url_, add_headers("user-key"=Sys.getenv("VRD_API")))
+    content(response)
+
 }
