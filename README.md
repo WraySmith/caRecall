@@ -27,7 +27,7 @@ devtools::install_github("WraySmith/caRecall")
 
 ## Set up
 You'll need an api key from the website at the top of this read me.  
-Then run `Sys.setenv(VRD_API = "your_api_key_here")`
+Then run `Sys.setenv(VRD_API = "your_api_key_here")` in your R terminal.
 
 ## Example
 
