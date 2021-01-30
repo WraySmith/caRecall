@@ -25,6 +25,9 @@ And the development version from [GitHub](https://github.com/) with:
 devtools::install_github("WraySmith/caRecall")
 ```
 
+First, get an api key from the website at the top of this read me.  
+Then run `Sys.setenv(VRD_API = "your_api_key_here")`
+
 ## Example
 
 This is a basic example which shows you how to solve a common problem:
