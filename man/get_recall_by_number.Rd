@@ -16,5 +16,7 @@ url response
 get_recall_by_number
 }
 \examples{
+\dontrun{
 get_recall_by_number(1977044)
+}
 }

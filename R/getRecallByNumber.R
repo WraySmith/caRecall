@@ -6,7 +6,9 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' get_recall_by_number(1977044)
+#' }
 get_recall_by_number <- function(recall_number) {
 
     # format the url string
