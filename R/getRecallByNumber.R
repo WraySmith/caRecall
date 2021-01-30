@@ -18,7 +18,7 @@ get_recall_by_number <- function(recall_number) {
     url_ <- paste(url_, toString(recall_number), sep="")
 
     # query the api
-    response <- GET(url_, add_headers("user-key"=Sys.getenv("VRD_API")))
-    content(response)
+    response <- httr::GET(url_, add_headers("user-key"=Sys.getenv("VRD_API")))
+    httr::content(response)
 
 }
