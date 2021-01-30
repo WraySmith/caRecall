@@ -10,5 +10,5 @@ get_vrd_api <- function() {
     if (x == "") {
         stop("You must set your VRD_API with `Sys.setenv(VRD_API = 'your_api_key_here')`")
     }
-    return(x)
+    x
 }
