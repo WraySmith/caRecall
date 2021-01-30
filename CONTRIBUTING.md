@@ -1,6 +1,6 @@
 # How to contribute to caRecall
 
-This project was made as an API wrapper for the Canda [Vehicle Recall Database API](https://tc.api.canada.ca/en/detail?api=VRDB)
+This project was made as an API wrapper for the Canda [Vehicle Recall Database API](https://tc.api.canada.ca/en/detail?api=VRDB). Please read through the [Code of Conduct](https://github.com/WraySmith/caRecall/blob/setup_contributions/CODE_OF_CONDUCT.md) before making any contributions.
 
 ## Testing
 
