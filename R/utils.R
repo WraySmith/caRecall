@@ -1,16 +1,13 @@
-library(jsonlite)
-
-#' get_secrets
+#' get_vrd_api
 #'
-#' @return map of keys by name to their values
+#' @return A string that is your VRD_API key
 #' @export
 #'
 #' @examples
-get_secrets <- function() {
-    path <- "./secrets.txt"
-    if (!file.exists(path)) {
-        stop("Can't find secret file: '", path, "'")
+get_vrd_api <- function() {
+    x <- Sys.getenv("VRD_API")
+    if (x == "") {
+        stop("You must set your VRD_API with `Sys.setenv(VRD_API = 'xxxxx')`")
     }
-
-    jsonlite::read_json(path)
+    return(x)
 }
