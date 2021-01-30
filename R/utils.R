@@ -4,6 +4,7 @@
 #' @export
 #'
 #' @examples
+#' get_vrd_api()
 get_vrd_api <- function() {
     x <- Sys.getenv("VRD_API")
     if (x == "") {
