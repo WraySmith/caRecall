@@ -10,6 +10,8 @@
 #' get_recall_by_number(1977044)
 #' }
 get_recall_by_number <- function(recall_number) {
+    # TODO : add error handeling, parsing, provide S3 output class, and setting a user agent
+    # refer to: https://httr.r-lib.org/articles/api-packages.html
 
     # format the url string
     url_ <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/recall-number/"
