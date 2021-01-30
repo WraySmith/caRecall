@@ -35,8 +35,8 @@ Although the style guide explains the “what” and the “why”, another impo
 - styler::style_pkg() restyles an entire R package.
 - styler::style_dir() restyles all files in a directory.
 - usethis::use_tidy_style() is wrapper that applies one of the above functions depending on whether the current project is an R package or not.
--styler::style_file() restyles a single file.
--styler::style_text() restyles a character vector.
+- styler::style_file() restyles a single file.
+- styler::style_text() restyles a character vector.
 
 
 Thanks,
