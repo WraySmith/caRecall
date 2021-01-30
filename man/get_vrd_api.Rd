@@ -12,3 +12,6 @@ A string that is your VRD_API key
 \description{
 get_vrd_api
 }
+\examples{
+get_vrd_api()
+}

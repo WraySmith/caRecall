@@ -1,6 +1,3 @@
-# where does this go?
-library(httr)
-
 #' get_recall_by_number
 #'
 #' @param recall_number An integer
