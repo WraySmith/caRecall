@@ -13,5 +13,5 @@ vrd_api class
 helper function for querying api database
 }
 \examples{
-call_vrd_api()()
+call_vrd_api()
 }

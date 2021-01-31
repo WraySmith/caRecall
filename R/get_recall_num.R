@@ -1,6 +1,6 @@
 #ua <- user_agent("http://github.com/WrathSmith/caRecall")
 #ua
-#' recall_by_number
+#' get_recall_num
 #'
 #' @param recall_number An integer
 #'
@@ -9,9 +9,9 @@
 #'
 #' @examples
 #' \dontrun{
-#' recall_by_number(1977044)
+#' get_recall_num(1977044)
 #' }
-recall_by_number <- function(recall_number) {
+get_recall_num <- function(recall_number) {
 
     # format the url string
     url_ <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/recall-number/"
@@ -23,7 +23,7 @@ recall_by_number <- function(recall_number) {
 
 }
 #Provides S3 output.
-print.recall_by_number <- function(x, ...){
+print.get_recall_num <- function(x, ...){
     cat("<Recall_Number ", x$number, ">/n", sep = "") #Was not sure as to the exact notation of this part.  Wasn't clear in example.
     str(x$content)
     invisible(x)
