@@ -2,7 +2,7 @@
 #ua
 #' get_recall_by_number
 #'
-#' @param manufactuer: A car manufactuer name (ie. Honda, Nissan, etc.)
+#' @param manufacturer: A car manufacturer name (ie. Honda, Nissan, etc.)
 #' limit: Number of records to return (default is 25)
 #' page: the serach page result to return (default is 1)
 #'
@@ -14,12 +14,12 @@
 #' \dontrun{
 #' get_recall_by_number(1977044)
 #' }
-recall_manufactuer <- function(manufactuer, limit=25, page=1) {
+recall_manufacturer <- function(manufacturer, limit=25, page=1) {
 
     # refer to: https://httr.r-lib.org/articles/api-packages.html
 
     # format the url string
-    url_ <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/manufactuer-name/"
+    url_ <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/manufacturer-name/"
     url_ <- paste(url_, toString(manufactuer), sep="")
 
     # query the api
@@ -50,7 +50,7 @@ recall_manufactuer <- function(manufactuer, limit=25, page=1) {
     structure(
         list(
             content = parsed,
-            name = manufactuer,
+            name = manufacturer,
             response = response
         ),
         class = "recall_manufactuer"
@@ -59,7 +59,7 @@ recall_manufactuer <- function(manufactuer, limit=25, page=1) {
 }
 #Provides S3 output.
 print.get_recall_by_number <- function(x, ...){
-    cat("<Manufactuer ", x$name, ">/n", sep = "") #Was not sure as to the exact notation of this part.  Wasn't clear in example.
+    cat("<Manufacturer ", x$name, ">/n", sep = "") #Was not sure as to the exact notation of this part.  Wasn't clear in example.
     str(x$content)
     invisible(x)
 }
