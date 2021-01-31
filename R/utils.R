@@ -22,7 +22,7 @@ get_vrd_api <- function() {
 #' @export
 #'
 #' @examples
-#' call_vrd_api()()
+#' call_vrd_api()
 
 call_vrd_api <- function(url_, query, limit=25, page=1){
 
@@ -58,5 +58,6 @@ call_vrd_api <- function(url_, query, limit=25, page=1){
         ),
         class = "vrd_api"
     )
+
 }
 
