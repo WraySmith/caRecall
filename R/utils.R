@@ -12,3 +12,51 @@ get_vrd_api <- function() {
     }
     x
 }
+
+
+#' call_vrd_api()
+#'
+#'helper function for querying api database
+#'
+#' @return vrd_api class
+#' @export
+#'
+#' @examples
+#' call_vrd_api()()
+
+call_vrd_api <- function(url_, query, limit=25, page=1){
+
+    # query the api
+    response <- httr::GET(url_, httr::add_headers("user-key"=get_vrd_api(),"limit"=limit, "page"=page))
+
+    #check to verify json response
+    if (httr::http_type(response) != "application/json") {
+        stop("API did not return json", call. = FALSE)
+    }
+
+    #parses response
+    parsed <- jsonlite::fromJSON(httr::content(response, "text"), simplifyVector = FALSE)
+
+    if (httr::status_code(response) != 200) {
+        stop(
+            sprintf(
+                "Vehicle Recall Database request failed [%s]\n%s\n<%s>",
+                httr::status_code(response),
+                parsed$message,
+                parsed$documentation_url
+            ),
+            call. = FALSE
+        )
+    }
+
+
+    structure(
+        list(
+            content = parsed,
+            name = query,
+            response = response
+        ),
+        class = "vrd_api"
+    )
+}
+
