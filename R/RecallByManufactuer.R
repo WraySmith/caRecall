@@ -53,7 +53,7 @@ recall_manufacturer <- function(manufacturer, limit=25, page=1) {
             name = manufacturer,
             response = response
         ),
-        class = "recall_manufactuer"
+        class = "vrd_api"
     )
 
 }

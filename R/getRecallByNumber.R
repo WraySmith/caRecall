@@ -50,7 +50,7 @@ get_recall_by_number <- function(recall_number) {
             number = recall_number,
             response = response
         ),
-        class = "recall_by_number"
+        class = "vrd_api"
     )
 
 }
