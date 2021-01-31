@@ -1,5 +1,5 @@
-ua <- user_agent("http://github.com/WrathSmith/caRecall")
-ua
+#ua <- user_agent("http://github.com/WrathSmith/caRecall")
+#ua
 #' get_recall_by_number
 #'
 #' @param recall_number An integer
@@ -11,7 +11,7 @@ ua
 #' \dontrun{
 #' get_recall_by_number(1977044)
 #' }
-recall_by_number <- function(recall_number) {
+get_recall_by_number <- function(recall_number) {
 
     # refer to: https://httr.r-lib.org/articles/api-packages.html
 
@@ -47,7 +47,7 @@ recall_by_number <- function(recall_number) {
     structure(
         list(
             content = parsed,
-            path = path,
+            number = recall_number,
             response = response
         ),
         class = "recall_by_number"
@@ -55,10 +55,10 @@ recall_by_number <- function(recall_number) {
 
 }
 #Provides S3 output.
-print.recall_by_number <- function(x, ...){
-    cat("<Recall_Number ", x$path, ">/n", sep = "") #Was not sure as to the exact notation of this part.  Wasn't clear in example.
+print.get_recall_by_number <- function(x, ...){
+    cat("<Recall_Number ", x$number, ">/n", sep = "") #Was not sure as to the exact notation of this part.  Wasn't clear in example.
     str(x$content)
-    invisibile(x)
+    invisible(x)
 }
 
 
