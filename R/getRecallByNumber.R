@@ -4,7 +4,7 @@ ua
 #'
 #' @param recall_number An integer
 #'
-#' @return url response
+#' @return text output
 #' @export
 #'
 #' @examples
@@ -30,11 +30,11 @@ recall_by_number <- function(recall_number) {
     #parses response
     parsed <- jsonlite::fromJSON(content(response, "text"), simplifyVector = FALSE)
 
-    if (status_code(resp) != 200) {
+    if (status_code(response) != 200) {
         stop(
             sprintf(
                 "Vehicle Recall Database request failed [%s]\n%s\n<%s>",
-                status_code(resp),
+                status_code(response),
                 parsed$message,
                 parsed$documentation_url
             ),
