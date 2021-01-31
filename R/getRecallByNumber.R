@@ -1,3 +1,5 @@
+ua <- user_agent("http://github.com/WrathSmith/caRecall")
+ua
 #' get_recall_by_number
 #'
 #' @param recall_number An integer
@@ -9,8 +11,8 @@
 #' \dontrun{
 #' get_recall_by_number(1977044)
 #' }
-get_recall_by_number <- function(recall_number) {
-    # TODO : add error handeling, parsing, provide S3 output class, and setting a user agent
+recall_by_number <- function(recall_number) {
+
     # refer to: https://httr.r-lib.org/articles/api-packages.html
 
     # format the url string
@@ -19,6 +21,33 @@ get_recall_by_number <- function(recall_number) {
 
     # query the api
     response <- httr::GET(url_, add_headers("user-key"=Sys.getenv("VRD_API")))
-    httr::content(response)
+
+    #check to verify json response
+    if (http_type(response) != "application/json") {
+        stop("API did not return json", call. = FALSE)
+    }
+
+    #parses response
+    jsonlite::fromJSON(content(response, "text"), simplifyVector = FALSE)
+
+    #httr::content(response)
+
+    structure(
+        list(
+            content = parsed,
+            path = path,
+            response = response
+        ),
+        class = "recall_by_number"
+    )
 
 }
+#Provides S3 output.
+print.recall_by_number <- function(x, ...){
+    cat("<Recall_Number ", x$path, ">/n", sep = "") #Was not sure as to the exact notation of this part.  Wasn't clear in example.
+    str(x$content)
+    invisibile(x)
+}
+
+
+
