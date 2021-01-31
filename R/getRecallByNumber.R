@@ -28,7 +28,19 @@ recall_by_number <- function(recall_number) {
     }
 
     #parses response
-    jsonlite::fromJSON(content(response, "text"), simplifyVector = FALSE)
+    parsed <- jsonlite::fromJSON(content(response, "text"), simplifyVector = FALSE)
+
+    if (status_code(resp) != 200) {
+        stop(
+            sprintf(
+                "Vehicle Recall Database request failed [%s]\n%s\n<%s>",
+                status_code(resp),
+                parsed$message,
+                parsed$documentation_url
+            ),
+            call. = FALSE
+        )
+    }
 
     #httr::content(response)
 
