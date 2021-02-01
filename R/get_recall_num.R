@@ -20,7 +20,7 @@ get_recall_num <- function(recall_number, limit=25, page=1) {
     url_ <- paste(url_, toString(recall_number), sep="")
 
     # api call, returns class vrd_api
-    api_output <- call_vrd_api(url_, recall_number)
+    api_output <- call_vrd_api(url_, manufacturer, limit=25, page=1)
 
     # convert content to a dataframe
     contents_df <- as.data.frame(api_output$content)

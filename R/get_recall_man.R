@@ -19,7 +19,7 @@ get_recall_manu <- function(manufacturer, limit=25, page=1) {
     url_ <- paste(url_, toString(manufacturer), sep="")
 
     # api call, returns class vrd_api
-    api_output <- call_vrd_api(url_, manufacturer)
+    api_output <- call_vrd_api(url_, manufacturer, limit=25, page=1)
 
     # convert content to a dataframe
     contents_df <- as.data.frame(api_output$content)
