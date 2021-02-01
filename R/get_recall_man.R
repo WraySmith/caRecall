@@ -5,13 +5,14 @@
 #' @param manufacturer A string
 #'
 #' @return dataframe
-#' @export
+#' @param limit An integer
+#' @param page An integer
 #'
 #' @examples
 #' \dontrun{
 #' get_recall_manu('Nissan')
 #' }
-get_recall_manu <- function(manufacturer) {
+get_recall_manu <- function(manufacturer, limit=25, page=1) {
 
     # format the url string
     url_ <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/manufacturer-name/"

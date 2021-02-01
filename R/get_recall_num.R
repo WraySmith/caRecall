@@ -3,6 +3,8 @@
 #' get_recall_num
 #'
 #' @param recall_number An integer
+#' @param limit An integer
+#' @param page An integer
 #'
 #' @return dataframe
 #' @export
@@ -11,7 +13,7 @@
 #' \dontrun{
 #' get_recall_num(1977044)
 #' }
-get_recall_num <- function(recall_number) {
+get_recall_num <- function(recall_number, limit=25, page=1) {
 
     # format the url string
     url_ <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/recall-number/"
