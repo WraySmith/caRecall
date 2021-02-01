@@ -4,10 +4,14 @@
 \alias{get_recall_manu}
 \title{get_recall_man}
 \usage{
-get_recall_manu(manufacturer)
+get_recall_manu(manufacturer, limit = 25, page = 1)
 }
 \arguments{
 \item{manufacturer}{A string}
+
+\item{limit}{An integer}
+
+\item{page}{An integer}
 }
 \value{
 dataframe

@@ -4,10 +4,14 @@
 \alias{get_recall_num}
 \title{get_recall_num}
 \usage{
-get_recall_num(recall_number)
+get_recall_num(recall_number, limit = 25, page = 1)
 }
 \arguments{
 \item{recall_number}{An integer}
+
+\item{limit}{An integer}
+
+\item{page}{An integer}
 }
 \value{
 dataframe

@@ -2,6 +2,5 @@
 
 export(call_vrd_api)
 export(fbind)
-export(get_recall_manu)
 export(get_recall_num)
 export(get_vrd_api)

@@ -27,15 +27,23 @@ get_vrd_api <- function() {
 #' }
 call_vrd_api <- function(url_, query, limit=25, page=1){
 
-    # query the api
-    response <- httr::GET(url_, httr::add_headers("user-key"=get_vrd_api(),"limit"=limit, "page"=page))
+    # set a the user agent
+    ua <- httr::user_agent("https://github.com/WraySmith/caRecall")
 
-    #check to verify json response
+    # set headers
+    headers <- httr::add_headers("user-key"=get_vrd_api(),
+                                 "limit"=limit,
+                                 "page"=page)
+
+    # query the api
+    response <- httr::GET(url_, headers, ua)
+
+    # check to verify json response
     if (httr::http_type(response) != "application/json") {
         stop("API did not return json", call. = FALSE)
     }
 
-    #parses response
+    # parse response
     parsed <- jsonlite::fromJSON(httr::content(response, "text"), flatten = TRUE)
 
     if (httr::status_code(response) != 200) {
@@ -50,7 +58,7 @@ call_vrd_api <- function(url_, query, limit=25, page=1){
         )
     }
 
-
+    # create a class for the returned response
     structure(
         list(
             content = parsed,
