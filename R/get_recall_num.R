@@ -4,7 +4,7 @@
 #'
 #' @param recall_number An integer
 #'
-#' @return text output
+#' @return dataframe
 #' @export
 #'
 #' @examples
@@ -17,18 +17,18 @@ get_recall_num <- function(recall_number) {
     url_ <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/recall-number/"
     url_ <- paste(url_, toString(recall_number), sep="")
 
-    # run helper function
-    call_vrd_api(url_, recall_number)
+    # api call, returns class vrd_api
+    api_output <- call_vrd_api(url_, recall_number)
 
+    # convert content to a dataframe
+    contents_df <- as.data.frame(api_output$content)
+
+    # currently just provides raw dataframe output, needs to be cleaned up
+    # any repetitive clean-up should go into helper functions
+    contents_df
 
 }
-#Provides S3 output.
-print.get_recall_num <- function(x, ...){
-    cat("<Recall_Number ", x$number, ">/n", sep = "") #Was not sure as to the exact notation of this part.  Wasn't clear in example.
-    str(x$content)
-    invisible(x)
 
-}
 
 
 

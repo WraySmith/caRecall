@@ -22,8 +22,9 @@ get_vrd_api <- function() {
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' call_vrd_api()
-
+#' }
 call_vrd_api <- function(url_, query, limit=25, page=1){
 
     # query the api
@@ -35,7 +36,7 @@ call_vrd_api <- function(url_, query, limit=25, page=1){
     }
 
     #parses response
-    parsed <- jsonlite::fromJSON(httr::content(response, "text"), simplifyVector = FALSE)
+    parsed <- jsonlite::fromJSON(httr::content(response, "text"), flatten = TRUE)
 
     if (httr::status_code(response) != 200) {
         stop(
@@ -60,4 +61,13 @@ call_vrd_api <- function(url_, query, limit=25, page=1){
     )
 
 }
+
+# this is a placeholder helper function that allows print from class vrd_api
+# need to determine if we want to keep something like this, leave as a placeholder
+print_vrd_api <- function(x, ...){
+    cat("<Recall_Number ", x$name, ">\n", sep = "")
+    utils::str(x$content)
+    invisible(x)
+}
+
 

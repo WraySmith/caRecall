@@ -13,5 +13,7 @@ vrd_api class
 helper function for querying api database
 }
 \examples{
+\dontrun{
 call_vrd_api()
+}
 }
