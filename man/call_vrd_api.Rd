@@ -4,7 +4,7 @@
 \alias{call_vrd_api}
 \title{call_vrd_api()}
 \usage{
-call_vrd_api(url_, query, limit = 25, page = 1)
+call_vrd_api(url_, query, limit = NULL)
 }
 \value{
 vrd_api class
