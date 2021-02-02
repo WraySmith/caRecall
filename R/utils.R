@@ -32,8 +32,7 @@ call_vrd_api <- function(url_, query, limit = 25){
 
     # set headers
     headers <- httr::add_headers("user-key"=get_vrd_key(),
-                                 "limit"=limit,
-                                 "page"=page)
+                                 "limit"=limit)
 
     # query the api
     response <- httr::GET(url_, headers, ua)

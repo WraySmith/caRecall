@@ -2,5 +2,7 @@
 
 export(call_vrd_api)
 export(fbind)
-export(get_recall_num)
-export(get_vrd_api)
+export(get_recall_detailed)
+export(get_recall_number)
+export(get_recall_years)
+export(get_vrd_key)
