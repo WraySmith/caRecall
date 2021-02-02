@@ -80,7 +80,7 @@ count_recall_years <- function(start_year = 1900, end_year = 2100) {
 
     # format the url string
     year_range <- paste(toString(start_year), toString(end_year), sep = "-")
-    url_ <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/recall-number/"
+    url_ <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/year-range/"
     url_ <- paste(url_, year_range,  "/count", sep = "")
 
     # api call, returns class vrd_api
