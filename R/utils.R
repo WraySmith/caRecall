@@ -1,11 +1,11 @@
-#' get_vrd_api
+#' get_vrd_key
 #'
 #' @return A string that is your VRD_API key
 #' @export
 #'
 #' @examples
 #' get_vrd_api()
-get_vrd_api <- function() {
+get_vrd_key <- function() {
     x <- Sys.getenv("VRD_API")
     if (x == "") {
         stop("You must set your VRD_API with `Sys.setenv(VRD_API = 'your_api_key_here')`")
@@ -25,13 +25,13 @@ get_vrd_api <- function() {
 #' \dontrun{
 #' call_vrd_api()
 #' }
-call_vrd_api <- function(url_, query, limit=25, page=1){
+call_vrd_api <- function(url_, query, limit = 25){
 
     # set a the user agent
     ua <- httr::user_agent("https://github.com/WraySmith/caRecall")
 
     # set headers
-    headers <- httr::add_headers("user-key"=get_vrd_api(),
+    headers <- httr::add_headers("user-key"=get_vrd_key(),
                                  "limit"=limit,
                                  "page"=page)
 

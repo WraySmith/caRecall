@@ -1,0 +1,126 @@
+#' get_recall_make
+#'
+#' @param make A string
+#' @param limit An integer
+#' @param partial A bool
+#'
+#' @return dataframe
+#'
+#' @examples
+#' \dontrun{
+#' get_recall_make('Nissan')
+#' }
+get_recall_make <- function(make, manufacturer = FALSE, limit = 25, partial = FALSE) {
+
+    # format the url string
+    if (manufacturer) {
+        url_ <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/manufacturer-name/"
+    } else {
+        url_ <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/make-name/"
+    }
+    url_ <- paste(url_, toString(make), sep = "")
+
+    # api call, returns class vrd_api
+    api_output <- call_vrd_api(url_, make, limit)
+
+    # convert content to a dataframe
+    contents_df <- as.data.frame(api_output$content)
+
+    # currently just provides raw dataframe output, needs to be cleaned up
+    # any repetitive clean-up should go into helper functions
+    # if partial = FALSE need to filter data, if partial = TRUE return all data
+    contents_df
+
+}
+
+#' get_recall_model
+#'
+#' @param model A string
+#' @param limit An integer
+#' @param partial A bool
+#'
+#' @return dataframe
+#'
+#' @examples
+#' \dontrun{
+#' get_recall_model('488')
+#' }
+get_recall_model <- function(model, limit = 25, partial = FALSE) {
+
+    # format the url string
+    url_ <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/model-name/"
+    url_ <- paste(url_, toString(model), sep = "")
+
+    # api call, returns class vrd_api
+    api_output <- call_vrd_api(url_, model, limit)
+
+    # convert content to a dataframe
+    contents_df <- as.data.frame(api_output$content)
+
+    # currently just provides raw dataframe output, needs to be cleaned up
+    # any repetitive clean-up should go into helper functions
+    # if partial = FALSE need to filter data, if partial = TRUE return all data
+    contents_df
+
+}
+
+#' get_recall_number
+#'
+#' @param recall_number An integer
+#' @param limit An integer
+#'
+#' @return dataframe
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' get_recall_number(1977044)
+#' }
+get_recall_number <- function(recall_number, limit = 25) {
+
+    # format the url string
+    url_ <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/recall-number/"
+    url_ <- paste(url_, toString(recall_number), sep = "")
+
+    # api call, returns class vrd_api
+    api_output <- call_vrd_api(url_, recall_number, limit)
+
+    # convert content to a dataframe
+    contents_df <- as.data.frame(api_output$content)
+
+    # currently just provides raw dataframe output, needs to be cleaned up
+    # any repetitive clean-up should go into helper functions
+    contents_df
+
+}
+
+#' get_recall_detailed
+#'
+#' @param recall_number An integer
+#' @param limit An integer
+#'
+#' @return dataframe
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' get_recall_detailed(1977044)
+#' }
+get_recall_detailed <- function(recall_number, limit = 25) {
+
+    # format the url string
+    url_ <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall-summary/recall-number/"
+    url_ <- paste(url_, toString(recall_number), sep = "")
+
+    # api call, returns class vrd_api
+    api_output <- call_vrd_api(url_, recall_number, limit)
+
+    # convert content to a dataframe
+    contents_df <- as.data.frame(api_output$content)
+
+    # currently just provides raw dataframe output, needs to be cleaned up
+    # any repetitive clean-up should go into helper functions
+    contents_df
+
+}
+
