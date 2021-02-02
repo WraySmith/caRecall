@@ -1,4 +1,4 @@
-#' get_recall_make
+#' recall_by_make
 #'
 #' @param make A string
 #' @param limit An integer
@@ -8,9 +8,9 @@
 #'
 #' @examples
 #' \dontrun{
-#' get_recall_make('Nissan')
+#' recall_by_make('Nissan')
 #' }
-get_recall_make <- function(make, manufacturer = FALSE, limit = 25, partial = FALSE) {
+recall_by_make <- function(make, manufacturer = FALSE, limit = 25, partial = FALSE) {
 
     # format the url string
     if (manufacturer) {
@@ -33,7 +33,7 @@ get_recall_make <- function(make, manufacturer = FALSE, limit = 25, partial = FA
 
 }
 
-#' get_recall_model
+#' recall_by_model
 #'
 #' @param model A string
 #' @param limit An integer
@@ -43,9 +43,9 @@ get_recall_make <- function(make, manufacturer = FALSE, limit = 25, partial = FA
 #'
 #' @examples
 #' \dontrun{
-#' get_recall_model('488')
+#' recall_by_model('Civic')
 #' }
-get_recall_model <- function(model, limit = 25, partial = FALSE) {
+recall_by_model <- function(model, limit = 25, partial = FALSE) {
 
     # format the url string
     url_ <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/model-name/"
@@ -64,7 +64,7 @@ get_recall_model <- function(model, limit = 25, partial = FALSE) {
 
 }
 
-#' get_recall_years
+#' recall_by_years
 #'
 #' @param start_year An integer
 #' @param end_year An integer
@@ -75,9 +75,9 @@ get_recall_model <- function(model, limit = 25, partial = FALSE) {
 #'
 #' @examples
 #' \dontrun{
-#' get_recall_years(2010, 2012)
+#' recall_by_years(2010, 2012)
 #' }
-get_recall_years <- function(start_year = 1900, end_year = 2100, limit = 25) {
+recall_by_years <- function(start_year = 1900, end_year = 2100, limit = 25) {
 
     # format the url string
     year_range <- paste(toString(start_year), toString(end_year), sep = "-")
@@ -96,7 +96,7 @@ get_recall_years <- function(start_year = 1900, end_year = 2100, limit = 25) {
 
 }
 
-#' get_recall_number
+#' recall_by_number
 #'
 #' @param recall_number An integer
 #' @param limit An integer
@@ -106,9 +106,9 @@ get_recall_years <- function(start_year = 1900, end_year = 2100, limit = 25) {
 #'
 #' @examples
 #' \dontrun{
-#' get_recall_number(1977044)
+#' recall_by_number(1977044)
 #' }
-get_recall_number <- function(recall_number, limit = 25) {
+recall_by_number <- function(recall_number, limit = 25) {
 
     # format the url string
     url_ <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/recall-number/"
@@ -126,7 +126,7 @@ get_recall_number <- function(recall_number, limit = 25) {
 
 }
 
-#' get_recall_detailed
+#' recall_details
 #'
 #' @param recall_number An integer
 #' @param limit An integer
@@ -136,9 +136,9 @@ get_recall_number <- function(recall_number, limit = 25) {
 #'
 #' @examples
 #' \dontrun{
-#' get_recall_detailed(1977044)
+#' recall_details(1977044)
 #' }
-get_recall_detailed <- function(recall_number, limit = 25) {
+recall_details <- function(recall_number, limit = 25) {
 
     # format the url string
     url_ <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall-summary/recall-number/"

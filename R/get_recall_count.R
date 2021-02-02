@@ -1,4 +1,4 @@
-#' count_recall_make
+#' count_recall_by_make
 #'
 #' @param make A string
 #'
@@ -6,9 +6,9 @@
 #'
 #' @examples
 #' \dontrun{
-#' count_recall_make('Nissan')
+#' count_recall_by_make('Nissan')
 #' }
-count_recall_make <- function(make, manufacturer = FALSE) {
+count_recall_by_make <- function(make, manufacturer = FALSE) {
 
     # format the url string
     if (manufacturer) {
@@ -33,7 +33,7 @@ count_recall_make <- function(make, manufacturer = FALSE) {
 
 }
 
-#' count_recall_model
+#' count_recall_by_model
 #'
 #' @param model A string
 #'
@@ -41,9 +41,9 @@ count_recall_make <- function(make, manufacturer = FALSE) {
 #'
 #' @examples
 #' \dontrun{
-#' count_recall_model('488')
+#' count_recall_by_model('488')
 #' }
-count_recall_model <- function(model) {
+count_recall_by_model <- function(model) {
 
     # format the url string
     url_ <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/model-name/"
@@ -64,7 +64,7 @@ count_recall_model <- function(model) {
 
 }
 
-#' count_recall_years
+#' count_recall_by_years
 #'
 #' @param start_year An integer
 #' @param end_year An integer
@@ -74,9 +74,9 @@ count_recall_model <- function(model) {
 #'
 #' @examples
 #' \dontrun{
-#' count_recall_years(2010, 2012)
+#' count_recall_by_years(2010, 2012)
 #' }
-count_recall_years <- function(start_year = 1900, end_year = 2100) {
+count_recall_by_years <- function(start_year = 1900, end_year = 2100) {
 
     # format the url string
     year_range <- paste(toString(start_year), toString(end_year), sep = "-")
