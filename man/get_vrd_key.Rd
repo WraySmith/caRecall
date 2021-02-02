@@ -13,5 +13,5 @@ A string that is your VRD_API key
 get_vrd_key
 }
 \examples{
-get_vrd_api()
+get_vrd_key()
 }

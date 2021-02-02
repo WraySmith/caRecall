@@ -4,7 +4,7 @@
 #' @export
 #'
 #' @examples
-#' get_vrd_api()
+#' get_vrd_key()
 get_vrd_key <- function() {
     x <- Sys.getenv("VRD_API")
     if (x == "") {
@@ -31,11 +31,24 @@ call_vrd_api <- function(url_, query, limit = NULL){
     ua <- httr::user_agent("https://github.com/WraySmith/caRecall")
 
     # set headers
-    headers <- httr::add_headers("user-key"=get_vrd_key(),
-                                 "limit"=limit)
+    headers <- httr::add_headers("user-key" = get_vrd_key(),
+                                 "limit" = limit)
 
     # query the api
     response <- httr::GET(url_, headers, ua)
+
+    ### NEED TO PROVIDE MORE ERROR OUTPUT HERE
+    ### POTENTIALLY API KEY AND LINK TO DOCS
+    if (httr::status_code(response) != 200) {
+        stop(
+            sprintf(
+                "Vehicle Recall Database request failed [%s]\n%s",
+                httr::status_code(response),
+                response$request$url
+            ),
+            call. = FALSE
+        )
+    }
 
     # check to verify json response
     if (httr::http_type(response) != "application/json") {
@@ -44,18 +57,6 @@ call_vrd_api <- function(url_, query, limit = NULL){
 
     # parse response
     parsed <- jsonlite::fromJSON(httr::content(response, "text"), flatten = TRUE)
-
-    if (httr::status_code(response) != 200) {
-        stop(
-            sprintf(
-                "Vehicle Recall Database request failed [%s]\n%s\n<%s>",
-                httr::status_code(response),
-                parsed$message,
-                parsed$documentation_url
-            ),
-            call. = FALSE
-        )
-    }
 
     # create a class for the returned response
     structure(

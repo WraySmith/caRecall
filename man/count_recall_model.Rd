@@ -17,6 +17,6 @@ count_recall_model
 }
 \examples{
 \dontrun{
-get_recall_model('488')
+count_recall_model('488')
 }
 }
