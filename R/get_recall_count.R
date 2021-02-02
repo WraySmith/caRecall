@@ -33,7 +33,7 @@ count_recall_make <- function(make, manufacturer = FALSE) {
 
 }
 
-#' get_recall_model
+#' count_recall_model
 #'
 #' @param model A string
 #'
@@ -43,7 +43,7 @@ count_recall_make <- function(make, manufacturer = FALSE) {
 #' \dontrun{
 #' get_recall_model('488')
 #' }
-get_recall_model <- function(model) {
+count_recall_model <- function(model) {
 
     # format the url string
     url_ <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/model-name/"
@@ -76,7 +76,7 @@ get_recall_model <- function(model) {
 #' \dontrun{
 #' count_recall_years(2010, 2012)
 #' }
-get_recall_years <- function(start_year = 1900, end_year = 2100) {
+count_recall_years <- function(start_year = 1900, end_year = 2100) {
 
     # format the url string
     year_range <- paste(toString(start_year), toString(end_year), sep = "-")
