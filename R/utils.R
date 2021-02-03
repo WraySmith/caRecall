@@ -18,6 +18,11 @@ get_vrd_key <- function() {
 #'
 #'helper function for querying api database
 #'
+#' @param url_ api url to be hit
+#' @param query names the resulting object
+#' @param limit how many items to get from the api, default to no limit
+#' @param api_key defaults to the one set in the environment, can be pass one manually
+#'
 #' @return vrd_api class
 #' @export
 #'
