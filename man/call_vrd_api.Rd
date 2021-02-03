@@ -4,7 +4,16 @@
 \alias{call_vrd_api}
 \title{call_vrd_api()}
 \usage{
-call_vrd_api(url_, query, limit = NULL)
+call_vrd_api(url_, query, limit = NULL, api_key = get_vrd_key())
+}
+\arguments{
+\item{url_}{api url to be hit}
+
+\item{query}{names the resulting object}
+
+\item{limit}{how many items to get from the api, default to no limit}
+
+\item{api_key}{defaults to the one set in the environment, can be pass one manually}
 }
 \value{
 vrd_api class
