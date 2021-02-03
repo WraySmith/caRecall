@@ -25,13 +25,13 @@ get_vrd_key <- function() {
 #' \dontrun{
 #' call_vrd_api()
 #' }
-call_vrd_api <- function(url_, query, limit = NULL){
+call_vrd_api <- function(url_, query, limit = NULL, api_key=get_vrd_key()){
 
     # set a the user agent
     ua <- httr::user_agent("https://github.com/WraySmith/caRecall")
 
     # set headers
-    headers <- httr::add_headers("user-key" = get_vrd_key(),
+    headers <- httr::add_headers("user-key" = api_key,
                                  "limit" = limit)
 
     # query the api
