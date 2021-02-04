@@ -9,6 +9,8 @@ recall_by_make(make, manufacturer = FALSE, limit = 25, partial = FALSE)
 \arguments{
 \item{make}{A string}
 
+\item{manufacturer}{bool, with this flag we are asking for the manufacturer not the make}
+
 \item{limit}{An integer}
 
 \item{partial}{A bool}
