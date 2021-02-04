@@ -4,10 +4,23 @@
 \alias{recall_by_make}
 \title{recall_by_make}
 \usage{
-recall_by_make(make, manufacturer = FALSE, limit = 25, partial = FALSE)
+recall_by_make(
+  make,
+  manufacturer = FALSE,
+  start_year = NULL,
+  end_year = NULL,
+  limit = 25,
+  partial = FALSE
+)
 }
 \arguments{
-\item{make}{list string}
+\item{make}{List string}
+
+\item{manufacturer}{A bool}
+
+\item{start_year}{An integer}
+
+\item{end_year}{An integer}
 
 \item{limit}{An integer}
 
