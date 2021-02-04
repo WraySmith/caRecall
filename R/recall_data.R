@@ -44,14 +44,8 @@ recall_by_make <- function(make, manufacturer = FALSE,
     # api call, returns class vrd_api
     api_output <- call_vrd_api(url_, make, limit)
 
-    # set database
-    contents_df <- data.frame(matrix(ncol = length(api_output$content$ResultSet[[1]]$Name)))
-    colnames(contents_df) <- api_output$content$ResultSet[[1]]$Name
-
     # convert content to a dataframe
-    for (i in 1:length(api_output$content$ResultSet)){
-        contents_df<-rbind(contents_df,api_output$content$ResultSet[[i]]$Value.Literal)
-    }
+    contents_df <- clean_vrd_api(api_output)
 
     # currently just provides raw dataframe output, needs to be cleaned up
     # any repetitive clean-up should go into helper functions
@@ -100,14 +94,8 @@ recall_by_model <- function(model,
     # api call, returns class vrd_api
     api_output <- call_vrd_api(url_, model, limit)
 
-    # set database
-    contents_df <- data.frame(matrix(ncol = length(api_output$content$ResultSet[[1]]$Name)))
-    colnames(contents_df) <- api_output$content$ResultSet[[1]]$Name
-
     # convert content to a dataframe
-    for (i in 1:length(api_output$content$ResultSet)){
-        contents_df<-rbind(contents_df,api_output$content$ResultSet[[i]]$Value.Literal)
-    }
+    contents_df <- clean_vrd_api(api_output)
 
     # currently just provides raw dataframe output, needs to be cleaned up
     # any repetitive clean-up should go into helper functions
@@ -139,14 +127,8 @@ recall_by_years <- function(start_year = 1900, end_year = 2100, limit = 25) {
     # api call, returns class vrd_api
     api_output <- call_vrd_api(url_, year_range, limit)
 
-    # set database
-    contents_df <- data.frame(matrix(ncol = length(api_output$content$ResultSet[[1]]$Name)))
-    colnames(contents_df) <- api_output$content$ResultSet[[1]]$Name
-
     # convert content to a dataframe
-    for (i in 1:length(api_output$content$ResultSet)){
-        contents_df<-rbind(contents_df,api_output$content$ResultSet[[i]]$Value.Literal)
-    }
+    contents_df <- clean_vrd_api(api_output)
 
     # currently just provides raw dataframe output, needs to be cleaned up
     # any repetitive clean-up should go into helper functions
@@ -179,14 +161,8 @@ recall_by_number <- function(recall_number, limit = 25) {
     # api call, returns class vrd_api
     api_output <- call_vrd_api(url_, recall_number, limit)
 
-    # set database
-    contents_df <- data.frame(matrix(ncol = length(api_output$content$ResultSet[[1]]$Name)))
-    colnames(contents_df) <- api_output$content$ResultSet[[1]]$Name
-
     # convert content to a dataframe
-    for (i in 1:length(api_output$content$ResultSet)){
-        contents_df<-rbind(contents_df,api_output$content$ResultSet[[i]]$Value.Literal)
-    }
+    contents_df <- clean_vrd_api(api_output)
 
     # currently just provides raw dataframe output, needs to be cleaned up
     # any repetitive clean-up should go into helper functions
@@ -223,7 +199,7 @@ recall_details <- function(recall_number, limit = 25) {
 
         # format the url string
         url_ <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall-summary/recall-number/"
-        url_ <- paste(url_, toString(single_number), sep = "")
+        url_ <- paste(url_, toString(siloadngle_number), sep = "")
 
         # api call, returns class vrd_api
         api_output <- call_vrd_api(url_, single_number, limit)
