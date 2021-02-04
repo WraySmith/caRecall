@@ -8,6 +8,8 @@ count_recall_by_make(make, manufacturer = FALSE)
 }
 \arguments{
 \item{make}{A string}
+
+\item{manufacturer}{bool, with this flag we are asking for the manufacturer not the make}
 }
 \value{
 integer
