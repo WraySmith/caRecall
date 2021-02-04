@@ -1,6 +1,9 @@
 #' recall_by_make
 #'
-#' @param make list string
+#' @param make List string
+#' @param manufacturer A bool
+#' @param start_year An integer
+#' @param end_year An integer
 #' @param limit An integer
 #' @param partial A bool
 #'
@@ -10,7 +13,10 @@
 #' \dontrun{
 #' recall_by_make('Nissan')
 #' }
-recall_by_make <- function(make, manufacturer = FALSE, limit = 25, partial = FALSE) {
+recall_by_make <- function(make, manufacturer = FALSE,
+                           start_year = NULL, end_year = NULL,
+                           limit = 25,
+                           partial = FALSE) {
 
     # create multiple requests from input list
     input_request <- paste(make, collapse = '|')
@@ -23,6 +29,17 @@ recall_by_make <- function(make, manufacturer = FALSE, limit = 25, partial = FAL
     }
 
     url_ <- paste(url_, input_request, sep = "")
+
+    # append year range criteria to url if input by user
+    if (!is.null(start_year) | !is.null(end_year)) {
+
+        # add start or end year if value one of the values is NULL
+        if (is.null(start_year)) start_year = 1900
+        if (is.null(end_year)) end_year = 2100
+
+        year_range <- paste(toString(start_year), toString(end_year), sep = "-")
+        url_ <- paste(url_, '/year-range/', year_range, sep = "")
+    }
 
     # api call, returns class vrd_api
     api_output <- call_vrd_api(url_, make, limit)
@@ -45,7 +62,9 @@ recall_by_make <- function(make, manufacturer = FALSE, limit = 25, partial = FAL
 
 #' recall_by_model
 #'
-#' @param model list string
+#' @param model List string
+#' @param start_year An integer
+#' @param end_year An integer
 #' @param limit An integer
 #' @param partial A bool
 #'
@@ -55,7 +74,10 @@ recall_by_make <- function(make, manufacturer = FALSE, limit = 25, partial = FAL
 #' \dontrun{
 #' recall_by_model('Civic')
 #' }
-recall_by_model <- function(model, limit = 25, partial = FALSE) {
+recall_by_model <- function(model,
+                           start_year = NULL, end_year = NULL,
+                           limit = 25,
+                           partial = FALSE) {
 
     # create multiple requests from input list
     input_request <- paste(model, collapse = '|')
@@ -63,6 +85,17 @@ recall_by_model <- function(model, limit = 25, partial = FALSE) {
     # format the url string
     url_ <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/model-name/"
     url_ <- paste(url_, input_request, sep = "")
+
+    # append year range criteria to url if input by user
+    if (!is.null(start_year) | !is.null(end_year)) {
+
+        # add start or end year if value one of the values is NULL
+        if (is.null(start_year)) start_year = 1900
+        if (is.null(end_year)) end_year = 2100
+
+        year_range <- paste(toString(start_year), toString(end_year), sep = "-")
+        url_ <- paste(url_, '/year-range/', year_range, sep = "")
+    }
 
     # api call, returns class vrd_api
     api_output <- call_vrd_api(url_, model, limit)
@@ -124,7 +157,7 @@ recall_by_years <- function(start_year = 1900, end_year = 2100, limit = 25) {
 
 #' recall_by_number
 #'
-#' @param recall_number list integer
+#' @param recall_number List integer
 #' @param limit An integer
 #'
 #' @return dataframe

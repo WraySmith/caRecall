@@ -7,7 +7,7 @@
 recall_details(recall_number, limit = 25)
 }
 \arguments{
-\item{recall_number}{list integer}
+\item{recall_number}{An integer}
 
 \item{limit}{An integer}
 }

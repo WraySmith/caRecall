@@ -4,10 +4,20 @@
 \alias{recall_by_model}
 \title{recall_by_model}
 \usage{
-recall_by_model(model, limit = 25, partial = FALSE)
+recall_by_model(
+  model,
+  start_year = NULL,
+  end_year = NULL,
+  limit = 25,
+  partial = FALSE
+)
 }
 \arguments{
-\item{model}{list string}
+\item{model}{List string}
+
+\item{start_year}{An integer}
+
+\item{end_year}{An integer}
 
 \item{limit}{An integer}
 

@@ -4,10 +4,14 @@
 \alias{count_recall_by_model}
 \title{count_recall_by_model}
 \usage{
-count_recall_by_model(model)
+count_recall_by_model(model, start_year = NULL, end_year = NULL)
 }
 \arguments{
 \item{model}{list string}
+
+\item{start_year}{An integer}
+
+\item{end_year}{An integer}
 }
 \value{
 integer
