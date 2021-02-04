@@ -4,7 +4,9 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' get_vrd_key()
+#' }
 get_vrd_key <- function() {
     x <- Sys.getenv("VRD_API")
     if (x == "") {
