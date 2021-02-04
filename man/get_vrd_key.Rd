@@ -13,5 +13,7 @@ A string that is your VRD_API key
 get_vrd_key
 }
 \examples{
+\dontrun{
 get_vrd_key()
+}
 }
