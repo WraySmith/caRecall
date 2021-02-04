@@ -171,7 +171,7 @@ recall_by_number <- function(recall_number, limit = 25) {
 
 #' recall_details
 #'
-#' @param recall_number An integer
+#' @param recall_number List integer
 #' @param limit An integer
 #'
 #' @return dataframe
@@ -183,22 +183,37 @@ recall_by_number <- function(recall_number, limit = 25) {
 #' }
 recall_details <- function(recall_number, limit = 25) {
 
-    ### Note that this API call does not allow multiple numbers
-    ### would need to implement multiple calls
+    # a limit of 60 calls are allowed per minute
+    # this function rate limits and a call with 600 numbers would take > 10 min
+    if (length(recall_number) > 600) {
+        stop(
+            print('Number of recall_numbers must be less than 600'),
+            call. = FALSE)
+    }
 
-    # format the url string
-    url_ <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall-summary/recall-number/"
-    url_ <- paste(url_, toString(recall_number), sep = "")
+    compiled_df <- vector(mode = "list", length = length(recall_number))
+    i <- 1
+    for (single_number in recall_number) {
 
-    # api call, returns class vrd_api
-    api_output <- call_vrd_api(url_, recall_number, limit)
+        # format the url string
+        url_ <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall-summary/recall-number/"
+        url_ <- paste(url_, toString(single_number), sep = "")
 
-    # convert content to a dataframe
-    contents_df <- as.data.frame(api_output$content)
+        # api call, returns class vrd_api
+        api_output <- call_vrd_api(url_, single_number, limit)
+
+        # convert content to a dataframe
+        ### NOTE that it may make sense to do format differently here
+        compiled_df[i] <- api_output$content
+
+        Sys.sleep(1)
+        i <- i + 1
+
+    }
 
     # currently just provides raw dataframe output, needs to be cleaned up
     # any repetitive clean-up should go into helper functions
-    contents_df
+    compiled_df
 
 }
 
