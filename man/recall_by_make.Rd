@@ -22,6 +22,8 @@ recall_by_make(
 
 \item{end_year}{An integer}
 
+\item{manufacturer}{bool, with this flag we are asking for the manufacturer not the make}
+
 \item{limit}{An integer}
 
 \item{partial}{A bool}

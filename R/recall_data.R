@@ -1,9 +1,7 @@
 #' recall_by_make
 #'
-#' @param make List string
-#' @param manufacturer A bool
-#' @param start_year An integer
-#' @param end_year An integer
+#' @param make A string
+#' @param manufacturer bool, with this flag we are asking for the manufacturer not the make
 #' @param limit An integer
 #' @param partial A bool
 #'
