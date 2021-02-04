@@ -1,7 +1,9 @@
 #' recall_by_make
 #'
-#' @param make A string
-#' @param manufacturer bool, with this flag we are asking for the manufacturer not the make
+#' @param make List string
+#' @param manufacturer A bool, with this flag we are asking for the manufacturer not the make
+#' @param start_year An integer
+#' @param end_year An integer
 #' @param limit An integer
 #' @param partial A bool
 #'
@@ -11,7 +13,13 @@
 #' \dontrun{
 #' recall_by_make('Nissan')
 #' }
-recall_by_make <- function(make, manufacturer = FALSE, limit = 25, partial = FALSE) {
+recall_by_make <- function(make, manufacturer = FALSE,
+                           start_year = NULL, end_year = NULL,
+                           limit = 25,
+                           partial = FALSE) {
+
+    # create multiple requests from input list
+    input_request <- paste(make, collapse = '|')
 
     # format the url string
     if (manufacturer) {
@@ -19,7 +27,19 @@ recall_by_make <- function(make, manufacturer = FALSE, limit = 25, partial = FAL
     } else {
         url_ <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/make-name/"
     }
-    url_ <- paste(url_, toString(make), sep = "")
+
+    url_ <- paste(url_, input_request, sep = "")
+
+    # append year range criteria to url if input by user
+    if (!is.null(start_year) | !is.null(end_year)) {
+
+        # add start or end year if value one of the values is NULL
+        if (is.null(start_year)) start_year = 1900
+        if (is.null(end_year)) end_year = 2100
+
+        year_range <- paste(toString(start_year), toString(end_year), sep = "-")
+        url_ <- paste(url_, '/year-range/', year_range, sep = "")
+    }
 
     # api call, returns class vrd_api
     api_output <- call_vrd_api(url_, make, limit)
@@ -36,7 +56,9 @@ recall_by_make <- function(make, manufacturer = FALSE, limit = 25, partial = FAL
 
 #' recall_by_model
 #'
-#' @param model A string
+#' @param model List string
+#' @param start_year An integer
+#' @param end_year An integer
 #' @param limit An integer
 #' @param partial A bool
 #'
@@ -46,11 +68,28 @@ recall_by_make <- function(make, manufacturer = FALSE, limit = 25, partial = FAL
 #' \dontrun{
 #' recall_by_model('Civic')
 #' }
-recall_by_model <- function(model, limit = 25, partial = FALSE) {
+recall_by_model <- function(model,
+                           start_year = NULL, end_year = NULL,
+                           limit = 25,
+                           partial = FALSE) {
+
+    # create multiple requests from input list
+    input_request <- paste(model, collapse = '|')
 
     # format the url string
     url_ <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/model-name/"
-    url_ <- paste(url_, toString(model), sep = "")
+    url_ <- paste(url_, input_request, sep = "")
+
+    # append year range criteria to url if input by user
+    if (!is.null(start_year) | !is.null(end_year)) {
+
+        # add start or end year if value one of the values is NULL
+        if (is.null(start_year)) start_year = 1900
+        if (is.null(end_year)) end_year = 2100
+
+        year_range <- paste(toString(start_year), toString(end_year), sep = "-")
+        url_ <- paste(url_, '/year-range/', year_range, sep = "")
+    }
 
     # api call, returns class vrd_api
     api_output <- call_vrd_api(url_, model, limit)
@@ -99,7 +138,7 @@ recall_by_years <- function(start_year = 1900, end_year = 2100, limit = 25) {
 
 #' recall_by_number
 #'
-#' @param recall_number An integer
+#' @param recall_number List integer
 #' @param limit An integer
 #'
 #' @return dataframe
@@ -111,9 +150,12 @@ recall_by_years <- function(start_year = 1900, end_year = 2100, limit = 25) {
 #' }
 recall_by_number <- function(recall_number, limit = 25) {
 
+    # create multiple requests from input list
+    input_request <- paste(recall_number, collapse = '|')
+
     # format the url string
     url_ <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/recall-number/"
-    url_ <- paste(url_, toString(recall_number), sep = "")
+    url_ <- paste(url_, input_request, sep = "")
 
     # api call, returns class vrd_api
     api_output <- call_vrd_api(url_, recall_number, limit)
@@ -129,7 +171,7 @@ recall_by_number <- function(recall_number, limit = 25) {
 
 #' recall_details
 #'
-#' @param recall_number An integer
+#' @param recall_number List integer
 #' @param limit An integer
 #'
 #' @return dataframe
@@ -141,19 +183,37 @@ recall_by_number <- function(recall_number, limit = 25) {
 #' }
 recall_details <- function(recall_number, limit = 25) {
 
-    # format the url string
-    url_ <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall-summary/recall-number/"
-    url_ <- paste(url_, toString(recall_number), sep = "")
+    # a limit of 60 calls are allowed per minute
+    # this function rate limits and a call with 600 numbers would take > 10 min
+    if (length(recall_number) > 600) {
+        stop(
+            print('Number of recall_numbers must be less than 600'),
+            call. = FALSE)
+    }
 
-    # api call, returns class vrd_api
-    api_output <- call_vrd_api(url_, recall_number, limit)
+    compiled_df <- vector(mode = "list", length = length(recall_number))
+    i <- 1
+    for (single_number in recall_number) {
 
-    # convert content to a dataframe
-    contents_df <- as.data.frame(api_output$content)
+        # format the url string
+        url_ <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall-summary/recall-number/"
+        url_ <- paste(url_, toString(single_number), sep = "")
+
+        # api call, returns class vrd_api
+        api_output <- call_vrd_api(url_, single_number, limit)
+
+        # convert content to a dataframe
+        ### NOTE that it may make sense to do format differently here
+        compiled_df[i] <- api_output$content
+
+        Sys.sleep(1)
+        i <- i + 1
+
+    }
 
     # currently just provides raw dataframe output, needs to be cleaned up
     # any repetitive clean-up should go into helper functions
-    contents_df
+    compiled_df
 
 }
 

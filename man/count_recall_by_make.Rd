@@ -4,12 +4,21 @@
 \alias{count_recall_by_make}
 \title{count_recall_by_make}
 \usage{
-count_recall_by_make(make, manufacturer = FALSE)
+count_recall_by_make(
+  make,
+  manufacturer = FALSE,
+  start_year = NULL,
+  end_year = NULL
+)
 }
 \arguments{
-\item{make}{A string}
+\item{make}{list string}
 
 \item{manufacturer}{bool, with this flag we are asking for the manufacturer not the make}
+
+\item{start_year}{An integer}
+
+\item{end_year}{An integer}
 }
 \value{
 integer
