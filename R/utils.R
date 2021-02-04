@@ -4,7 +4,9 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' get_vrd_key()
+#' }
 get_vrd_key <- function() {
     x <- Sys.getenv("VRD_API")
     if (x == "") {
@@ -18,6 +20,11 @@ get_vrd_key <- function() {
 #'
 #'helper function for querying api database
 #'
+#' @param url_ api url to be hit
+#' @param query names the resulting object
+#' @param limit how many items to get from the api, default to no limit
+#' @param api_key defaults to the one set in the environment, can be pass one manually
+#'
 #' @return vrd_api class
 #' @export
 #'
@@ -25,7 +32,7 @@ get_vrd_key <- function() {
 #' \dontrun{
 #' call_vrd_api()
 #' }
-call_vrd_api <- function(url_, query, limit = NULL){
+call_vrd_api <- function(url_, query, limit = NULL, api_key=get_vrd_key()){
 
     # add limit to url (limit does not go in header)
     url_ <- paste(url_, "?limit=", toString(limit), sep = "")
@@ -34,7 +41,7 @@ call_vrd_api <- function(url_, query, limit = NULL){
     ua <- httr::user_agent("https://github.com/WraySmith/caRecall")
 
     # set headers (currently only user-key is set)
-    headers <- httr::add_headers("user-key" = get_vrd_key())
+    headers <- httr::add_headers("user-key" = api_key)
 
     # query the api
     response <- httr::GET(url_, headers, ua)

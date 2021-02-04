@@ -1,7 +1,7 @@
 #' count_recall_by_make
 #'
 #' @param make list string
-#' @param manufacturer A bool
+#' @param manufacturer A bool, with this flag we are asking for the manufacturer not the make
 #' @param start_year An integer
 #' @param end_year An integer
 #'
