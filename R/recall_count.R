@@ -1,6 +1,6 @@
 #' count_recall_by_make
 #'
-#' @param make A string
+#' @param make list string
 #'
 #' @return integer
 #'
@@ -10,13 +10,16 @@
 #' }
 count_recall_by_make <- function(make, manufacturer = FALSE) {
 
+    # create multiple requests from input list
+    input_request <- paste(make, collapse = '|')
+
     # format the url string
     if (manufacturer) {
         url_ <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/manufacturer-name/"
     } else {
         url_ <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/make-name/"
     }
-    url_ <- paste(url_, toString(make), "/count", sep = "")
+    url_ <- paste(url_, input_request, "/count", sep = "")
 
     # api call, returns class vrd_api
     api_output <- call_vrd_api(url_, make)
@@ -35,7 +38,7 @@ count_recall_by_make <- function(make, manufacturer = FALSE) {
 
 #' count_recall_by_model
 #'
-#' @param model A string
+#' @param model list string
 #'
 #' @return integer
 #'
@@ -45,9 +48,12 @@ count_recall_by_make <- function(make, manufacturer = FALSE) {
 #' }
 count_recall_by_model <- function(model) {
 
-    # format the url string
+    # create multiple requests from input list
+    input_request <- paste(model, collapse = '|')
+
+        # format the url string
     url_ <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/model-name/"
-    url_ <- paste(url_, toString(model), "/count", sep = "")
+    url_ <- paste(url_, input_request, "/count", sep = "")
 
     # api call, returns class vrd_api
     api_output <- call_vrd_api(url_, model)

@@ -7,7 +7,7 @@
 count_recall_by_make(make, manufacturer = FALSE)
 }
 \arguments{
-\item{make}{A string}
+\item{make}{list string}
 }
 \value{
 integer

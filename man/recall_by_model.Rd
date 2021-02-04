@@ -7,7 +7,7 @@
 recall_by_model(model, limit = 25, partial = FALSE)
 }
 \arguments{
-\item{model}{A string}
+\item{model}{list string}
 
 \item{limit}{An integer}
 

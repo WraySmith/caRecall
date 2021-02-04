@@ -7,7 +7,7 @@
 count_recall_by_model(model)
 }
 \arguments{
-\item{model}{A string}
+\item{model}{list string}
 }
 \value{
 integer
