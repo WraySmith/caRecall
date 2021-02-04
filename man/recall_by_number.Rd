@@ -7,7 +7,7 @@
 recall_by_number(recall_number, limit = 25)
 }
 \arguments{
-\item{recall_number}{An integer}
+\item{recall_number}{list integer}
 
 \item{limit}{An integer}
 }

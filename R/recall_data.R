@@ -1,6 +1,6 @@
 #' recall_by_make
 #'
-#' @param make A string
+#' @param make list string
 #' @param limit An integer
 #' @param partial A bool
 #'
@@ -12,13 +12,17 @@
 #' }
 recall_by_make <- function(make, manufacturer = FALSE, limit = 25, partial = FALSE) {
 
+    # create multiple requests from input list
+    input_request <- paste(make, collapse = '|')
+
     # format the url string
     if (manufacturer) {
         url_ <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/manufacturer-name/"
     } else {
         url_ <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/make-name/"
     }
-    url_ <- paste(url_, toString(make), sep = "")
+
+    url_ <- paste(url_, input_request, sep = "")
 
     # api call, returns class vrd_api
     api_output <- call_vrd_api(url_, make, limit)
@@ -41,7 +45,7 @@ recall_by_make <- function(make, manufacturer = FALSE, limit = 25, partial = FAL
 
 #' recall_by_model
 #'
-#' @param model A string
+#' @param model list string
 #' @param limit An integer
 #' @param partial A bool
 #'
@@ -53,9 +57,12 @@ recall_by_make <- function(make, manufacturer = FALSE, limit = 25, partial = FAL
 #' }
 recall_by_model <- function(model, limit = 25, partial = FALSE) {
 
+    # create multiple requests from input list
+    input_request <- paste(model, collapse = '|')
+
     # format the url string
     url_ <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/model-name/"
-    url_ <- paste(url_, toString(model), sep = "")
+    url_ <- paste(url_, input_request, sep = "")
 
     # api call, returns class vrd_api
     api_output <- call_vrd_api(url_, model, limit)
@@ -117,7 +124,7 @@ recall_by_years <- function(start_year = 1900, end_year = 2100, limit = 25) {
 
 #' recall_by_number
 #'
-#' @param recall_number An integer
+#' @param recall_number list integer
 #' @param limit An integer
 #'
 #' @return dataframe
@@ -129,9 +136,12 @@ recall_by_years <- function(start_year = 1900, end_year = 2100, limit = 25) {
 #' }
 recall_by_number <- function(recall_number, limit = 25) {
 
+    # create multiple requests from input list
+    input_request <- paste(recall_number, collapse = '|')
+
     # format the url string
     url_ <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/recall-number/"
-    url_ <- paste(url_, toString(recall_number), sep = "")
+    url_ <- paste(url_, input_request, sep = "")
 
     # api call, returns class vrd_api
     api_output <- call_vrd_api(url_, recall_number, limit)
@@ -165,6 +175,9 @@ recall_by_number <- function(recall_number, limit = 25) {
 #' recall_details(1977044)
 #' }
 recall_details <- function(recall_number, limit = 25) {
+
+    ### Note that this API call does not allow multiple numbers
+    ### would need to implement multiple calls
 
     # format the url string
     url_ <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall-summary/recall-number/"

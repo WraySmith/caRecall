@@ -7,7 +7,7 @@
 recall_by_make(make, manufacturer = FALSE, limit = 25, partial = FALSE)
 }
 \arguments{
-\item{make}{A string}
+\item{make}{list string}
 
 \item{limit}{An integer}
 
