@@ -23,8 +23,14 @@ recall_by_make <- function(make, manufacturer = FALSE, limit = 25, partial = FAL
     # api call, returns class vrd_api
     api_output <- call_vrd_api(url_, make, limit)
 
+    # set database
+    contents_df <- data.frame(matrix(ncol = length(api_output$content$ResultSet[[1]]$Name)))
+    colnames(contents_df) <- api_output$content$ResultSet[[1]]$Name
+
     # convert content to a dataframe
-    contents_df <- as.data.frame(api_output$content)
+    for (i in 1:length(api_output$content$ResultSet)){
+        contents_df<-rbind(contents_df,api_output$content$ResultSet[[i]]$Value.Literal)
+    }
 
     # currently just provides raw dataframe output, needs to be cleaned up
     # any repetitive clean-up should go into helper functions
@@ -54,8 +60,14 @@ recall_by_model <- function(model, limit = 25, partial = FALSE) {
     # api call, returns class vrd_api
     api_output <- call_vrd_api(url_, model, limit)
 
+    # set database
+    contents_df <- data.frame(matrix(ncol = length(api_output$content$ResultSet[[1]]$Name)))
+    colnames(contents_df) <- api_output$content$ResultSet[[1]]$Name
+
     # convert content to a dataframe
-    contents_df <- as.data.frame(api_output$content)
+    for (i in 1:length(api_output$content$ResultSet)){
+        contents_df<-rbind(contents_df,api_output$content$ResultSet[[i]]$Value.Literal)
+    }
 
     # currently just provides raw dataframe output, needs to be cleaned up
     # any repetitive clean-up should go into helper functions
@@ -87,11 +99,18 @@ recall_by_years <- function(start_year = 1900, end_year = 2100, limit = 25) {
     # api call, returns class vrd_api
     api_output <- call_vrd_api(url_, year_range, limit)
 
+    # set database
+    contents_df <- data.frame(matrix(ncol = length(api_output$content$ResultSet[[1]]$Name)))
+    colnames(contents_df) <- api_output$content$ResultSet[[1]]$Name
+
     # convert content to a dataframe
-    contents_df <- as.data.frame(api_output$content)
+    for (i in 1:length(api_output$content$ResultSet)){
+        contents_df<-rbind(contents_df,api_output$content$ResultSet[[i]]$Value.Literal)
+    }
 
     # currently just provides raw dataframe output, needs to be cleaned up
     # any repetitive clean-up should go into helper functions
+    # if partial = FALSE need to filter data, if partial = TRUE return all data
     contents_df
 
 }
@@ -117,11 +136,18 @@ recall_by_number <- function(recall_number, limit = 25) {
     # api call, returns class vrd_api
     api_output <- call_vrd_api(url_, recall_number, limit)
 
+    # set database
+    contents_df <- data.frame(matrix(ncol = length(api_output$content$ResultSet[[1]]$Name)))
+    colnames(contents_df) <- api_output$content$ResultSet[[1]]$Name
+
     # convert content to a dataframe
-    contents_df <- as.data.frame(api_output$content)
+    for (i in 1:length(api_output$content$ResultSet)){
+        contents_df<-rbind(contents_df,api_output$content$ResultSet[[i]]$Value.Literal)
+    }
 
     # currently just provides raw dataframe output, needs to be cleaned up
     # any repetitive clean-up should go into helper functions
+    # if partial = FALSE need to filter data, if partial = TRUE return all data
     contents_df
 
 }
@@ -147,11 +173,18 @@ recall_details <- function(recall_number, limit = 25) {
     # api call, returns class vrd_api
     api_output <- call_vrd_api(url_, recall_number, limit)
 
+    # set database
+    contents_df <- data.frame(matrix(ncol = length(api_output$content$ResultSet[[1]]$Name)))
+    colnames(contents_df) <- api_output$content$ResultSet[[1]]$Name
+
     # convert content to a dataframe
-    contents_df <- as.data.frame(api_output$content)
+    for (i in 1:length(api_output$content$ResultSet)){
+        contents_df<-rbind(contents_df,api_output$content$ResultSet[[i]]$Value.Literal)
+    }
 
     # currently just provides raw dataframe output, needs to be cleaned up
     # any repetitive clean-up should go into helper functions
+    # if partial = FALSE need to filter data, if partial = TRUE return all data
     contents_df
 
 }
