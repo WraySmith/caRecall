@@ -1,7 +1,9 @@
 #' recall_by_make
 #'
-#' @param make A string
-#' @param manufacturer bool, with this flag we are asking for the manufacturer not the make
+#' @param make List string
+#' @param manufacturer A bool, with this flag we are asking for the manufacturer not the make
+#' @param start_year An integer
+#' @param end_year An integer
 #' @param limit An integer
 #' @param partial A bool
 #'
@@ -223,7 +225,6 @@ recall_details <- function(recall_number, limit = 25) {
         url_ <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall-summary/recall-number/"
         url_ <- paste(url_, toString(single_number), sep = "")
 
-
         # api call, returns class vrd_api
         api_output <- call_vrd_api(url_, single_number, limit)
 
@@ -234,14 +235,11 @@ recall_details <- function(recall_number, limit = 25) {
         Sys.sleep(1)
         i <- i + 1
 
-
     }
 
     # currently just provides raw dataframe output, needs to be cleaned up
     # any repetitive clean-up should go into helper functions
-
     compiled_df
-
 
 }
 

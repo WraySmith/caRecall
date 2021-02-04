@@ -12,9 +12,19 @@ count_recall_by_make(
 )
 }
 \arguments{
+<<<<<<< HEAD
 \item{make}{A string}
 
 \item{manufacturer}{bool, with this flag we are asking for the manufacturer not the make}
+=======
+\item{make}{list string}
+
+\item{manufacturer}{bool, with this flag we are asking for the manufacturer not the make}
+
+\item{start_year}{An integer}
+
+\item{end_year}{An integer}
+>>>>>>> 23d265c537dc8ef4e017429ede79ded6942a0528
 }
 \value{
 integer
