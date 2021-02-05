@@ -47,8 +47,16 @@ recall_by_make <- function(make, manufacturer = FALSE,
     # convert content to a dataframe
     contents_df <- clean_vrd_api(api_output)
 
+    # filters for exact result
+    if (partial == FALSE & manufacturer == FALSE){
+        contents_df<- contents_df[contents_df$`Make name`==toupper(toString(make)),]
+    }
+    if (partial == FALSE & manufacturer == TRUE){
+        contents_df<- contents_df[contents_df$`Manufacturer Name`==toupper(toString(make)),]
+    }
 
-    # if partial = FALSE need to filter data, if partial = TRUE return all data
+
+    # outputs dataframe
     contents_df
 
 }
@@ -96,8 +104,12 @@ recall_by_model <- function(model,
     # convert content to a dataframe
     contents_df <- clean_vrd_api(api_output)
 
+    # filters for exact result
+    if (partial == FALSE){
+        contents_df<- contents_df[contents_df$`Model name`==toupper(toString(model)),]
+    }
 
-    # if partial = FALSE need to filter data, if partial = TRUE return all data
+    # outputs dataframe
     contents_df
 
 }
