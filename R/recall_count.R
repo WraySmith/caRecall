@@ -87,7 +87,7 @@ count_recall_by_model <- function(model, start_year = NULL, end_year = NULL) {
     # convert content to a dataframe
     contents_df <- clean_vrd_api(api_output)
 
-    # if partial = FALSE need to filter data, if partial = TRUE return all data
+    # outputs dataframe
     contents_df
 
 }
@@ -117,6 +117,7 @@ count_recall_by_years <- function(start_year = 1900, end_year = 2100) {
     # convert content to a dataframe
     contents_df <- clean_vrd_api(api_output)
 
+    # outputs dataframe
     contents_df
 
 }
