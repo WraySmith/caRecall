@@ -47,8 +47,7 @@ recall_by_make <- function(make, manufacturer = FALSE,
     # convert content to a dataframe
     contents_df <- clean_vrd_api(api_output)
 
-    # currently just provides raw dataframe output, needs to be cleaned up
-    # any repetitive clean-up should go into helper functions
+
     # if partial = FALSE need to filter data, if partial = TRUE return all data
     contents_df
 
@@ -97,8 +96,7 @@ recall_by_model <- function(model,
     # convert content to a dataframe
     contents_df <- clean_vrd_api(api_output)
 
-    # currently just provides raw dataframe output, needs to be cleaned up
-    # any repetitive clean-up should go into helper functions
+
     # if partial = FALSE need to filter data, if partial = TRUE return all data
     contents_df
 
@@ -130,8 +128,7 @@ recall_by_years <- function(start_year = 1900, end_year = 2100, limit = 25) {
     # convert content to a dataframe
     contents_df <- clean_vrd_api(api_output)
 
-    # currently just provides raw dataframe output, needs to be cleaned up
-    # any repetitive clean-up should go into helper functions
+
     # if partial = FALSE need to filter data, if partial = TRUE return all data
     contents_df
 
@@ -164,8 +161,6 @@ recall_by_number <- function(recall_number, limit = 25) {
     # convert content to a dataframe
     contents_df <- clean_vrd_api(api_output)
 
-    # currently just provides raw dataframe output, needs to be cleaned up
-    # any repetitive clean-up should go into helper functions
     # if partial = FALSE need to filter data, if partial = TRUE return all data
     contents_df
 
@@ -193,28 +188,41 @@ recall_details <- function(recall_number, limit = 25) {
             call. = FALSE)
     }
 
-    compiled_df <- vector(mode = "list", length = length(recall_number))
+
     i <- 1
     for (single_number in recall_number) {
 
+        #initialize dataframe
+        if (i == 1){
+
+            # format the url string
+            url_ <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall-summary/recall-number/"
+            url_ <- paste(url_, toString(single_number), sep = "")
+
+            # api call, returns class vrd_api
+            api_output <- call_vrd_api(url_, single_number)
+
+            #create dataframe
+            compiled_df <- clean_vrd_api(api_output)
+        }else{
+
         # format the url string
         url_ <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall-summary/recall-number/"
-        url_ <- paste(url_, toString(siloadngle_number), sep = "")
+        url_ <- paste(url_, toString(single_number), sep = "")
 
         # api call, returns class vrd_api
-        api_output <- call_vrd_api(url_, single_number, limit)
+        api_output <- call_vrd_api(url_, single_number)
 
-        # convert content to a dataframe
-        ### NOTE that it may make sense to do format differently here
-        compiled_df[i] <- api_output$content
+        # add content to a dataframe
+        compiled_df<-rbind(compiled_df, clean_vrd_api(api_output))
+        }
 
         Sys.sleep(1)
         i <- i + 1
 
+
     }
 
-    # currently just provides raw dataframe output, needs to be cleaned up
-    # any repetitive clean-up should go into helper functions
     compiled_df
 
 }
