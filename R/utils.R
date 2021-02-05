@@ -110,7 +110,6 @@ clean_vrd_api <- function(api_output){
     df2 <- df1[, grep("Literal", colnames(df1))]
 
     # transposes dataframe
-    df3 <- as.data.frame(t(df2), row.names = FALSE)
 
     # adds back the correct column names
     colnames(df3) <- df1$Name
