@@ -4,6 +4,10 @@
 # caRecall
 
 <!-- badges: start -->
+
+[![R-CMD-check](https://github.com/WraySmith/caRecall/workflows/R-CMD-check/badge.svg)](https://github.com/WraySmith/caRecall/actions)
+[![Codecov test
+coverage](https://codecov.io/gh/WraySmith/caRecall/branch/main/graph/badge.svg)](https://codecov.io/gh/WraySmith/caRecall?branch=main)
 <!-- badges: end -->
 
 API wrapper for the Government of Canada Vehicle Recalls Database
@@ -24,10 +28,6 @@ And the development version from [GitHub](https://github.com/) with:
 # install.packages("devtools")
 devtools::install_github("WraySmith/caRecall")
 ```
-
-## Set up
-You'll need an api key from the website at the top of this read me.  
-Then run `Sys.setenv(VRD_API = "your_api_key_here")` in your R terminal.
 
 ## Example
 
