@@ -42,7 +42,7 @@ count_recall_by_make <- function(make, manufacturer = FALSE,
     #### THIS NEEDS TO BE EXTRACTED DIFFERNTLY ####
 
     # convert content to a dataframe
-    contents_df <- as.data.frame(api_output$content)
+    contents_df <- clean_vrd_api(api_output)
 
     # currently just provides raw dataframe output, needs to be cleaned up
     # any repetitive clean-up should go into helper functions
@@ -89,7 +89,7 @@ count_recall_by_model <- function(model, start_year = NULL, end_year = NULL) {
     #### THIS NEEDS TO BE EXTRACTED DIFFERNTLY ####
 
     # convert content to a dataframe
-    contents_df <- as.data.frame(api_output$content)
+    contents_df <- clean_vrd_api(api_output)
 
     # currently just provides raw dataframe output, needs to be cleaned up
     # any repetitive clean-up should go into helper functions
@@ -121,7 +121,7 @@ count_recall_by_years <- function(start_year = 1900, end_year = 2100) {
     api_output <- call_vrd_api(url_, year_range)
 
     # convert content to a dataframe
-    contents_df <- as.data.frame(api_output$content)
+    contents_df <- clean_vrd_api(api_output)
 
     # currently just provides raw dataframe output, needs to be cleaned up
     # any repetitive clean-up should go into helper functions
