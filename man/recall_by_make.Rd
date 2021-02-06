@@ -16,13 +16,11 @@ recall_by_make(
 \arguments{
 \item{make}{List string}
 
-\item{manufacturer}{A bool}
+\item{manufacturer}{A bool, with this flag we are asking for the manufacturer not the make}
 
 \item{start_year}{An integer}
 
 \item{end_year}{An integer}
-
-\item{manufacturer}{bool, with this flag we are asking for the manufacturer not the make}
 
 \item{limit}{An integer}
 
