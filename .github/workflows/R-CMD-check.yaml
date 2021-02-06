@@ -10,6 +10,8 @@ jobs:
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
+      - name: set up r env
+        run: echo VRD_API = ${{ secrets.VRD_API }} > ~/.Renviron
       - uses: actions/checkout@v2
       - uses: r-lib/actions/setup-r@v1
       - name: Install dependencies
