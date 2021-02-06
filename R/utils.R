@@ -115,6 +115,26 @@ clean_vrd_api <- function(api_output){
     # adds back the correct column names
     colnames(df3) <- df1$Name
 
+    # checks column types
+    col_type <- df1[1, grep("Type", colnames(df1))]
+
+    # assigns columns
+    i <- 1
+    for (element in col_type){
+
+        # change df type
+        if (element == "System.Decimal"){
+            df3[[i]] <- as.integer(df3[[i]])
+        }
+        if (element == "System.DateTime"){
+            df3[[i]] <- as.Date(substr(df3[[i]],
+                                       1,
+                                       nchar(df3[[i]])-11),
+                                "%m/%d/%Y")
+        }
+        i <- i + 1
+    }
+    # output dataframe
     df3
 }
 
