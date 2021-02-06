@@ -127,10 +127,10 @@ clean_vrd_api <- function(api_output){
             df3[[i]] <- as.integer(df3[[i]])
         }
         if (element == "System.DateTime"){
-            df3[[i]] <- as.Date(stringr::str_trunc(df3[[i]],
-                                                   12,
-                                                   "right")
-                                , "%m/%d/%Y")
+            df3[[i]] <- as.Date(substr(df3[[i]],
+                                       1,
+                                       nchar(df3[[i]])-11),
+                                "%m/%d/%Y")
         }
         i <- i + 1
     }
