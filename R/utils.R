@@ -116,11 +116,11 @@ clean_vrd_api <- function(api_output){
     colnames(df3) <- df1$Name
 
     # checks column types
-    col_type <- df1[, grep("Type", colnames(df1))]
+    col_type <- df1[1, grep("Type", colnames(df1))]
 
     # assigns columns
     i <- 1
-    for (element in col_type[[1]]){
+    for (element in col_type){
 
         # change df type
         if (element == "System.Decimal"){
