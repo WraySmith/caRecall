@@ -79,14 +79,6 @@ call_vrd_api <- function(url_, query, limit = NULL, api_key=get_vrd_key()){
 
 }
 
-# this is a placeholder helper function that allows print from class vrd_api
-# need to determine if we want to keep something like this, leave as a placeholder
-print_vrd_api <- function(x, ...){
-    cat("<Recall_Number ", x$name, ">\n", sep = "")
-    utils::str(x$content)
-    invisible(x)
-}
-
 
 #' clean_vrd_api()
 #'
