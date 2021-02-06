@@ -88,3 +88,34 @@ print_vrd_api <- function(x, ...){
 }
 
 
+#' clean_vrd_api()
+#'
+#'helper function for cleaning api database
+#'
+#' @param api_output api response to be cleaned
+#'
+#' @return dataframe
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' clean_vrd_api()
+#' }
+clean_vrd_api <- function(api_output){
+
+    # makes dataframe of output
+    df1 <- as.data.frame(unlist(api_output$content$ResultSet,recursive=FALSE))
+
+    # only keeps columns with values
+    df2 <- df1[, grep("Literal", colnames(df1))]
+
+    # transposes dataframe
+    df3 <- as.data.frame(t(df2), row.names = 1)
+
+    # adds back the correct column names
+    colnames(df3) <- df1$Name
+
+    df3
+}
+
+
