@@ -11,3 +11,11 @@ test_that("call_rd_api() returns the correct structure",{
     response <- call_vrd_api(test_url, "", api_key="test")
     expect_type(response, "list")
 })
+
+test_that("we can make api call with our key",{
+  result <- count_recall_by_make('Nissan')
+  expect_type(result, "list")
+})
+
+
+
