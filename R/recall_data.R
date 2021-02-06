@@ -210,20 +210,17 @@ recall_details <- function(recall_number, limit = 25) {
         # api call, returns class vrd_api
         api_output <- call_vrd_api(url_, single_number)
         
-        #initialize dataframe
         if (i == 1) {
-
-            #create dataframe
+            # initialize dataframe
             compiled_df <- clean_vrd_api(api_output)
+ 
         } else {
-
-        # add content to a dataframe
-        compiled_df <- rbind(compiled_df, clean_vrd_api(api_output))
+            # append to dataframe
+            compiled_df <- rbind(compiled_df, clean_vrd_api(api_output))
         }
 
         Sys.sleep(1)
         i <- i + 1
-
     }
     # output dataframe
     compiled_df
