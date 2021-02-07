@@ -210,8 +210,6 @@ recall_details <- function(recall_number, limit = 25) {
         # api call, returns class vrd_api
         api_output <- call_vrd_api(url_, single_number)
         
-<<<<<<< HEAD
-<<<<<<< HEAD
         if (i == 1) {
             # initialize dataframe
             compiled_df <- clean_vrd_api(api_output)
@@ -219,35 +217,11 @@ recall_details <- function(recall_number, limit = 25) {
         } else {
             # append to dataframe
             compiled_df <- rbind(compiled_df, clean_vrd_api(api_output))
-=======
-        #initialize dataframe
-=======
->>>>>>> c7970e5 (add tests for clean_vrd_api())
-        if (i == 1) {
-            # initialize dataframe
-            compiled_df <- clean_vrd_api(api_output)
- 
-        } else {
-<<<<<<< HEAD
-
-        # add content to a dataframe
-        compiled_df <- rbind(compiled_df, clean_vrd_api(api_output))
->>>>>>> 0b8185f (clean-up recall_details())
-=======
-            # append to dataframe
-            compiled_df <- rbind(compiled_df, clean_vrd_api(api_output))
->>>>>>> c7970e5 (add tests for clean_vrd_api())
         }
 
         Sys.sleep(1)
         i <- i + 1
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 
->>>>>>> 0b8185f (clean-up recall_details())
-=======
->>>>>>> c7970e5 (add tests for clean_vrd_api())
     }
     # output dataframe
     compiled_df
