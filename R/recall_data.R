@@ -97,7 +97,6 @@ recall_by_model <- function(model,
         year_range <- paste(toString(start_year), toString(end_year), sep = "-")
         url_ <- paste(url_, '/year-range/', year_range, sep = "")
     }
-
     # api call, returns class vrd_api
     api_output <- call_vrd_api(url_, model, limit)
 
