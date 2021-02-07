@@ -6,9 +6,10 @@ test_that("count_recall_by_make returns expected value", {
     expect_equal(colnames(query), "Result Count")
 })
 
-test_that("count_recall_by_make shape with default limits", {
-    query <- count_recall_by_make("Nissan")
+test_that("count_recall_by_make list with default limits", {
+    query <- count_recall_by_make(c("Nissan","Honda"))
     expect_type(query, "list")
+    expect_type(query[[1]], "integer")
     expect_equal(nrow(query),1)
     expect_equal(colnames(query), "Result Count")
 })
@@ -29,9 +30,10 @@ test_that("count_recall_by_model returns expected value", {
     expect_equal(colnames(query), "Result Count")
 })
 
-test_that("count_recall_by_model shape with default limits", {
-    query <- count_recall_by_model("Altima")
+test_that("count_recall_by_model list with default limits", {
+    query <- count_recall_by_model(c("Altima","Civic"))
     expect_type(query, "list")
+    expect_type(query[[1]], "integer")
     expect_equal(nrow(query),1)
     expect_equal(colnames(query), "Result Count")
 })
@@ -45,8 +47,9 @@ test_that("count_recall_by_years returns expected value", {
 })
 
 test_that("count_recall_by_years with default limits", {
-    query <- count_recall_by_make("Altima")
+    query <- count_recall_by_years()
     expect_type(query, "list")
+    expect_type(query[[1]], "integer")
     expect_equal(nrow(query),1)
     expect_equal(colnames(query), "Result Count")
 })
