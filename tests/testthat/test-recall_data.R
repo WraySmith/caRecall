@@ -5,6 +5,10 @@ test_that("recall_by_make returns the correct shape",{
     expected_col_names <- c("Recall number","Manufacturer Name",
                             "Model name", "Make name", "Year","Recall date")
     expect_equal(colnames(result), expected_col_names)
+    expected_dtypes <- c("character", "character", "character",
+                         "character", "integer",   "Date")
+    returned_dtypes <- as.vector(unlist(sapply(result, class)))
+    expect_equal(returned_dtypes, expected_dtypes)
 })
 
 test_that("recall_by_make by year range has the correct shape",{
@@ -12,11 +16,25 @@ test_that("recall_by_make by year range has the correct shape",{
     expect_gt(nrow(result), 0)
     filtered <- subset(result, Year >= 1980 & Year <= 2005)
     expect_equal(nrow(result), nrow(filtered))
+    expected_col_names <- c("Recall number","Manufacturer Name",
+                            "Model name", "Make name", "Year","Recall date")
+    expect_equal(colnames(result), expected_col_names)
+    expected_dtypes <- c("character", "character", "character",
+                         "character", "integer",   "Date")
+    returned_dtypes <- as.vector(unlist(sapply(result, class)))
+    expect_equal(returned_dtypes, expected_dtypes)
 })
 
 test_that("recall_by_make using manufacturer has the correct shape",{
     result <- recall_by_make('Nissan', manufacturer = TRUE)
     expect_equal(nrow(result), 25)
+    expected_col_names <- c("Recall number","Manufacturer Name",
+                            "Model name", "Make name", "Year","Recall date")
+    expect_equal(colnames(result), expected_col_names)
+    expected_dtypes <- c("character", "character", "character",
+                         "character", "integer",   "Date")
+    returned_dtypes <- as.vector(unlist(sapply(result, class)))
+    expect_equal(returned_dtypes, expected_dtypes)
 })
 
 test_that("recall_by_make using partial has the correct shape",{
@@ -29,6 +47,13 @@ test_that("recall_by_make using partial has the correct shape",{
     result <- recall_by_make('Nissan', partial = FALSE, manufacturer = TRUE)
     names <- unique(result$`Manufacturer Name`)
     expect_equal(length(names), 1)
+    expected_col_names <- c("Recall number","Manufacturer Name",
+                            "Model name", "Make name", "Year","Recall date")
+    expect_equal(colnames(result), expected_col_names)
+    expected_dtypes <- c("character", "character", "character",
+                         "character", "integer",   "Date")
+    returned_dtypes <- as.vector(unlist(sapply(result, class)))
+    expect_equal(returned_dtypes, expected_dtypes)
 })
 
 test_that("recall_by_model has the correct shape",{
@@ -38,6 +63,13 @@ test_that("recall_by_model has the correct shape",{
     expected_col_names <- c("Recall number","Manufacturer Name",
                             "Model name", "Make name", "Year","Recall date")
     expect_equal(colnames(result), expected_col_names)
+    expected_col_names <- c("Recall number","Manufacturer Name",
+                            "Model name", "Make name", "Year","Recall date")
+    expect_equal(colnames(result), expected_col_names)
+    expected_dtypes <- c("character", "character", "character",
+                         "character", "integer",   "Date")
+    returned_dtypes <- as.vector(unlist(sapply(result, class)))
+    expect_equal(returned_dtypes, expected_dtypes)
 })
 
 test_that("recall_by_model by year range has the correct shape",{
@@ -45,6 +77,13 @@ test_that("recall_by_model by year range has the correct shape",{
     expect_gt(nrow(result), 0)
     filtered <- subset(result, Year >= 1980 & Year <= 2005)
     expect_equal(nrow(result), nrow(filtered))
+    expected_col_names <- c("Recall number","Manufacturer Name",
+                            "Model name", "Make name", "Year","Recall date")
+    expect_equal(colnames(result), expected_col_names)
+    expected_dtypes <- c("character", "character", "character",
+                         "character", "integer",   "Date")
+    returned_dtypes <- as.vector(unlist(sapply(result, class)))
+    expect_equal(returned_dtypes, expected_dtypes)
 })
 
 test_that("recall_by_model using partial has the correct shape",{
@@ -54,6 +93,13 @@ test_that("recall_by_model using partial has the correct shape",{
     result <- recall_by_model('Civic', partial = FALSE)
     names <- unique(result$`Model name`)
     expect_equal(length(names), 1)
+    expected_col_names <- c("Recall number","Manufacturer Name",
+                            "Model name", "Make name", "Year","Recall date")
+    expect_equal(colnames(result), expected_col_names)
+    expected_dtypes <- c("character", "character", "character",
+                         "character", "integer",   "Date")
+    returned_dtypes <- as.vector(unlist(sapply(result, class)))
+    expect_equal(returned_dtypes, expected_dtypes)
 })
 
 test_that("recall_by_year returns the correct shape",{
@@ -65,6 +111,10 @@ test_that("recall_by_year returns the correct shape",{
     expect_equal(colnames(result), expected_col_names)
     filtered <- subset(result, Year >= 2010 & Year <= 2012)
     expect_equal(nrow(result), nrow(filtered))
+    expected_dtypes <- c("character", "character", "character",
+                         "character", "integer",   "Date")
+    returned_dtypes <- as.vector(unlist(sapply(result, class)))
+    expect_equal(returned_dtypes, expected_dtypes)
 })
 
 test_that("recall_by_number returns the correct shape",{
@@ -74,6 +124,10 @@ test_that("recall_by_number returns the correct shape",{
     expected_col_names <- c("Recall number","Manufacturer Name",
                             "Model name", "Make name", "Year","Recall date")
     expect_equal(colnames(result), expected_col_names)
+    expected_dtypes <- c("character", "character", "character",
+                         "character", "integer",   "Date")
+    returned_dtypes <- as.vector(unlist(sapply(result, class)))
+    expect_equal(returned_dtypes, expected_dtypes)
 })
 
 test_that("recall_details returns the correct shape",{
@@ -86,4 +140,21 @@ test_that("recall_details returns the correct shape",{
                             "NOTIFICATION_TYPE_ETXT", "NOTIFICATION_TYPE_FTXT", "COMMENT_ETXT",
                             "COMMENT_FTXT", "DATE_YEAR_CD", "RECALL_DATE_DTE")
     expect_equal(colnames(result), expected_col_names)
+    expected_dtypes <- c("character",
+                         "character",
+                         "character",
+                         "character",
+                         "character",
+                         "character",
+                         "integer",
+                         "character",
+                         "character",
+                         "character",
+                         "character",
+                         "character",
+                         "character",
+                         "integer",
+                         "Date")
+    returned_dtypes <- as.vector(unlist(sapply(result, class)))
+    expect_equal(returned_dtypes, expected_dtypes)
 })
