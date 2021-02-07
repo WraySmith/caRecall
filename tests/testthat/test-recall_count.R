@@ -39,7 +39,7 @@ test_that("count_recall_by_model shape with default limits", {
 test_that("count_recall_by_years returns expected value", {
     query <- count_recall_by_years(start_year = 1995, end_year = 1998)
     expect_type(query, "list")
-    expect_equal(query[[1]], 2L)
+    expect_equal(query[[1]], 5597L)
     expect_equal(nrow(query), 1)
     expect_equal(colnames(query), "Result Count")
 })
