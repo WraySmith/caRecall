@@ -2,8 +2,6 @@ test_that("API key is retreived", {
   expect_type(get_vrd_key(), 'character')
 })
 
-test_that("API call returns correct structure", {
-
 test_that("Bad API key correctly fails", {
   # valid url
   url_test <- 'https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/make-name/ford'
@@ -32,7 +30,7 @@ test_that("Clean API returns formatted dataframe", {
     url_test2 <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall-summary/recall-number/1977044"
     query_test2 <- '1977045'
     response2 <- call_vrd_api(url_test2, query = query_test2)
-    coltype2 <- c(rep('character', 13), 'integer', 'double')
+    coltype2 <- c(rep('character', 6),'integer', rep('character', 6), 'integer', 'double')
     # tests for first structure
     expect_s3_class(clean_vrd_api(response1), 'data.frame')
     expect_equal(nrow(clean_vrd_api(response1)), 25)
