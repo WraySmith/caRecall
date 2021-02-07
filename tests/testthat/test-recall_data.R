@@ -23,7 +23,6 @@ test_that("recall_by_make by year range has the correct shape",{
                          "character", "integer",   "Date")
     returned_dtypes <- as.vector(unlist(sapply(result, class)))
     expect_equal(returned_dtypes, expected_dtypes)
-
     result <- recall_by_make('Nissan', start_year = 1980)
     expect_gt(nrow(result), 0)
     result <- recall_by_make('Nissan', end_year = 1980)
