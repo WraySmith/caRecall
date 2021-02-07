@@ -87,4 +87,3 @@ test_that("recall_details returns the correct shape",{
                             "COMMENT_FTXT", "DATE_YEAR_CD", "RECALL_DATE_DTE")
     expect_equal(colnames(result), expected_col_names)
 })
-
