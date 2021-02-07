@@ -73,4 +73,18 @@ test_that("recall_by_number returns the correct shape",{
     expect_equal(nrow(result), 1)
     expected_col_names <- c("Recall number","Manufacturer Name",
                             "Model name", "Make name", "Year","Recall date")
+    expect_equal(colnames(result), expected_col_names)
 })
+
+test_that("recall_details returns the correct shape",{
+    result <- recall_details(1977044)
+    expect_type(result, "list")
+    expect_equal(nrow(result), 1)
+    expected_col_names <- c("RECALL_NUMBER_NUM","MANUFACTURER_RECALL_NO_TXT", "CATEGORY_ETXT",
+                            "CATEGORY_FTXT", "MODEL_NAME_NM", "MAKE_NAME_NM",
+                            "UNIT_AFFECTED_NBR", "SYSTEM_TYPE_ETXT", "SYSTEM_TYPE_FTXT",
+                            "NOTIFICATION_TYPE_ETXT", "NOTIFICATION_TYPE_FTXT", "COMMENT_ETXT",
+                            "COMMENT_FTXT", "DATE_YEAR_CD", "RECALL_DATE_DTE")
+    expect_equal(colnames(result), expected_col_names)
+})
+
