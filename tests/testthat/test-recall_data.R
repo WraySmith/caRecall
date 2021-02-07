@@ -1,5 +1,5 @@
 test_that("recall_by_make returns the correct shape",{
-    result <- recall_by_make('Nissan', limit=25)
+    result <- recall_by_make('Nissan')
     expect_type(result, "list")
     expect_equal(nrow(result), 25)
     expected_col_names <- c("Recall number","Manufacturer Name",
@@ -7,4 +7,70 @@ test_that("recall_by_make returns the correct shape",{
     expect_equal(colnames(result), expected_col_names)
 })
 
+test_that("recall_by_make by year range has the correct shape",{
+    result <- recall_by_make('Nissan', start_year = 1980, end_year=2005)
+    expect_gt(nrow(result), 0)
+    filtered <- subset(result, Year >= 1980 & Year <= 2005)
+    expect_equal(nrow(result), nrow(filtered))
+})
 
+test_that("recall_by_make using manufacturer has the correct shape",{
+    result <- recall_by_make('Nissan', manufacturer = TRUE)
+    expect_equal(nrow(result), 25)
+})
+
+test_that("recall_by_make using partial has the correct shape",{
+    result <- recall_by_make('N', partial = TRUE, manufacturer = FALSE)
+    names <- unique(result$`Make name`)
+    expect_gt(length(names), 1)
+    result <- recall_by_make('Nissan', partial = FALSE, manufacturer = FALSE)
+    names <- unique(result$`Make name`)
+    expect_equal(length(names), 1)
+    result <- recall_by_make('Nissan', partial = FALSE, manufacturer = TRUE)
+    names <- unique(result$`Manufacturer Name`)
+    expect_equal(length(names), 1)
+})
+
+test_that("recall_by_model has the correct shape",{
+    result <- recall_by_model('Civic', limit=25, partial=TRUE)
+    expect_type(result, "list")
+    expect_equal(nrow(result), 25)
+    expected_col_names <- c("Recall number","Manufacturer Name",
+                            "Model name", "Make name", "Year","Recall date")
+    expect_equal(colnames(result), expected_col_names)
+})
+
+test_that("recall_by_model by year range has the correct shape",{
+    result <- recall_by_model('Civic', start_year = 1980, end_year=2005)
+    expect_gt(nrow(result), 0)
+    filtered <- subset(result, Year >= 1980 & Year <= 2005)
+    expect_equal(nrow(result), nrow(filtered))
+})
+
+test_that("recall_by_model using partial has the correct shape",{
+    result <- recall_by_model('Civic', partial = TRUE)
+    names <- unique(result$`Model name`)
+    expect_gt(length(names), 1)
+    result <- recall_by_model('Civic', partial = FALSE)
+    names <- unique(result$`Model name`)
+    expect_equal(length(names), 1)
+})
+
+test_that("recall_by_year returns the correct shape",{
+    result <- recall_by_years(2010, 2012)
+    expect_type(result, "list")
+    expect_equal(nrow(result), 25)
+    expected_col_names <- c("Recall number","Manufacturer Name",
+                            "Model name", "Make name", "Year","Recall date")
+    expect_equal(colnames(result), expected_col_names)
+    filtered <- subset(result, Year >= 2010 & Year <= 2012)
+    expect_equal(nrow(result), nrow(filtered))
+})
+
+test_that("recall_by_number returns the correct shape",{
+    result <- recall_by_number(1977044)
+    expect_type(result, "list")
+    expect_equal(nrow(result), 1)
+    expected_col_names <- c("Recall number","Manufacturer Name",
+                            "Model name", "Make name", "Year","Recall date")
+})
