@@ -23,7 +23,8 @@ count_recall_by_make <- function(make, manufacturer = FALSE,
     } else {
         url_ <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/make-name/"
     }
-    url_ <- paste(url_, input_request, "/count", sep = "")
+
+    url_ <- paste(url_, input_request, sep = "")
 
     # append year range criteria to url if input by user
     if (!is.null(start_year) | !is.null(end_year)) {
@@ -35,6 +36,9 @@ count_recall_by_make <- function(make, manufacturer = FALSE,
         year_range <- paste(toString(start_year), toString(end_year), sep = "-")
         url_ <- paste(url_, '/year-range/', year_range, sep = "")
     }
+
+    # add count to url
+    url_ <- paste (url_, "/count", sep = "")
 
     # api call, returns class vrd_api
     api_output <- call_vrd_api(url_, make)
@@ -66,7 +70,7 @@ count_recall_by_model <- function(model, start_year = NULL, end_year = NULL) {
 
     # format the url string
     url_ <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/model-name/"
-    url_ <- paste(url_, input_request, "/count", sep = "")
+    url_ <- paste(url_, input_request, sep = "")
 
     # append year range criteria to url if input by user
     if (!is.null(start_year) | !is.null(end_year)) {
@@ -78,6 +82,8 @@ count_recall_by_model <- function(model, start_year = NULL, end_year = NULL) {
         year_range <- paste(toString(start_year), toString(end_year), sep = "-")
         url_ <- paste(url_, '/year-range/', year_range, sep = "")
     }
+    # add count to url
+    url_ <- paste (url_, "/count", sep = "")
 
     # api call, returns class vrd_api
     api_output <- call_vrd_api(url_, model)
