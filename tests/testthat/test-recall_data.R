@@ -130,7 +130,7 @@ test_that("recall_by_number returns the correct shape",{
     expect_equal(returned_dtypes, expected_dtypes)
 })
 
-test_that("recall_details returns the correct shape",{
+test_that("recall_details returns the correct shape when given an integer",{
     result <- recall_details(1977044)
     expect_type(result, "list")
     expect_equal(nrow(result), 1)
@@ -157,4 +157,37 @@ test_that("recall_details returns the correct shape",{
                          "Date")
     returned_dtypes <- as.vector(unlist(sapply(result, class)))
     expect_equal(returned_dtypes, expected_dtypes)
+})
+
+test_that("recall_details returns the correct shape when given a list",{
+    recall_numbers <- c(1977044, 2009097)
+    result <- recall_details(recall_numbers)
+    expect_type(result, "list")
+    expect_gt(nrow(result), 1)
+    expected_col_names <- c("RECALL_NUMBER_NUM","MANUFACTURER_RECALL_NO_TXT", "CATEGORY_ETXT",
+                            "CATEGORY_FTXT", "MODEL_NAME_NM", "MAKE_NAME_NM",
+                            "UNIT_AFFECTED_NBR", "SYSTEM_TYPE_ETXT", "SYSTEM_TYPE_FTXT",
+                            "NOTIFICATION_TYPE_ETXT", "NOTIFICATION_TYPE_FTXT", "COMMENT_ETXT",
+                            "COMMENT_FTXT", "DATE_YEAR_CD", "RECALL_DATE_DTE")
+    expect_equal(colnames(result), expected_col_names)
+    expected_dtypes <- c("character",
+                         "character",
+                         "character",
+                         "character",
+                         "character",
+                         "character",
+                         "integer",
+                         "character",
+                         "character",
+                         "character",
+                         "character",
+                         "character",
+                         "character",
+                         "integer",
+                         "Date")
+    returned_dtypes <- as.vector(unlist(sapply(result, class)))
+    expect_equal(returned_dtypes, expected_dtypes)
+
+    recall_numbers <- seq(1, 700, by=1)
+    expect_error(recall_details(recall_numbers))
 })
