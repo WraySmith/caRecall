@@ -15,10 +15,6 @@ test_that("recall_by_make returns the correct shape",{
 
     Sys.sleep(1.5)
 
-})
-
-test_that("recall_by_make by year range has the correct shape",{
-
     result <- recall_by_make('Nissan', start_year = 1980, end_year=2005)
     expect_gt(nrow(result), 0)
     filtered <- subset(result, Year >= 1980 & Year <= 2005)
