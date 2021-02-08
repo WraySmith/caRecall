@@ -29,3 +29,11 @@ test_that("count_recall_by_years returns expected value", {
     expect_equal(nrow(query), 1)
     expect_equal(colnames(query), "Result Count")
 })
+
+test_that("count_recall_by_years returns expected value", {
+    query <- count_recall_by_years()
+    expect_type(query, "list")
+    expect_type(query[[1]], "integer")
+    expect_equal(nrow(query), 1)
+    expect_equal(colnames(query), "Result Count")
+})
