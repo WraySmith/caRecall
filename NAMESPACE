@@ -3,7 +3,6 @@
 export(call_vrd_api)
 export(clean_vrd_api)
 export(count_recall_by_years)
-export(fbind)
 export(get_vrd_key)
 export(recall_by_number)
 export(recall_by_years)
