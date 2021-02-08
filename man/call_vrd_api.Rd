@@ -4,7 +4,7 @@
 \alias{call_vrd_api}
 \title{call_vrd_api()}
 \usage{
-call_vrd_api(url_, query, limit = NULL, api_key = get_vrd_key())
+call_vrd_api(url_, query = NULL, limit = NULL, api_key = get_vrd_key())
 }
 \arguments{
 \item{url_}{api url to be hit}

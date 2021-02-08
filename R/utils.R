@@ -26,18 +26,18 @@ get_vrd_key <- function() {
 #' @param api_key defaults to the one set in the environment, can be pass one manually
 #'
 #' @return vrd_api class
-#' @export
 #'
 #' @examples
 #' \dontrun{
 #' call_vrd_api()
 #' }
-call_vrd_api <- function(url_, query, limit = NULL, api_key=get_vrd_key()){
+call_vrd_api <- function(url_, query = NULL, limit = NULL,
+                         api_key=get_vrd_key()){
 
     # add limit to url (limit does not go in header)
     url_ <- paste(url_, "?limit=", toString(limit), sep = "")
 
-    # set a the user agent
+    # set the user agent
     ua <- httr::user_agent("https://github.com/WraySmith/caRecall")
 
     # set headers (currently only user-key is set)
@@ -87,7 +87,6 @@ call_vrd_api <- function(url_, query, limit = NULL, api_key=get_vrd_key()){
 #' @param api_output api response to be cleaned
 #'
 #' @return dataframe
-#' @export
 #'
 #' @examples
 #' \dontrun{

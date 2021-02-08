@@ -8,6 +8,7 @@
 #' @param partial A bool
 #'
 #' @return dataframe
+#' @export
 #'
 #' @examples
 #' \dontrun{
@@ -70,6 +71,7 @@ recall_by_make <- function(make, manufacturer = FALSE,
 #' @param partial A bool
 #'
 #' @return dataframe
+#' @export
 #'
 #' @examples
 #' \dontrun{
@@ -209,11 +211,11 @@ recall_details <- function(recall_number, limit = 25) {
 
         # api call, returns class vrd_api
         api_output <- call_vrd_api(url_, single_number)
-        
+
         if (i == 1) {
             # initialize dataframe
             compiled_df <- clean_vrd_api(api_output)
- 
+
         } else {
             # append to dataframe
             compiled_df <- rbind(compiled_df, clean_vrd_api(api_output))

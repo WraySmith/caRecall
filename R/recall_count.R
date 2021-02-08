@@ -6,6 +6,7 @@
 #' @param end_year An integer
 #'
 #' @return integer
+#' @export
 #'
 #' @examples
 #' \dontrun{
@@ -58,6 +59,7 @@ count_recall_by_make <- function(make, manufacturer = FALSE,
 #' @param end_year An integer
 #'
 #' @return integer
+#' @export
 #'
 #' @examples
 #' \dontrun{
