@@ -203,34 +203,24 @@ recall_details <- function(recall_number, limit = 25) {
     i <- 1
     for (single_number in recall_number) {
 
-        #initialize dataframe
-        if (i == 1){
-
-            # format the url string
-            url_ <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall-summary/recall-number/"
-            url_ <- paste(url_, toString(single_number), sep = "")
-
-            # api call, returns class vrd_api
-            api_output <- call_vrd_api(url_, single_number)
-
-            #create dataframe
-            compiled_df <- clean_vrd_api(api_output)
-        }else{
-
         # format the url string
         url_ <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall-summary/recall-number/"
         url_ <- paste(url_, toString(single_number), sep = "")
 
         # api call, returns class vrd_api
         api_output <- call_vrd_api(url_, single_number)
-
-        # add content to a dataframe
-        compiled_df<-rbind(compiled_df, clean_vrd_api(api_output))
+        
+        if (i == 1) {
+            # initialize dataframe
+            compiled_df <- clean_vrd_api(api_output)
+ 
+        } else {
+            # append to dataframe
+            compiled_df <- rbind(compiled_df, clean_vrd_api(api_output))
         }
 
         Sys.sleep(1)
         i <- i + 1
-
 
     }
     # output dataframe
