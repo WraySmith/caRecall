@@ -48,19 +48,21 @@ test_that("recall_by_make using manufacturer has the correct shape",{
                          "character", "integer",   "Date")
     returned_dtypes <- as.vector(sapply(result, class))
     expect_equal(returned_dtypes, expected_dtypes)
-    result <- recall_by_make('Nissan', start_year = 1980)
-    expect_gt(nrow(result), 0)
-    result <- recall_by_make('Nissan', end_year = 1980)
-    expect_gt(nrow(result), 0)
 })
 
 test_that("recall_by_make using partial has the correct shape",{
+
+    # first call
     result <- recall_by_make('N', partial = TRUE, manufacturer = FALSE)
     names <- unique(result$`Make name`)
     expect_gt(length(names), 1)
+
+    # second call
     result <- recall_by_make('Nissan', partial = FALSE, manufacturer = FALSE)
     names <- unique(result$`Make name`)
     expect_equal(length(names), 1)
+
+    # third call
     result <- recall_by_make('Nissan', partial = FALSE, manufacturer = TRUE)
     names <- unique(result$`Manufacturer Name`)
     expect_equal(length(names), 1)
@@ -74,6 +76,8 @@ test_that("recall_by_make using partial has the correct shape",{
 })
 
 test_that("recall_by_model has the correct shape",{
+
+    # first call
     result <- recall_by_model('Civic', limit=25, partial=TRUE)
     expect_type(result, "list")
     expect_equal(nrow(result), 25)
@@ -87,13 +91,19 @@ test_that("recall_by_model has the correct shape",{
                          "character", "integer",   "Date")
     returned_dtypes <- as.vector(sapply(result, class))
     expect_equal(returned_dtypes, expected_dtypes)
+
+    # second call
     result <- recall_by_model('Civic', start_year = 1980)
     expect_gt(nrow(result), 0)
+
+    # third call
     result <- recall_by_model('Civic', end_year = 1980)
     expect_gt(nrow(result), 0)
 })
 
 test_that("recall_by_model by year range has the correct shape",{
+
+    # First call
     result <- recall_by_model('Civic', start_year = 1980, end_year=2005)
     expect_gt(nrow(result), 0)
     filtered <- subset(result, Year >= 1980 & Year <= 2005)
@@ -108,9 +118,13 @@ test_that("recall_by_model by year range has the correct shape",{
 })
 
 test_that("recall_by_model using partial has the correct shape",{
+
+    # First call
     result <- recall_by_model('Civic', partial = TRUE)
     names <- unique(result$`Model name`)
     expect_gt(length(names), 1)
+
+    # Second call
     result <- recall_by_model('Civic', partial = FALSE)
     names <- unique(result$`Model name`)
     expect_equal(length(names), 1)
@@ -124,6 +138,8 @@ test_that("recall_by_model using partial has the correct shape",{
 })
 
 test_that("recall_by_year returns the correct shape",{
+
+    # First call
     result <- recall_by_years(2010, 2012)
     expect_type(result, "list")
     expect_equal(nrow(result), 25)
@@ -139,6 +155,8 @@ test_that("recall_by_year returns the correct shape",{
 })
 
 test_that("recall_by_number returns the correct shape",{
+
+    # First call
     result <- recall_by_number(1977044)
     expect_type(result, "list")
     expect_equal(nrow(result), 1)
@@ -152,6 +170,8 @@ test_that("recall_by_number returns the correct shape",{
 })
 
 test_that("recall_details returns the correct shape when given an integer",{
+
+    # First call
     result <- recall_details(1977044)
     expect_type(result, "list")
     expect_equal(nrow(result), 1)
@@ -181,6 +201,8 @@ test_that("recall_details returns the correct shape when given an integer",{
 })
 
 test_that("recall_details returns the correct shape when given a list",{
+
+    # First call
     recall_numbers <- c(1977044, 2009097)
     result <- recall_details(recall_numbers)
     expect_type(result, "list")
