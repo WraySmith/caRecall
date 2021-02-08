@@ -1,4 +1,6 @@
 test_that("recall_by_make returns the correct shape",{
+
+    # first call
     result <- recall_by_make('Nissan')
     expect_type(result, "list")
     expect_equal(nrow(result), 25)
@@ -7,11 +9,13 @@ test_that("recall_by_make returns the correct shape",{
     expect_equal(colnames(result), expected_col_names)
     expected_dtypes <- c("character", "character", "character",
                          "character", "integer",   "Date")
-    returned_dtypes <- as.vector(unlist(sapply(result, class)))
+    returned_dtypes <- as.vector(sapply(result, class))
     expect_equal(returned_dtypes, expected_dtypes)
 })
 
 test_that("recall_by_make by year range has the correct shape",{
+
+    # first call
     result <- recall_by_make('Nissan', start_year = 1980, end_year=2005)
     expect_gt(nrow(result), 0)
     filtered <- subset(result, Year >= 1980 & Year <= 2005)
@@ -21,10 +25,14 @@ test_that("recall_by_make by year range has the correct shape",{
     expect_equal(colnames(result), expected_col_names)
     expected_dtypes <- c("character", "character", "character",
                          "character", "integer",   "Date")
-    returned_dtypes <- as.vector(unlist(sapply(result, class)))
+    returned_dtypes <- as.vector(sapply(result, class))
     expect_equal(returned_dtypes, expected_dtypes)
+
+    # second call
     result <- recall_by_make('Nissan', start_year = 1980)
     expect_gt(nrow(result), 0)
+
+    # third call
     result <- recall_by_make('Nissan', end_year = 1980)
     expect_gt(nrow(result), 0)
 
@@ -38,7 +46,7 @@ test_that("recall_by_make using manufacturer has the correct shape",{
     expect_equal(colnames(result), expected_col_names)
     expected_dtypes <- c("character", "character", "character",
                          "character", "integer",   "Date")
-    returned_dtypes <- as.vector(unlist(sapply(result, class)))
+    returned_dtypes <- as.vector(sapply(result, class))
     expect_equal(returned_dtypes, expected_dtypes)
     result <- recall_by_make('Nissan', start_year = 1980)
     expect_gt(nrow(result), 0)
@@ -61,7 +69,7 @@ test_that("recall_by_make using partial has the correct shape",{
     expect_equal(colnames(result), expected_col_names)
     expected_dtypes <- c("character", "character", "character",
                          "character", "integer",   "Date")
-    returned_dtypes <- as.vector(unlist(sapply(result, class)))
+    returned_dtypes <- as.vector(sapply(result, class))
     expect_equal(returned_dtypes, expected_dtypes)
 })
 
@@ -77,7 +85,7 @@ test_that("recall_by_model has the correct shape",{
     expect_equal(colnames(result), expected_col_names)
     expected_dtypes <- c("character", "character", "character",
                          "character", "integer",   "Date")
-    returned_dtypes <- as.vector(unlist(sapply(result, class)))
+    returned_dtypes <- as.vector(sapply(result, class))
     expect_equal(returned_dtypes, expected_dtypes)
     result <- recall_by_model('Civic', start_year = 1980)
     expect_gt(nrow(result), 0)
@@ -95,7 +103,7 @@ test_that("recall_by_model by year range has the correct shape",{
     expect_equal(colnames(result), expected_col_names)
     expected_dtypes <- c("character", "character", "character",
                          "character", "integer",   "Date")
-    returned_dtypes <- as.vector(unlist(sapply(result, class)))
+    returned_dtypes <- as.vector(sapply(result, class))
     expect_equal(returned_dtypes, expected_dtypes)
 })
 
@@ -111,7 +119,7 @@ test_that("recall_by_model using partial has the correct shape",{
     expect_equal(colnames(result), expected_col_names)
     expected_dtypes <- c("character", "character", "character",
                          "character", "integer",   "Date")
-    returned_dtypes <- as.vector(unlist(sapply(result, class)))
+    returned_dtypes <- as.vector(sapply(result, class))
     expect_equal(returned_dtypes, expected_dtypes)
 })
 
@@ -126,7 +134,7 @@ test_that("recall_by_year returns the correct shape",{
     expect_equal(nrow(result), nrow(filtered))
     expected_dtypes <- c("character", "character", "character",
                          "character", "integer",   "Date")
-    returned_dtypes <- as.vector(unlist(sapply(result, class)))
+    returned_dtypes <- as.vector(sapply(result, class))
     expect_equal(returned_dtypes, expected_dtypes)
 })
 
@@ -139,7 +147,7 @@ test_that("recall_by_number returns the correct shape",{
     expect_equal(colnames(result), expected_col_names)
     expected_dtypes <- c("character", "character", "character",
                          "character", "integer",   "Date")
-    returned_dtypes <- as.vector(unlist(sapply(result, class)))
+    returned_dtypes <- as.vector(sapply(result, class))
     expect_equal(returned_dtypes, expected_dtypes)
 })
 
@@ -168,7 +176,7 @@ test_that("recall_details returns the correct shape when given an integer",{
                          "character",
                          "integer",
                          "Date")
-    returned_dtypes <- as.vector(unlist(sapply(result, class)))
+    returned_dtypes <- as.vector(sapply(result, class))
     expect_equal(returned_dtypes, expected_dtypes)
 })
 
@@ -198,7 +206,7 @@ test_that("recall_details returns the correct shape when given a list",{
                          "character",
                          "integer",
                          "Date")
-    returned_dtypes <- as.vector(unlist(sapply(result, class)))
+    returned_dtypes <- as.vector(sapply(result, class))
     expect_equal(returned_dtypes, expected_dtypes)
 
     recall_numbers <- seq(1, 700, by=1)
