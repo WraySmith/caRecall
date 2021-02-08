@@ -104,7 +104,6 @@ test_that("recall_by_model has the correct shape",{
 
     Sys.sleep(1.5)
 
-
     # second call
     result <- recall_by_model('Civic', start_year = 1980)
     expect_gt(nrow(result), 0)
