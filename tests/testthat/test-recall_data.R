@@ -14,7 +14,7 @@ test_that("recall_by_make returns the correct shape",{
     names <- unique(result$`Make name`)
     expect_equal(length(names), 1)
 
-    Sys.sleep(1)
+    Sys.sleep(1.5)
 
 })
 
@@ -41,7 +41,7 @@ test_that("recall_by_make by year range has the correct shape",{
     result <- recall_by_make('Nissan', end_year = 1980)
     expect_gt(nrow(result), 0)
 
-    Sys.sleep(1)
+    Sys.sleep(1.5)
 
 })
 
@@ -64,7 +64,7 @@ test_that("recall_by_make using partial has the correct shape",{
     names <- unique(result$`Make name`)
     expect_gt(length(names), 1)
 
-    Sys.sleep(1)
+    Sys.sleep(1.5)
 
     # second call
     # result <- recall_by_make('Nissan', partial = FALSE, manufacturer = FALSE)
@@ -83,7 +83,7 @@ test_that("recall_by_make using partial has the correct shape",{
     returned_dtypes <- as.vector(sapply(result, class))
     expect_equal(returned_dtypes, expected_dtypes)
 
-    Sys.sleep(1)
+    Sys.sleep(1.5)
 })
 
 test_that("recall_by_model has the correct shape",{
@@ -102,7 +102,7 @@ test_that("recall_by_model has the correct shape",{
     names <- unique(result$`Model name`)
     expect_gt(length(names), 1)
 
-    Sys.sleep(1)
+    Sys.sleep(1.5)
 
 
     # second call
@@ -111,7 +111,7 @@ test_that("recall_by_model has the correct shape",{
     filtered <- subset(result, Year >= 1980)
     expect_equal(nrow(result), nrow(filtered))
 
-    Sys.sleep(1)
+    Sys.sleep(1.5)
 
     # third call
     result <- recall_by_model('Civic', end_year = 1980)
@@ -119,7 +119,7 @@ test_that("recall_by_model has the correct shape",{
     filtered <- subset(result, Year <= 1980)
     expect_equal(nrow(result), nrow(filtered))
 
-    Sys.sleep(1)
+    Sys.sleep(1.5)
 })
 
 # test_that("recall_by_model by year range has the correct shape",{
@@ -174,7 +174,7 @@ test_that("recall_by_year returns the correct shape",{
     returned_dtypes <- as.vector(sapply(result, class))
     expect_equal(returned_dtypes, expected_dtypes)
 
-    Sys.sleep(1)
+    Sys.sleep(1.5)
 })
 
 test_that("recall_by_number returns the correct shape",{
@@ -190,7 +190,7 @@ test_that("recall_by_number returns the correct shape",{
     returned_dtypes <- as.vector(sapply(result, class))
     expect_equal(returned_dtypes, expected_dtypes)
 
-    Sys.sleep(1)
+    Sys.sleep(1.5)
 })
 
 # test_that("recall_details returns the correct shape when given an integer",{
@@ -233,7 +233,7 @@ test_that("recall_details returns the correct shape when given a list",{
     returned_dtypes <- as.vector(sapply(result, class))
     expect_equal(returned_dtypes, expected_dtypes)
 
-    Sys.sleep(1)
+    Sys.sleep(1.5)
 
     # Fails before second call
     recall_numbers <- seq(1, 700, by=1)
