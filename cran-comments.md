@@ -6,10 +6,9 @@
 * win-builder (devel and release)
 
 ## R CMD check results
-There were no ERRORs or WARNINGs. 
-
-There were no NOTEs but this is the first submission 
-for this package.
+* 0 ERRORs
+* 0 WARNINGs
+* 1 NOTE - this is a new release 
 
 ## Downstream dependencies
 There are currently no downstream dependencies for
