@@ -1,12 +1,12 @@
 #' count_recall_by_make
 #'
-#' @param make list string
-#' @param manufacturer A bool, with this flag we are asking for the manufacturer not the make
-#' @param start_year An integer
-#' @param end_year An integer
+#' @param make List string, name(s) of the vehicle(s).
+#' @param manufacturer A boolean, with this flag we are asking for the manufacturer not the make.
+#' @param start_year An integer, start of year range, defaults to 1900.
+#' @param end_year An integer, end of year range, defaults to 2100.
 #' @param api_key A string, optional
 #'
-#' @return integer
+#' @return A integer, the number of recalls for input make in given year range.
 #' @export
 #'
 #' @examples
@@ -55,12 +55,12 @@ count_recall_by_make <- function(make, manufacturer = FALSE, start_year = NULL,
 
 #' count_recall_by_model
 #'
-#' @param model list string
-#' @param start_year An integer
-#' @param end_year An integer
-#' @param api_key A string, optional
+#' @param model List string, the name(s) of the model of the vehicle(s).
+#' @param start_year An integer, start of year range, defaults to 1900.
+#' @param end_year An integer, end of year range, defaults to 2100.
+#' @param api_key A string, optional.
 #'
-#' @return integer
+#' @return integer, the number of recalls for input model in given year range.
 #' @export
 #'
 #' @examples
@@ -103,11 +103,11 @@ count_recall_by_model <- function(model, start_year = NULL, end_year = NULL,
 
 #' count_recall_by_years
 #'
-#' @param start_year An integer
-#' @param end_year An integer
-#' @param api_key A string, optional
+#' @param start_year An integer, start of year range, defaults to 1900.
+#' @param end_year An integer, end of year range, defaults to 2100.
+#' @param api_key A string, optional.
 #'
-#' @return dataframe
+#' @return A dataframe of vehicles for the year range.
 #' @export
 #'
 #' @examples
