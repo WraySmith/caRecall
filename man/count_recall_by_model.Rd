@@ -4,7 +4,12 @@
 \alias{count_recall_by_model}
 \title{count_recall_by_model}
 \usage{
-count_recall_by_model(model, start_year = NULL, end_year = NULL)
+count_recall_by_model(
+  model,
+  start_year = NULL,
+  end_year = NULL,
+  api_key = NULL
+)
 }
 \arguments{
 \item{model}{list string}
@@ -12,6 +17,8 @@ count_recall_by_model(model, start_year = NULL, end_year = NULL)
 \item{start_year}{An integer}
 
 \item{end_year}{An integer}
+
+\item{api_key}{A string, optional}
 }
 \value{
 integer

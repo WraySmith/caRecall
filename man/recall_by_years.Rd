@@ -4,7 +4,7 @@
 \alias{recall_by_years}
 \title{recall_by_years}
 \usage{
-recall_by_years(start_year = 1900, end_year = 2100, limit = 25)
+recall_by_years(start_year = 1900, end_year = 2100, limit = 25, api_key = NULL)
 }
 \arguments{
 \item{start_year}{An integer}
@@ -12,6 +12,8 @@ recall_by_years(start_year = 1900, end_year = 2100, limit = 25)
 \item{end_year}{An integer}
 
 \item{limit}{An integer}
+
+\item{api_key}{A string, optional}
 }
 \value{
 dataframe

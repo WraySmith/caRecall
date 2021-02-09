@@ -8,7 +8,8 @@ count_recall_by_make(
   make,
   manufacturer = FALSE,
   start_year = NULL,
-  end_year = NULL
+  end_year = NULL,
+  api_key = NULL
 )
 }
 \arguments{
@@ -19,6 +20,8 @@ count_recall_by_make(
 \item{start_year}{An integer}
 
 \item{end_year}{An integer}
+
+\item{api_key}{A string, optional}
 }
 \value{
 integer

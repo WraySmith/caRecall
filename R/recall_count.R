@@ -4,15 +4,17 @@
 #' @param manufacturer A bool, with this flag we are asking for the manufacturer not the make
 #' @param start_year An integer
 #' @param end_year An integer
+#' @param api_key A string, optional
 #'
 #' @return integer
+#' @export
 #'
 #' @examples
 #' \dontrun{
 #' count_recall_by_make('Nissan')
 #' }
-count_recall_by_make <- function(make, manufacturer = FALSE,
-                                 start_year = NULL, end_year = NULL) {
+count_recall_by_make <- function(make, manufacturer = FALSE, start_year = NULL,
+                                 end_year = NULL, api_key = NULL) {
 
     # create multiple requests from input list
     input_request <- paste(make, collapse = '|')
@@ -30,8 +32,8 @@ count_recall_by_make <- function(make, manufacturer = FALSE,
     if (!is.null(start_year) | !is.null(end_year)) {
 
         # add start or end year if value one of the values is NULL
-        if (is.null(start_year)) start_year = 1900
-        if (is.null(end_year)) end_year = 2100
+        if (is.null(start_year)) start_year <- 1900
+        if (is.null(end_year)) end_year <- 2100
 
         year_range <- paste(toString(start_year), toString(end_year), sep = "-")
         url_ <- paste(url_, '/year-range/', year_range, sep = "")
@@ -41,7 +43,7 @@ count_recall_by_make <- function(make, manufacturer = FALSE,
     url_ <- paste (url_, "/count", sep = "")
 
     # api call, returns class vrd_api
-    api_output <- call_vrd_api(url_, make)
+    api_output <- call_vrd_api(url_, make, api_key = api_key)
 
     # convert content to a dataframe
     contents_df <- clean_vrd_api(api_output)
@@ -56,14 +58,17 @@ count_recall_by_make <- function(make, manufacturer = FALSE,
 #' @param model list string
 #' @param start_year An integer
 #' @param end_year An integer
+#' @param api_key A string, optional
 #'
 #' @return integer
+#' @export
 #'
 #' @examples
 #' \dontrun{
 #' count_recall_by_model('488')
 #' }
-count_recall_by_model <- function(model, start_year = NULL, end_year = NULL) {
+count_recall_by_model <- function(model, start_year = NULL, end_year = NULL,
+                                  api_key = NULL) {
 
     # create multiple requests from input list
     input_request <- paste(model, collapse = '|')
@@ -76,8 +81,8 @@ count_recall_by_model <- function(model, start_year = NULL, end_year = NULL) {
     if (!is.null(start_year) | !is.null(end_year)) {
 
         # add start or end year if value one of the values is NULL
-        if (is.null(start_year)) start_year = 1900
-        if (is.null(end_year)) end_year = 2100
+        if (is.null(start_year)) start_year <- 1900
+        if (is.null(end_year)) end_year <- 2100
 
         year_range <- paste(toString(start_year), toString(end_year), sep = "-")
         url_ <- paste(url_, '/year-range/', year_range, sep = "")
@@ -86,7 +91,7 @@ count_recall_by_model <- function(model, start_year = NULL, end_year = NULL) {
     url_ <- paste (url_, "/count", sep = "")
 
     # api call, returns class vrd_api
-    api_output <- call_vrd_api(url_, model)
+    api_output <- call_vrd_api(url_, model, api_key = api_key)
 
     # convert content to a dataframe
     contents_df <- clean_vrd_api(api_output)
@@ -100,6 +105,7 @@ count_recall_by_model <- function(model, start_year = NULL, end_year = NULL) {
 #'
 #' @param start_year An integer
 #' @param end_year An integer
+#' @param api_key A string, optional
 #'
 #' @return dataframe
 #' @export
@@ -108,7 +114,8 @@ count_recall_by_model <- function(model, start_year = NULL, end_year = NULL) {
 #' \dontrun{
 #' count_recall_by_years(2010, 2012)
 #' }
-count_recall_by_years <- function(start_year = 1900, end_year = 2100) {
+count_recall_by_years <- function(start_year = 1900, end_year = 2100,
+                                  api_key = NULL) {
 
     # format the url string
     year_range <- paste(toString(start_year), toString(end_year), sep = "-")
@@ -116,7 +123,7 @@ count_recall_by_years <- function(start_year = 1900, end_year = 2100) {
     url_ <- paste(url_, year_range,  "/count", sep = "")
 
     # api call, returns class vrd_api
-    api_output <- call_vrd_api(url_, year_range)
+    api_output <- call_vrd_api(url_, year_range, api_key = api_key)
 
     # convert content to a dataframe
     contents_df <- clean_vrd_api(api_output)

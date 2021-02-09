@@ -10,7 +10,7 @@
 get_vrd_key <- function() {
     x <- Sys.getenv("VRD_API")
     if (x == "") {
-        stop("You must set your VRD_API with `Sys.setenv(VRD_API = 'your_api_key_here')`")
+        stop("You must provide an API key to the function or use `Sys.setenv(VRD_API = 'your_api_key_here')`")
     }
     x
 }
@@ -26,18 +26,21 @@ get_vrd_key <- function() {
 #' @param api_key defaults to the one set in the environment, can be pass one manually
 #'
 #' @return vrd_api class
-#' @export
 #'
 #' @examples
 #' \dontrun{
 #' call_vrd_api()
 #' }
-call_vrd_api <- function(url_, query, limit = NULL, api_key=get_vrd_key()){
+call_vrd_api <- function(url_, query = NULL, limit = NULL,
+                         api_key = NULL){
+
+    # retrieve API key if no user key input to function call
+    if (is.null(api_key)) api_key <- get_vrd_key()
 
     # add limit to url (limit does not go in header)
     url_ <- paste(url_, "?limit=", toString(limit), sep = "")
 
-    # set a the user agent
+    # set the user agent
     ua <- httr::user_agent("https://github.com/WraySmith/caRecall")
 
     # set headers (currently only user-key is set)
@@ -87,7 +90,6 @@ call_vrd_api <- function(url_, query, limit = NULL, api_key=get_vrd_key()){
 #' @param api_output api response to be cleaned
 #'
 #' @return dataframe
-#' @export
 #'
 #' @examples
 #' \dontrun{

@@ -1,6 +1,6 @@
 # MIT License
 
-Copyright (c) 2021 caRecall authors
+Copyright (c) 2021 Nathan Smith, Mitch Harris, Ryan Koenig
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

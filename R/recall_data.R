@@ -6,8 +6,10 @@
 #' @param end_year An integer
 #' @param limit An integer
 #' @param partial A bool
+#' @param api_key A string, optional
 #'
 #' @return dataframe
+#' @export
 #'
 #' @examples
 #' \dontrun{
@@ -15,8 +17,8 @@
 #' }
 recall_by_make <- function(make, manufacturer = FALSE,
                            start_year = NULL, end_year = NULL,
-                           limit = 25,
-                           partial = FALSE) {
+                           limit = 25, partial = FALSE,
+                           api_key = NULL) {
 
     # create multiple requests from input list
     input_request <- paste(make, collapse = '|')
@@ -34,25 +36,25 @@ recall_by_make <- function(make, manufacturer = FALSE,
     if (!is.null(start_year) | !is.null(end_year)) {
 
         # add start or end year if value one of the values is NULL
-        if (is.null(start_year)) start_year = 1900
-        if (is.null(end_year)) end_year = 2100
+        if (is.null(start_year)) start_year <- 1900
+        if (is.null(end_year)) end_year <- 2100
 
         year_range <- paste(toString(start_year), toString(end_year), sep = "-")
         url_ <- paste(url_, '/year-range/', year_range, sep = "")
     }
 
     # api call, returns class vrd_api
-    api_output <- call_vrd_api(url_, make, limit)
+    api_output <- call_vrd_api(url_, make, limit, api_key = api_key)
 
     # convert content to a dataframe
     contents_df <- clean_vrd_api(api_output)
 
     # filters for exact result
     if (partial == FALSE & manufacturer == FALSE){
-        contents_df<- contents_df[contents_df$`Make name`==toupper(toString(make)),]
+        contents_df <- contents_df[contents_df$`Make name`==toupper(toString(make)),]
     }
     if (partial == FALSE & manufacturer == TRUE){
-        contents_df<- contents_df[contents_df$`Manufacturer Name`==toupper(toString(make)),]
+        contents_df <- contents_df[contents_df$`Manufacturer Name`==toupper(toString(make)),]
     }
 
 
@@ -68,8 +70,10 @@ recall_by_make <- function(make, manufacturer = FALSE,
 #' @param end_year An integer
 #' @param limit An integer
 #' @param partial A bool
+#' @param api_key A string, optional
 #'
 #' @return dataframe
+#' @export
 #'
 #' @examples
 #' \dontrun{
@@ -77,8 +81,8 @@ recall_by_make <- function(make, manufacturer = FALSE,
 #' }
 recall_by_model <- function(model,
                            start_year = NULL, end_year = NULL,
-                           limit = 25,
-                           partial = FALSE) {
+                           limit = 25, partial = FALSE,
+                           api_key = NULL) {
 
     # create multiple requests from input list
     input_request <- paste(model, collapse = '|')
@@ -91,21 +95,21 @@ recall_by_model <- function(model,
     if (!is.null(start_year) | !is.null(end_year)) {
 
         # add start or end year if value one of the values is NULL
-        if (is.null(start_year)) start_year = 1900
-        if (is.null(end_year)) end_year = 2100
+        if (is.null(start_year)) start_year <- 1900
+        if (is.null(end_year)) end_year <- 2100
 
         year_range <- paste(toString(start_year), toString(end_year), sep = "-")
         url_ <- paste(url_, '/year-range/', year_range, sep = "")
     }
     # api call, returns class vrd_api
-    api_output <- call_vrd_api(url_, model, limit)
+    api_output <- call_vrd_api(url_, model, limit, api_key = api_key)
 
     # convert content to a dataframe
     contents_df <- clean_vrd_api(api_output)
 
     # filters for exact result
-    if (partial == FALSE){
-        contents_df<- contents_df[contents_df$`Model name`==toupper(toString(model)),]
+    if (partial == FALSE) {
+        contents_df <- contents_df[contents_df$`Model name`==toupper(toString(model)),]
     }
 
     # outputs dataframe
@@ -118,6 +122,7 @@ recall_by_model <- function(model,
 #' @param start_year An integer
 #' @param end_year An integer
 #' @param limit An integer
+#' @param api_key A string, optional
 #'
 #' @return dataframe
 #' @export
@@ -126,7 +131,8 @@ recall_by_model <- function(model,
 #' \dontrun{
 #' recall_by_years(2010, 2012)
 #' }
-recall_by_years <- function(start_year = 1900, end_year = 2100, limit = 25) {
+recall_by_years <- function(start_year = 1900, end_year = 2100,
+                            limit = 25, api_key = NULL) {
 
     # format the url string
     year_range <- paste(toString(start_year), toString(end_year), sep = "-")
@@ -134,7 +140,8 @@ recall_by_years <- function(start_year = 1900, end_year = 2100, limit = 25) {
     url_ <- paste(url_, year_range, sep = "")
 
     # api call, returns class vrd_api
-    api_output <- call_vrd_api(url_, year_range, limit)
+    api_output <- call_vrd_api(url_, year_range, limit,
+                               api_key = api_key)
 
     # convert content to a dataframe
     contents_df <- clean_vrd_api(api_output)
@@ -149,6 +156,7 @@ recall_by_years <- function(start_year = 1900, end_year = 2100, limit = 25) {
 #'
 #' @param recall_number List integer
 #' @param limit An integer
+#' @param api_key A string, optional
 #'
 #' @return dataframe
 #' @export
@@ -157,7 +165,7 @@ recall_by_years <- function(start_year = 1900, end_year = 2100, limit = 25) {
 #' \dontrun{
 #' recall_by_number(1977044)
 #' }
-recall_by_number <- function(recall_number, limit = 25) {
+recall_by_number <- function(recall_number, limit = 25, api_key = NULL) {
 
     # create multiple requests from input list
     input_request <- paste(recall_number, collapse = '|')
@@ -167,7 +175,8 @@ recall_by_number <- function(recall_number, limit = 25) {
     url_ <- paste(url_, input_request, sep = "")
 
     # api call, returns class vrd_api
-    api_output <- call_vrd_api(url_, recall_number, limit)
+    api_output <- call_vrd_api(url_, recall_number, limit,
+                               api_key = api_key)
 
     # convert content to a dataframe
     contents_df <- clean_vrd_api(api_output)
@@ -181,6 +190,7 @@ recall_by_number <- function(recall_number, limit = 25) {
 #'
 #' @param recall_number List integer
 #' @param limit An integer
+#' @param api_key A string, optional
 #'
 #' @return dataframe
 #' @export
@@ -189,7 +199,7 @@ recall_by_number <- function(recall_number, limit = 25) {
 #' \dontrun{
 #' recall_details(1977044)
 #' }
-recall_details <- function(recall_number, limit = 25) {
+recall_details <- function(recall_number, limit = 25, api_key = NULL) {
 
     # a limit of 60 calls are allowed per minute
     # this function rate limits and a call with 600 numbers would take > 10 min
@@ -208,12 +218,13 @@ recall_details <- function(recall_number, limit = 25) {
         url_ <- paste(url_, toString(single_number), sep = "")
 
         # api call, returns class vrd_api
-        api_output <- call_vrd_api(url_, single_number)
-        
+        api_output <- call_vrd_api(url_, single_number,
+                                   api_key = api_key)
+
         if (i == 1) {
             # initialize dataframe
             compiled_df <- clean_vrd_api(api_output)
- 
+
         } else {
             # append to dataframe
             compiled_df <- rbind(compiled_df, clean_vrd_api(api_output))

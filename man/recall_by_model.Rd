@@ -9,7 +9,8 @@ recall_by_model(
   start_year = NULL,
   end_year = NULL,
   limit = 25,
-  partial = FALSE
+  partial = FALSE,
+  api_key = NULL
 )
 }
 \arguments{
@@ -22,6 +23,8 @@ recall_by_model(
 \item{limit}{An integer}
 
 \item{partial}{A bool}
+
+\item{api_key}{A string, optional}
 }
 \value{
 dataframe

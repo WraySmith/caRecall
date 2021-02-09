@@ -10,7 +10,8 @@ recall_by_make(
   start_year = NULL,
   end_year = NULL,
   limit = 25,
-  partial = FALSE
+  partial = FALSE,
+  api_key = NULL
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ recall_by_make(
 \item{limit}{An integer}
 
 \item{partial}{A bool}
+
+\item{api_key}{A string, optional}
 }
 \value{
 dataframe
