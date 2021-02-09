@@ -4,12 +4,14 @@
 \alias{count_recall_by_years}
 \title{count_recall_by_years}
 \usage{
-count_recall_by_years(start_year = 1900, end_year = 2100)
+count_recall_by_years(start_year = 1900, end_year = 2100, api_key = NULL)
 }
 \arguments{
 \item{start_year}{An integer}
 
 \item{end_year}{An integer}
+
+\item{api_key}{A string, optional}
 }
 \value{
 dataframe

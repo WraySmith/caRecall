@@ -7,11 +7,11 @@ Authors@R: c(
     person("Mitch", "Harris", role = "aut"),
     person("Ryan", "Koenig", role = "aut"))
 Description: The package is an API wrapper for the Government of Canada Vehicle 
-    Recalls Database (https://tc.api.canada.ca/en/detail?api=VRDB) used by the 
+    Recalls Database <https://tc.api.canada.ca/en/detail?api=VRDB> used by the 
     Defect Investigations and Recalls Division for vehicles, tires, and 
-    child car seats. The API provides access to recall summary information 
-    searchable by make, model, and year range, as well as detailed recall
-    information searchable by recall number.
+    child car seats. Using the API, the package provides access to recall 
+    summary information searchable by make, model, and year range, 
+    as well as detailed recall information searchable by recall number.
 URL: https://github.com/WraySmith/caRecall
 BugReports: https://github.com/WraySmith/caRecall/issues
 License: MIT + file LICENSE

@@ -4,12 +4,14 @@
 \alias{recall_by_number}
 \title{recall_by_number}
 \usage{
-recall_by_number(recall_number, limit = 25)
+recall_by_number(recall_number, limit = 25, api_key = NULL)
 }
 \arguments{
 \item{recall_number}{List integer}
 
 \item{limit}{An integer}
+
+\item{api_key}{A string, optional}
 }
 \value{
 dataframe
