@@ -20,7 +20,7 @@ get_vrd_key <- function() {
 
 #' call_vrd_api()
 #'
-#' Helper function for querying api database
+#' Helper function for querying API database
 #'
 #' @param url_ A string, api url to be hit
 #' @param query A string, names the resulting object
@@ -87,7 +87,7 @@ call_vrd_api <- function(url_, query = NULL, limit = NULL,
 
 #' clean_vrd_api()
 #'
-#' Helper function for cleaning api database
+#' Helper function for cleaning API response
 #'
 #' @param api_output api response to be cleaned
 #'

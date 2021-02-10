@@ -1,6 +1,6 @@
 #' recall_by_make
 #'
-#' Queries the website with a url that it generates from it's parameters.
+#' Queries the API with a url that it generates from it's parameters.
 #'
 #' @param make List string, a list of make names for vehicles
 #' @param manufacturer A bool, with this flag we are asking for the manufacturer not the make
@@ -67,7 +67,7 @@ recall_by_make <- function(make, manufacturer = FALSE,
 
 #' recall_by_model
 #'
-#' Queries the website with a url that it generates from it's parameters.
+#' Queries the API with a url that it generates from it's parameters.
 #'
 #' @param model List string, a list of make names for vehicles
 #' @param start_year An integer, start of year range, defaults to 1900.
@@ -123,7 +123,7 @@ recall_by_model <- function(model,
 
 #' recall_by_years
 #'
-#' Queries the website with a url that it generates from it's parameters.
+#' Queries the API with a url that it generates from it's parameters.
 #'
 #' @param start_year An integer, start of year range, defaults to 1900.
 #' @param end_year An integer, end of year range, defaults to 2100.
@@ -160,6 +160,8 @@ recall_by_years <- function(start_year = 1900, end_year = 2100,
 
 #' recall_by_number
 #'
+#' Queries the API with a url that it generates from it's parameters.
+#'
 #' @param recall_number List integer, list of recalls numbers to get information on
 #' @param limit An integer, how many entires to get from the website, default is no limit.
 #' @param api_key A string, optional
@@ -194,7 +196,7 @@ recall_by_number <- function(recall_number, limit = 25, api_key = NULL) {
 
 #' recall_details
 #'
-#' Queries the website with a url that it generates from it's parameters.
+#' Queries the API with a url that it generates from it's parameters.
 #'
 #' @param recall_number List integer
 #' @param limit An integer, how many entires to get from the website, default is no limit.
