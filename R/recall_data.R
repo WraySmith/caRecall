@@ -10,7 +10,7 @@
 #' @param partial A bool, to determine if we want partial matches on the make parameter
 #' @param api_key A string, optional
 #'
-#' @return dataframe, collection of responses from the api
+#' @return A dataframe, collection of responses from the api
 #' @export
 #'
 #' @examples
@@ -76,7 +76,7 @@ recall_by_make <- function(make, manufacturer = FALSE,
 #' @param partial A bool, to determine if we want partial matches on the make parameter
 #' @param api_key A string, optional
 #'
-#' @return dataframe, collection of responses from the api
+#' @return A dataframe, collection of responses from the api
 #' @export
 #'
 #' @examples
@@ -130,7 +130,7 @@ recall_by_model <- function(model,
 #' @param limit An integer, how many entires to get from the website, default is no limit.
 #' @param api_key A string, optional
 #'
-#' @return dataframe, collection of responses from the api
+#' @return A dataframe, collection of responses from the api
 #' @export
 #'
 #' @examples
@@ -164,7 +164,7 @@ recall_by_years <- function(start_year = 1900, end_year = 2100,
 #' @param limit An integer, how many entires to get from the website, default is no limit.
 #' @param api_key A string, optional
 #'
-#' @return dataframe, collection of responses from the api
+#' @return A dataframe, collection of responses from the api
 #' @export
 #'
 #' @examples
@@ -200,7 +200,7 @@ recall_by_number <- function(recall_number, limit = 25, api_key = NULL) {
 #' @param limit An integer, how many entires to get from the website, default is no limit.
 #' @param api_key A string, optional
 #'
-#' @return dataframe, collection of responses from the api
+#' @return A dataframe, collection of responses from the api
 #' @export
 #'
 #' @examples
