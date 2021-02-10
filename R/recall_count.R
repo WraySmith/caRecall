@@ -14,6 +14,8 @@
 #' @examples
 #' \dontrun{
 #' count_recall_by_make('Nissan')
+#' count_recall_by_make('Firestone', manufacturer=TRUE)
+#' count_recall_by_make('Firestone', api_key=API_KEY)
 #' }
 count_recall_by_make <- function(make, manufacturer = FALSE, start_year = NULL,
                                  end_year = NULL, api_key = NULL) {
@@ -70,6 +72,7 @@ count_recall_by_make <- function(make, manufacturer = FALSE, start_year = NULL,
 #' @examples
 #' \dontrun{
 #' count_recall_by_model('488')
+#' count_recall_by_model('911', start_year=1980, end_year=2005)
 #' }
 count_recall_by_model <- function(model, start_year = NULL, end_year = NULL,
                                   api_key = NULL) {
@@ -119,6 +122,7 @@ count_recall_by_model <- function(model, start_year = NULL, end_year = NULL,
 #' @examples
 #' \dontrun{
 #' count_recall_by_years(2010, 2012)
+#' count_recall_by_years(2010, 2012, api_key=API_KEY)
 #' }
 count_recall_by_years <- function(start_year = 1900, end_year = 2100,
                                   api_key = NULL) {
