@@ -7,6 +7,21 @@ get_vrd_key <- function() {
     x
 }
 
+#' call_vrd_api()
+#'
+#' Helper function for querying API database
+#'
+#' @param url_ A string, API's url to be queried
+#' @param query A string, names the resulting object
+#' @param limit An integer, how many entries to get from the website, default is no limit.
+#' @param api_key defaults to the one set in the environment, can be pass one manually
+#'
+#' @return vrd_api class
+#'
+#' @examples
+#' \dontrun{
+#' call_vrd_api()
+#' }
 call_vrd_api <- function(url_, query = NULL, limit = NULL,
                          api_key = NULL){
 
