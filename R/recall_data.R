@@ -3,11 +3,11 @@
 #' Queries the API with a url that it generates from it's parameters.
 #'
 #' @param make List string, a list of make names for vehicles
-#' @param manufacturer A boolean, with this flag we are asking for the manufacturer not the make
+#' @param manufacturer A boolean, flag indicating if manufacturer should be used instead of make for the API call
 #' @param start_year An integer, start of year range, defaults to 1900.
 #' @param end_year An integer, end of year range, defaults to 2100.
 #' @param limit An integer, how many entries to get from the website, default is no limit.
-#' @param partial A boolean, to determine if we want partial matches on the make parameter
+#' @param partial A boolean, to ask the API for partial matches on the model name.
 #' @param api_key A string, optional
 #'
 #' @return A dataframe, collection of responses from the api
@@ -70,11 +70,11 @@ recall_by_make <- function(make, manufacturer = FALSE,
 #'
 #' Queries the API with a url that it generates from it's parameters.
 #'
-#' @param model List string, a list of make names for vehicles
+#' @param model List string, a list of make names
 #' @param start_year An integer, start of year range, defaults to 1900.
 #' @param end_year An integer, end of year range, defaults to 2100.
 #' @param limit An integer, how many entries to get from the website, default is no limit.
-#' @param partial A bool, to determine if we want partial matches on the make parameter
+#' @param partial A bool, to ask the API for partial matches on the model name.
 #' @param api_key A string, optional
 #'
 #' @return A dataframe, collection of responses from the api

@@ -3,7 +3,7 @@
 #' Queries the API with a url that it generates from it's parameters.
 #'
 #' @param make List string, make or manufacturer name(s)
-#' @param manufacturer A boolean, with this flag we are asking for the manufacturer not the make.
+#' @param manufacturer A boolean, flag indicating if manufacturer should be used instead of make for the API call
 #' @param start_year An integer, start of year range, defaults to 1900.
 #' @param end_year An integer, end of year range, defaults to 2100.
 #' @param api_key A string, optional
