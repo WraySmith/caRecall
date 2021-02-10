@@ -22,7 +22,7 @@ get_vrd_key <- function() {
 #'
 #' Helper function for querying API database
 #'
-#' @param url_ A string, api url to be hit
+#' @param url_ A string, API's url to be queried
 #' @param query A string, names the resulting object
 #' @param limit An integer, how many entries to get from the website, default is no limit.
 #' @param api_key defaults to the one set in the environment, can be pass one manually
