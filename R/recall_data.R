@@ -7,7 +7,7 @@
 #' The API can be asked for vehicle names, car seats, tires, etc.
 #' This function can be given a partial name with the partial boolean parameter set to true, and
 #' the year range can be specified. The API key can be passed manually, or if it is not passed
-#' it will use the API key in the R environment, required to be set to VRD_API.
+#' it will use the API key in the R environment.
 #'
 #' @param make List string, a list of make names for vehicles
 #' @param manufacturer A boolean, flag indicating if manufacturer should be used instead of make for the API call
@@ -82,7 +82,7 @@ recall_by_make <- function(make, manufacturer = FALSE,
 #' The API can be asked for model names of vehicle , car seats, tires, etc.
 #' This function can be given a partial name with the partial boolean parameter set to true, and
 #' the year range can be specified. The API key can be passed manually, or if it is not passed
-#' it will use the API key in the R environment, required to be set to VRD_API.
+#' it will use the API key in the R environment.
 #'
 #' @param model List string, a list of make names
 #' @param start_year An integer, start of year range, defaults to 1900.
@@ -146,7 +146,7 @@ recall_by_model <- function(model,
 #' It will return a list of vehicles, car seats, tires, etc. Can be given a start year
 #' and or a end year. The default for the start and end year are 1900 and 2100.
 #' The API key can be passed manually, or if it is not passed
-#' it will use the API key in the R environment, required to be set to VRD_API.
+#' it will use the API key in the R environment.
 #'
 #' @param start_year An integer, start of year range, defaults to 1900.
 #' @param end_year An integer, end of year range, defaults to 2100.
@@ -189,7 +189,7 @@ recall_by_years <- function(start_year = 1900, end_year = 2100,
 #' @details
 #' This function asks the VRD api for recalls for list of given recall numbers. It can be given
 #' either a single recall number or a list of recall numbers. The API key can be passed manually, or if it is not passed
-#' it will use the API key in the R environment, required to be set to VRD_API.
+#' it will use the API key in the R environment.
 #'
 #' @param recall_number List integer, list of recalls numbers to get information on
 #' @param limit An integer, how many entries to get from the website, default is no limit.
@@ -232,7 +232,7 @@ recall_by_number <- function(recall_number, limit = 25, api_key = NULL) {
 #' This function asks the API for details for recall numbers. Recall numbers can be
 #' passed as an integer or a list of integers. Response detail columns are given in
 #' English and in French. The API key can be passed manually, or if it is not passed
-#' it will use the API key in the R environment, required to be set to VRD_API.
+#' it will use the API key in the R environment.
 #'
 #' @param recall_number List integer
 #' @param limit An integer, how many entries to get from the website, default is no limit.
