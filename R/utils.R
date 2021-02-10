@@ -17,6 +17,7 @@ get_vrd_key <- function() {
 #' @param api_key defaults to the one set in the environment, can be pass one manually
 #'
 #' @return vrd_api class
+#' @export
 #'
 #' @examples
 #' \dontrun{
