@@ -1,5 +1,7 @@
 #' count_recall_by_make
 #'
+#' Queries the website with a url that it generates from it's parameters.
+#'
 #' @param make List string, name(s) of the vehicle(s).
 #' @param manufacturer A boolean, with this flag we are asking for the manufacturer not the make.
 #' @param start_year An integer, start of year range, defaults to 1900.
@@ -55,6 +57,8 @@ count_recall_by_make <- function(make, manufacturer = FALSE, start_year = NULL,
 
 #' count_recall_by_model
 #'
+#' Queries the website with a url that it generates from it's parameters.
+#'
 #' @param model List string, the name(s) of the model of the vehicle(s).
 #' @param start_year An integer, start of year range, defaults to 1900.
 #' @param end_year An integer, end of year range, defaults to 2100.
@@ -102,6 +106,8 @@ count_recall_by_model <- function(model, start_year = NULL, end_year = NULL,
 }
 
 #' count_recall_by_years
+#'
+#' Queries the website with a url that it generates from it's parameters.
 #'
 #' @param start_year An integer, start of year range, defaults to 1900.
 #' @param end_year An integer, end of year range, defaults to 2100.
