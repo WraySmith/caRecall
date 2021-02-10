@@ -73,7 +73,7 @@ recall_by_make <- function(make, manufacturer = FALSE,
 #' @param model List string, a list of make names for vehicles
 #' @param start_year An integer, start of year range, defaults to 1900.
 #' @param end_year An integer, end of year range, defaults to 2100.
-#' @param limit An integer, how many entires to get from the website, default is no limit.
+#' @param limit An integer, how many entries to get from the website, default is no limit.
 #' @param partial A bool, to determine if we want partial matches on the make parameter
 #' @param api_key A string, optional
 #'
@@ -129,7 +129,7 @@ recall_by_model <- function(model,
 #'
 #' @param start_year An integer, start of year range, defaults to 1900.
 #' @param end_year An integer, end of year range, defaults to 2100.
-#' @param limit An integer, how many entires to get from the website, default is no limit.
+#' @param limit An integer, how many entries to get from the website, default is no limit.
 #' @param api_key A string, optional
 #'
 #' @return A dataframe, collection of responses from the api
@@ -166,7 +166,7 @@ recall_by_years <- function(start_year = 1900, end_year = 2100,
 #' Queries the API with a url that it generates from it's parameters.
 #'
 #' @param recall_number List integer, list of recalls numbers to get information on
-#' @param limit An integer, how many entires to get from the website, default is no limit.
+#' @param limit An integer, how many entries to get from the website, default is no limit.
 #' @param api_key A string, optional
 #'
 #' @return A dataframe, collection of responses from the api
@@ -203,7 +203,7 @@ recall_by_number <- function(recall_number, limit = 25, api_key = NULL) {
 #' Queries the API with a url that it generates from it's parameters.
 #'
 #' @param recall_number List integer
-#' @param limit An integer, how many entires to get from the website, default is no limit.
+#' @param limit An integer, how many entries to get from the website, default is no limit.
 #' @param api_key A string, optional
 #'
 #' @return A dataframe, collection of responses from the api

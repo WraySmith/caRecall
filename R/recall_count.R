@@ -61,7 +61,7 @@ count_recall_by_make <- function(make, manufacturer = FALSE, start_year = NULL,
 #'
 #' Queries the API with a url that it generates from it's parameters.
 #'
-#' @param model List string, the name(s) of the model of the vehicle(s).
+#' @param model List string, make or manufacturer name(s)
 #' @param start_year An integer, start of year range, defaults to 1900.
 #' @param end_year An integer, end of year range, defaults to 2100.
 #' @param api_key A string, optional.
