@@ -19,6 +19,12 @@ A dataframe of vehicles for the year range.
 \description{
 Queries the API with a url that it generates from it's parameters.
 }
+\details{
+Asks the API for the number of recalls for a given year range.
+The year range can be specified, or the defaults can be used.
+The API key can be passed manually, or if it is not passed
+it will use the API key in the R environment.
+}
 \examples{
 \dontrun{
 count_recall_by_years(2010, 2012)

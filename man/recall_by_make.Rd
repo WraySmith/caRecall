@@ -40,7 +40,7 @@ This function asks the VRD api for recalls for a specific make or manufacturer.
 The API can be asked for vehicle names, car seats, tires, etc.
 This function can be given a partial name with the partial boolean parameter set to true, and
 the year range can be specified. The API key can be passed manually, or if it is not passed
-it will use the API key in the R environment, required to be set to VRD_API.
+it will use the API key in the R environment.
 }
 \examples{
 \dontrun{

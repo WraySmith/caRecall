@@ -3,7 +3,6 @@
 export(count_recall_by_make)
 export(count_recall_by_model)
 export(count_recall_by_years)
-export(get_vrd_key)
 export(recall_by_make)
 export(recall_by_model)
 export(recall_by_number)

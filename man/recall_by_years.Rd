@@ -26,7 +26,7 @@ This function asks the VRD api for recalls for a year range.
 It will return a list of vehicles, car seats, tires, etc. Can be given a start year
 and or a end year. The default for the start and end year are 1900 and 2100.
 The API key can be passed manually, or if it is not passed
-it will use the API key in the R environment, required to be set to VRD_API.
+it will use the API key in the R environment.
 }
 \examples{
 \dontrun{
