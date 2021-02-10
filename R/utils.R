@@ -24,7 +24,7 @@ get_vrd_key <- function() {
 #'
 #' @param url_ A string, api url to be hit
 #' @param query A string, names the resulting object
-#' @param limit An integer, how many entires to get from the website, default is no limit.
+#' @param limit An integer, how many entries to get from the website, default is no limit.
 #' @param api_key defaults to the one set in the environment, can be pass one manually
 #'
 #' @return vrd_api class
@@ -91,7 +91,7 @@ call_vrd_api <- function(url_, query = NULL, limit = NULL,
 #'
 #' @param api_output api response to be cleaned
 #'
-#' @return A dataframe, cleaned api reponse data
+#' @return A dataframe, cleaned api response data
 #'
 #' @examples
 #' \dontrun{
