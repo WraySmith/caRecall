@@ -7,11 +7,11 @@
 call_vrd_api(url_, query = NULL, limit = NULL, api_key = NULL)
 }
 \arguments{
-\item{url_}{api url to be hit}
+\item{url_}{A string, api url to be hit}
 
-\item{query}{names the resulting object}
+\item{query}{A string, names the resulting object}
 
-\item{limit}{how many items to get from the api, default to no limit}
+\item{limit}{An integer, how many entires to get from the website, default is no limit.}
 
 \item{api_key}{defaults to the one set in the environment, can be pass one manually}
 }
@@ -19,7 +19,7 @@ call_vrd_api(url_, query = NULL, limit = NULL, api_key = NULL)
 vrd_api class
 }
 \description{
-helper function for querying api database
+Helper function for querying API database
 }
 \examples{
 \dontrun{

@@ -14,26 +14,27 @@ recall_by_model(
 )
 }
 \arguments{
-\item{model}{List string}
+\item{model}{List string, a list of make names for vehicles}
 
-\item{start_year}{An integer}
+\item{start_year}{An integer, start of year range, defaults to 1900.}
 
-\item{end_year}{An integer}
+\item{end_year}{An integer, end of year range, defaults to 2100.}
 
-\item{limit}{An integer}
+\item{limit}{An integer, how many entries to get from the website, default is no limit.}
 
-\item{partial}{A bool}
+\item{partial}{A bool, to determine if we want partial matches on the make parameter}
 
 \item{api_key}{A string, optional}
 }
 \value{
-dataframe
+A dataframe, collection of responses from the api
 }
 \description{
-recall_by_model
+Queries the API with a url that it generates from it's parameters.
 }
 \examples{
 \dontrun{
 recall_by_model('Civic')
+recall_by_model('Sub', limit=100, partial=TRUE, api_key=API_KEY)
 }
 }

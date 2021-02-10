@@ -15,28 +15,29 @@ recall_by_make(
 )
 }
 \arguments{
-\item{make}{List string}
+\item{make}{List string, a list of make names for vehicles}
 
-\item{manufacturer}{A bool, with this flag we are asking for the manufacturer not the make}
+\item{manufacturer}{A boolean, with this flag we are asking for the manufacturer not the make}
 
-\item{start_year}{An integer}
+\item{start_year}{An integer, start of year range, defaults to 1900.}
 
-\item{end_year}{An integer}
+\item{end_year}{An integer, end of year range, defaults to 2100.}
 
-\item{limit}{An integer}
+\item{limit}{An integer, how many entries to get from the website, default is no limit.}
 
-\item{partial}{A bool}
+\item{partial}{A boolean, to determine if we want partial matches on the make parameter}
 
 \item{api_key}{A string, optional}
 }
 \value{
-dataframe
+A dataframe, collection of responses from the api
 }
 \description{
-recall_by_make
+Queries the API with a url that it generates from it's parameters.
 }
 \examples{
 \dontrun{
 recall_by_make('Nissan')
+recall_by_make('Maz', end_year=2000, limit=100, partial=TRUE, api_key=API_KEY)
 }
 }

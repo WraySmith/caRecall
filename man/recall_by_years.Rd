@@ -7,22 +7,23 @@
 recall_by_years(start_year = 1900, end_year = 2100, limit = 25, api_key = NULL)
 }
 \arguments{
-\item{start_year}{An integer}
+\item{start_year}{An integer, start of year range, defaults to 1900.}
 
-\item{end_year}{An integer}
+\item{end_year}{An integer, end of year range, defaults to 2100.}
 
-\item{limit}{An integer}
+\item{limit}{An integer, how many entries to get from the website, default is no limit.}
 
 \item{api_key}{A string, optional}
 }
 \value{
-dataframe
+A dataframe, collection of responses from the api
 }
 \description{
-recall_by_years
+Queries the API with a url that it generates from it's parameters.
 }
 \examples{
 \dontrun{
-recall_by_years(2010, 2012)
+recall_by_years(2010, 2012, limit=100)
+recall_by_years(2010, 2012, api_key=API_KEY)
 }
 }

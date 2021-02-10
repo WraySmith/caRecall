@@ -13,24 +13,26 @@ count_recall_by_make(
 )
 }
 \arguments{
-\item{make}{list string}
+\item{make}{List string, make or manufacturer name(s)}
 
-\item{manufacturer}{A bool, with this flag we are asking for the manufacturer not the make}
+\item{manufacturer}{A boolean, with this flag we are asking for the manufacturer not the make.}
 
-\item{start_year}{An integer}
+\item{start_year}{An integer, start of year range, defaults to 1900.}
 
-\item{end_year}{An integer}
+\item{end_year}{An integer, end of year range, defaults to 2100.}
 
 \item{api_key}{A string, optional}
 }
 \value{
-integer
+An integer, the number of recalls for input make in given year range.
 }
 \description{
-count_recall_by_make
+Queries the API with a url that it generates from it's parameters.
 }
 \examples{
 \dontrun{
 count_recall_by_make('Nissan')
+count_recall_by_make('Firestone', manufacturer=TRUE)
+count_recall_by_make('Firestone', api_key=API_KEY)
 }
 }

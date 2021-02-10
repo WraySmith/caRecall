@@ -10,10 +10,10 @@ clean_vrd_api(api_output)
 \item{api_output}{api response to be cleaned}
 }
 \value{
-dataframe
+A dataframe, cleaned api reponse data
 }
 \description{
-helper function for cleaning api database
+Helper function for cleaning API response
 }
 \examples{
 \dontrun{

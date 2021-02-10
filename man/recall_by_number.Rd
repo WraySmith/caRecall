@@ -7,20 +7,21 @@
 recall_by_number(recall_number, limit = 25, api_key = NULL)
 }
 \arguments{
-\item{recall_number}{List integer}
+\item{recall_number}{List integer, list of recalls numbers to get information on}
 
-\item{limit}{An integer}
+\item{limit}{An integer, how many entries to get from the website, default is no limit.}
 
 \item{api_key}{A string, optional}
 }
 \value{
-dataframe
+A dataframe, collection of responses from the api
 }
 \description{
-recall_by_number
+Queries the API with a url that it generates from it's parameters.
 }
 \examples{
 \dontrun{
 recall_by_number(1977044)
+recall_by_number(c(2014216, 2013022))
 }
 }
