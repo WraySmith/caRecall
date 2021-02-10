@@ -3,11 +3,11 @@
 #' Queries the API with a url that it generates from it's parameters.
 #'
 #' @param make List string, a list of make names for vehicles
-#' @param manufacturer A bool, with this flag we are asking for the manufacturer not the make
+#' @param manufacturer A boolean, with this flag we are asking for the manufacturer not the make
 #' @param start_year An integer, start of year range, defaults to 1900.
 #' @param end_year An integer, end of year range, defaults to 2100.
-#' @param limit An integer, how many entires to get from the website, default is no limit.
-#' @param partial A bool, to determine if we want partial matches on the make parameter
+#' @param limit An integer, how many entries to get from the website, default is no limit.
+#' @param partial A boolean, to determine if we want partial matches on the make parameter
 #' @param api_key A string, optional
 #'
 #' @return A dataframe, collection of responses from the api
@@ -16,6 +16,7 @@
 #' @examples
 #' \dontrun{
 #' recall_by_make('Nissan')
+#' recall_by_make('Maz', end_year=2000, limit=100, partial=TRUE, api_key=API_KEY)
 #' }
 recall_by_make <- function(make, manufacturer = FALSE,
                            start_year = NULL, end_year = NULL,
@@ -82,6 +83,7 @@ recall_by_make <- function(make, manufacturer = FALSE,
 #' @examples
 #' \dontrun{
 #' recall_by_model('Civic')
+#' recall_by_model('Sub', limit=100, partial=TRUE, api_key=API_KEY)
 #' }
 recall_by_model <- function(model,
                            start_year = NULL, end_year = NULL,
@@ -135,7 +137,8 @@ recall_by_model <- function(model,
 #'
 #' @examples
 #' \dontrun{
-#' recall_by_years(2010, 2012)
+#' recall_by_years(2010, 2012, limit=100)
+#' recall_by_years(2010, 2012, api_key=API_KEY)
 #' }
 recall_by_years <- function(start_year = 1900, end_year = 2100,
                             limit = 25, api_key = NULL) {
@@ -172,6 +175,7 @@ recall_by_years <- function(start_year = 1900, end_year = 2100,
 #' @examples
 #' \dontrun{
 #' recall_by_number(1977044)
+#' recall_by_number(c(2014216, 2013022))
 #' }
 recall_by_number <- function(recall_number, limit = 25, api_key = NULL) {
 
@@ -208,6 +212,7 @@ recall_by_number <- function(recall_number, limit = 25, api_key = NULL) {
 #' @examples
 #' \dontrun{
 #' recall_details(1977044)
+#' recall_details(c(2014216, 2013022))
 #' }
 recall_details <- function(recall_number, limit = 25, api_key = NULL) {
 
