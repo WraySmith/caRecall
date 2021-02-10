@@ -19,6 +19,12 @@ A dataframe, collection of responses from the api
 \description{
 Queries the API with a url that it generates from it's parameters.
 }
+\details{
+This function asks the API for details for recall numbers. Recall numbers can be
+passed as an integer or a list of integers. Response detail columns are given in
+English and in French. The API key can be passed manually, or if it is not passed
+it will use the API key in the R environment, required to be set to VRD_API.
+}
 \examples{
 \dontrun{
 recall_details(1977044)

@@ -7,11 +7,11 @@
 call_vrd_api(url_, query = NULL, limit = NULL, api_key = NULL)
 }
 \arguments{
-\item{url_}{A string, api url to be hit}
+\item{url_}{A string, API's url to be queried}
 
 \item{query}{A string, names the resulting object}
 
-\item{limit}{An integer, how many entires to get from the website, default is no limit.}
+\item{limit}{An integer, how many entries to get from the website, default is no limit.}
 
 \item{api_key}{defaults to the one set in the environment, can be pass one manually}
 }

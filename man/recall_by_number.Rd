@@ -19,6 +19,11 @@ A dataframe, collection of responses from the api
 \description{
 Queries the API with a url that it generates from it's parameters.
 }
+\details{
+This function asks the VRD api for recalls for list of given recall numbers. It can be given
+either a single recall number or a list of recall numbers. The API key can be passed manually, or if it is not passed
+it will use the API key in the R environment, required to be set to VRD_API.
+}
 \examples{
 \dontrun{
 recall_by_number(1977044)

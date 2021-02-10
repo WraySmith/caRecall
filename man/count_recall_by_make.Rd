@@ -15,7 +15,7 @@ count_recall_by_make(
 \arguments{
 \item{make}{List string, make or manufacturer name(s)}
 
-\item{manufacturer}{A boolean, with this flag we are asking for the manufacturer not the make.}
+\item{manufacturer}{A boolean, flag indicating if manufacturer should be used instead of make for the API call}
 
 \item{start_year}{An integer, start of year range, defaults to 1900.}
 

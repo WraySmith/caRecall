@@ -14,7 +14,7 @@ recall_by_model(
 )
 }
 \arguments{
-\item{model}{List string, a list of make names for vehicles}
+\item{model}{List string, a list of make names}
 
 \item{start_year}{An integer, start of year range, defaults to 1900.}
 
@@ -22,7 +22,7 @@ recall_by_model(
 
 \item{limit}{An integer, how many entries to get from the website, default is no limit.}
 
-\item{partial}{A bool, to determine if we want partial matches on the make parameter}
+\item{partial}{A bool, to ask the API for partial matches on the model name.}
 
 \item{api_key}{A string, optional}
 }
@@ -31,6 +31,13 @@ A dataframe, collection of responses from the api
 }
 \description{
 Queries the API with a url that it generates from it's parameters.
+}
+\details{
+This function asks the VRD api for recalls for a specific model.
+The API can be asked for model names of vehicle , car seats, tires, etc.
+This function can be given a partial name with the partial boolean parameter set to true, and
+the year range can be specified. The API key can be passed manually, or if it is not passed
+it will use the API key in the R environment, required to be set to VRD_API.
 }
 \examples{
 \dontrun{

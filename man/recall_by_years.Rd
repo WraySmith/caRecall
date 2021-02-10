@@ -21,6 +21,13 @@ A dataframe, collection of responses from the api
 \description{
 Queries the API with a url that it generates from it's parameters.
 }
+\details{
+This function asks the VRD api for recalls for a year range.
+It will return a list of vehicles, car seats, tires, etc. Can be given a start year
+and or a end year. The default for the start and end year are 1900 and 2100.
+The API key can be passed manually, or if it is not passed
+it will use the API key in the R environment, required to be set to VRD_API.
+}
 \examples{
 \dontrun{
 recall_by_years(2010, 2012, limit=100)
