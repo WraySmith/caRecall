@@ -1,14 +1,16 @@
 #' recall_by_make
 #'
-#' @param make List string
+#' Queries the website with a url that it generates from it's parameters.
+#'
+#' @param make List string, a list of make names for vehicles
 #' @param manufacturer A bool, with this flag we are asking for the manufacturer not the make
-#' @param start_year An integer
-#' @param end_year An integer
-#' @param limit An integer
-#' @param partial A bool
+#' @param start_year An integer, start of year range, defaults to 1900.
+#' @param end_year An integer, end of year range, defaults to 2100.
+#' @param limit An integer, how many entires to get from the website.
+#' @param partial A bool, to determine if we want partial matches on the make parameter
 #' @param api_key A string, optional
 #'
-#' @return dataframe
+#' @return dataframe, collection of responses from the api
 #' @export
 #'
 #' @examples
@@ -65,14 +67,16 @@ recall_by_make <- function(make, manufacturer = FALSE,
 
 #' recall_by_model
 #'
-#' @param model List string
-#' @param start_year An integer
-#' @param end_year An integer
-#' @param limit An integer
-#' @param partial A bool
+#' Queries the website with a url that it generates from it's parameters.
+#'
+#' @param model List string, a list of make names for vehicles
+#' @param start_year An integer, start of year range, defaults to 1900.
+#' @param end_year An integer, end of year range, defaults to 2100.
+#' @param limit An integer, how many entires to get from the website.
+#' @param partial A bool, to determine if we want partial matches on the make parameter
 #' @param api_key A string, optional
 #'
-#' @return dataframe
+#' @return dataframe, collection of responses from the api
 #' @export
 #'
 #' @examples
@@ -119,12 +123,14 @@ recall_by_model <- function(model,
 
 #' recall_by_years
 #'
-#' @param start_year An integer
-#' @param end_year An integer
-#' @param limit An integer
+#' Queries the website with a url that it generates from it's parameters.
+#'
+#' @param start_year An integer, start of year range, defaults to 1900.
+#' @param end_year An integer, end of year range, defaults to 2100.
+#' @param limit An integer, how many entires to get from the website.
 #' @param api_key A string, optional
 #'
-#' @return dataframe
+#' @return dataframe, collection of responses from the api
 #' @export
 #'
 #' @examples
@@ -154,11 +160,11 @@ recall_by_years <- function(start_year = 1900, end_year = 2100,
 
 #' recall_by_number
 #'
-#' @param recall_number List integer
-#' @param limit An integer
+#' @param recall_number List integer, list of recalls numbers to get information on
+#' @param limit An integer, how many entires to get from the website.
 #' @param api_key A string, optional
 #'
-#' @return dataframe
+#' @return dataframe, collection of responses from the api
 #' @export
 #'
 #' @examples
@@ -188,11 +194,13 @@ recall_by_number <- function(recall_number, limit = 25, api_key = NULL) {
 
 #' recall_details
 #'
+#' Queries the website with a url that it generates from it's parameters.
+#'
 #' @param recall_number List integer
-#' @param limit An integer
+#' @param limit An integer, how many entires to get from the website.
 #' @param api_key A string, optional
 #'
-#' @return dataframe
+#' @return dataframe, collection of responses from the api
 #' @export
 #'
 #' @examples
