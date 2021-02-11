@@ -1,4 +1,4 @@
-#' Summary of recalls searching on make or manufacturer
+#' Summary of recalls searching by make or manufacturer
 #'
 #' Returns summary information of recalls in the Vehicle Recalls Database based
 #' on a make or manufacturer search term.
@@ -10,14 +10,15 @@
 #' the year range can be specified. The API key can be passed manually, or if it is not passed
 #' it will use the API key in the R environment.
 #'
-#' @param make List of make or manufacturer names.
+#' @param make List of make or manufacturer names. Case insensitive.
 #' @param manufacturer Logical; if TRUE, manufacturer is searched on instead
 #' of make.
 #' @param start_year Start of year range (optional).
 #' @param end_year End of year range (optional).
 #' @param limit Number indicating how many recall entries should be returned.
+#' Defaults to 25 which is the default of the API.
 #' @param partial Logical; if TRUE, returns all partial search term matches.
-#' @param api_key API access key if not set in environment.
+#' @param api_key API access key to use, if not set in environment.
 #'
 #' @return A data.frame of recall summary information from the Vehicle Recalls
 #' Database. Includes six columns.
@@ -26,7 +27,9 @@
 #' @examples
 #' \dontrun{
 #' recall_by_make('Nissan')
-#' recall_by_make('Maz', end_year=2000, limit=100, partial=TRUE, api_key=API_KEY)
+#' recall_by_make(c('Mazda', 'Toyota'), start_year = 2008, partial = FALSE)
+#' API_KEY <- 'xxxxxxxxxxx'
+#' recall_by_make('Maz', end_year = 2000, limit = 100, api_key = API_KEY)
 #' }
 recall_by_make <- function(make, manufacturer = FALSE,
                            start_year = NULL, end_year = NULL,
@@ -76,7 +79,7 @@ recall_by_make <- function(make, manufacturer = FALSE,
 
 }
 
-#' Summary of recalls searching on model
+#' Summary of recalls searching by model
 #'
 #' Returns summary information of recalls in the Vehicle Recalls Database based
 #' on a model search term.
@@ -92,8 +95,9 @@ recall_by_make <- function(make, manufacturer = FALSE,
 #' @param start_year Start of year range (optional).
 #' @param end_year End of year range (optional).
 #' @param limit Number indicating how many recall entries should be returned.
+#' Defaults to 25 which is the default of the API.
 #' @param partial Logical; if TRUE, returns all partial search term matches.
-#' @param api_key API access key if not set in environment.
+#' @param api_key API access key to use, if not set in environment.
 #'
 #' @return A data.frame of recall summary information from the Vehicle Recalls
 #' Database. Includes six columns.
@@ -101,8 +105,10 @@ recall_by_make <- function(make, manufacturer = FALSE,
 #'
 #' @examples
 #' \dontrun{
-#' recall_by_model('Civic')
-#' recall_by_model('Sub', limit=100, partial=TRUE, api_key=API_KEY)
+#' recall_by_model('civic')
+#' recall_by_model(c('Subaru', 'Toyota'), start_year = 2008, partial = FALSE)
+#' API_KEY <- 'xxxxxxxxxxx'
+#' recall_by_model('Sub', end_year = 2000, limit = 100, api_key = API_KEY)
 #' }
 recall_by_model <- function(model,
                            start_year = NULL, end_year = NULL,
@@ -142,7 +148,7 @@ recall_by_model <- function(model,
 
 }
 
-#' Summary of recalls searching on years
+#' Summary of recalls searching by years
 #'
 #' Returns summary information of recalls in the Vehicle Recalls Database based
 #' on a year range search term.
@@ -157,7 +163,8 @@ recall_by_model <- function(model,
 #' @param start_year Start of year range (optional).
 #' @param end_year End of year range (optional).
 #' @param limit Number indicating how many recall entries should be returned.
-#' @param api_key API access key if not set in environment.
+#' Defaults to 25 which is the default of the API.
+#' @param api_key API access key to use, if not set in environment.
 #'
 #' @return A data.frame of recall summary information from the Vehicle Recalls
 #' Database. Includes six columns.
@@ -165,8 +172,9 @@ recall_by_model <- function(model,
 #'
 #' @examples
 #' \dontrun{
-#' recall_by_years(2010, 2012, limit=100)
-#' recall_by_years(2010, 2012, api_key=API_KEY)
+#' recall_by_years(2010, 2012, limit = 100)
+#' API_KEY <- 'xxxxxxxxxxx'
+#' recall_by_years(end_year = 1970, api_key = API_KEY)
 #' }
 recall_by_years <- function(start_year = 1900, end_year = 2100,
                             limit = 25, api_key = NULL) {
@@ -189,7 +197,7 @@ recall_by_years <- function(start_year = 1900, end_year = 2100,
 
 }
 
-#' Summary of recalls searching on recall number(s)
+#' Summary of recalls searching by recall number(s)
 #'
 #' Returns summary information of recalls in the Vehicle Recalls Database based
 #' on recall numbers(s).
@@ -201,7 +209,8 @@ recall_by_years <- function(start_year = 1900, end_year = 2100,
 #'
 #' @param recall_number List of recall numbers.
 #' @param limit Number indicating how many recall entries should be returned.
-#' @param api_key API access key if not set in environment.
+#' Defaults to 25 which is the default of the API.
+#' @param api_key API access key to use, if not set in environment.
 #'
 #' @return A data.frame of recall summary information from the Vehicle Recalls
 #' Database. Includes six columns.
@@ -210,7 +219,8 @@ recall_by_years <- function(start_year = 1900, end_year = 2100,
 #' @examples
 #' \dontrun{
 #' recall_by_number(1977044)
-#' recall_by_number(c(2014216, 2013022))
+#' API_KEY <- 'xxxxxxxxxxx'
+#' recall_by_number(c(2014216, 2013022), api_key = API_KEY)
 #' }
 recall_by_number <- function(recall_number, limit = 25, api_key = NULL) {
 
@@ -233,7 +243,7 @@ recall_by_number <- function(recall_number, limit = 25, api_key = NULL) {
 
 }
 
-#' Detailed information on recalls searching on recall number(s)
+#' Detailed information on recalls searching by recall number(s)
 #'
 #' Returns detailed information on recalls in the Vehicle Recalls Database
 #' based on recall numbers(s).
@@ -245,7 +255,7 @@ recall_by_number <- function(recall_number, limit = 25, api_key = NULL) {
 #' it will use the API key in the R environment.
 #'
 #' @param recall_number List of recall numbers.
-#' @param api_key API access key if not set in environment.
+#' @param api_key API access key to use, if not set in environment.
 #'
 #' @return A data.frame of detailed recall information from the Vehicle Recalls
 #' Database. Includes 15 columns.
@@ -254,7 +264,8 @@ recall_by_number <- function(recall_number, limit = 25, api_key = NULL) {
 #' @examples
 #' \dontrun{
 #' recall_details(1977044)
-#' recall_details(c(2014216, 2013022))
+#' API_KEY <- 'xxxxxxxxxxx'
+#' recall_details(c(2014216, 2013022), api_key = API_KEY)
 #' }
 recall_details <- function(recall_number, api_key = NULL) {
 

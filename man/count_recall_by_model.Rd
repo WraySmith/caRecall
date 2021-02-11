@@ -2,7 +2,7 @@
 % Please edit documentation in R/recall_count.R
 \name{count_recall_by_model}
 \alias{count_recall_by_model}
-\title{count_recall_by_model}
+\title{Count of recalls searching by model}
 \usage{
 count_recall_by_model(
   model,
@@ -12,19 +12,20 @@ count_recall_by_model(
 )
 }
 \arguments{
-\item{model}{List string, make or manufacturer name(s)}
+\item{model}{List of model names.}
 
-\item{start_year}{An integer, start of year range, defaults to 1900.}
+\item{start_year}{Start of year range (optional).}
 
-\item{end_year}{An integer, end of year range, defaults to 2100.}
+\item{end_year}{End of year range (optional).}
 
-\item{api_key}{A string, optional.}
+\item{api_key}{API access key to use, if not set in environment.}
 }
 \value{
-integer, the number of recalls for input model in given year range.
+A data.frame providing the count of recalls from the Vehicle Recalls.
 }
 \description{
-Queries the API with a url that it generates from it's parameters.
+Returns the count of recalls in the Vehicle Recalls Database based on a
+model search term.
 }
 \details{
 Asks the API for the number of recalls for a given model name.
@@ -33,7 +34,9 @@ it will use the API key in the R environment.
 }
 \examples{
 \dontrun{
-count_recall_by_model('488')
-count_recall_by_model('911', start_year=1980, end_year=2005)
+count_recall_by_model('civic')
+count_recall_by_model(c('Subaru', 'Toyota'), start_year = 2008)
+API_KEY <- 'xxxxxxxxxxx'
+count_recall_by_model('Sub', end_year = 2000, api_key = API_KEY)
 }
 }

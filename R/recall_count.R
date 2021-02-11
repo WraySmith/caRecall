@@ -1,4 +1,4 @@
-#' Count of recalls searching on make or manufacturer
+#' Count of recalls searching by make or manufacturer
 #'
 #' Returns the count of recalls in the Vehicle Recalls Database based on a
 #' make or manufacturer search term.
@@ -13,7 +13,7 @@
 #' of make.
 #' @param start_year Start of year range (optional).
 #' @param end_year End of year range (optional).
-#' @param api_key API access key if not set in environment.
+#' @param api_key API access key to use, if not set in environment.
 #'
 #' A data.frame of recall summary information from the Vehicle Recalls
 #' Database. Includes six columns.
@@ -24,8 +24,9 @@
 #' @examples
 #' \dontrun{
 #' count_recall_by_make('Nissan')
-#' count_recall_by_make('Firestone', manufacturer=TRUE)
-#' count_recall_by_make('Firestone', api_key=API_KEY)
+#' count_recall_by_make(c('Mazda', 'Toyota'), start_year = 2008)
+#' API_KEY <- 'xxxxxxxxxxx'
+#' count_recall_by_make('Maz', end_year = 2000, api_key = API_KEY)
 #' }
 count_recall_by_make <- function(make, manufacturer = FALSE, start_year = NULL,
                                  end_year = NULL, api_key = NULL) {
@@ -67,7 +68,7 @@ count_recall_by_make <- function(make, manufacturer = FALSE, start_year = NULL,
 
 }
 
-#' Count of recalls searching on model
+#' Count of recalls searching by model
 #'
 #' Returns the count of recalls in the Vehicle Recalls Database based on a
 #' model search term.
@@ -80,15 +81,17 @@ count_recall_by_make <- function(make, manufacturer = FALSE, start_year = NULL,
 #' @param model List of model names.
 #' @param start_year Start of year range (optional).
 #' @param end_year End of year range (optional).
-#' @param api_key API access key if not set in environment.
+#' @param api_key API access key to use, if not set in environment.
 #'
 #' @return A data.frame providing the count of recalls from the Vehicle Recalls.
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' count_recall_by_model('488')
-#' count_recall_by_model('911', start_year=1980, end_year=2005)
+#' count_recall_by_model('civic')
+#' count_recall_by_model(c('Subaru', 'Toyota'), start_year = 2008)
+#' API_KEY <- 'xxxxxxxxxxx'
+#' count_recall_by_model('Sub', end_year = 2000, api_key = API_KEY)
 #' }
 count_recall_by_model <- function(model, start_year = NULL, end_year = NULL,
                                   api_key = NULL) {
@@ -124,7 +127,7 @@ count_recall_by_model <- function(model, start_year = NULL, end_year = NULL,
 
 }
 
-#' Count of recalls searching on year
+#' Count of recalls searching by year
 #'
 #' Returns the count of recalls in the Vehicle Recalls Database based on a
 #' year range search term.
@@ -137,7 +140,7 @@ count_recall_by_model <- function(model, start_year = NULL, end_year = NULL,
 #'
 #' @param start_year Start of year range (optional).
 #' @param end_year End of year range (optional).
-#' @param api_key API access key if not set in environment.
+#' @param api_key API access key to use, if not set in environment.
 #'
 #' @return A data.frame providing the count of recalls from the Vehicle Recalls.
 #' @export
@@ -145,7 +148,8 @@ count_recall_by_model <- function(model, start_year = NULL, end_year = NULL,
 #' @examples
 #' \dontrun{
 #' count_recall_by_years(2010, 2012)
-#' count_recall_by_years(2010, 2012, api_key=API_KEY)
+#' API_KEY <- 'xxxxxxxxxxx'
+#' count_recall_by_years(end_year = 1970, api_key = API_KEY)
 #' }
 count_recall_by_years <- function(start_year = 1900, end_year = 2100,
                                   api_key = NULL) {

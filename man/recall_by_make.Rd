@@ -2,7 +2,7 @@
 % Please edit documentation in R/recall_data.R
 \name{recall_by_make}
 \alias{recall_by_make}
-\title{recall_by_make}
+\title{Summary of recalls searching by make or manufacturer}
 \usage{
 recall_by_make(
   make,
@@ -15,25 +15,29 @@ recall_by_make(
 )
 }
 \arguments{
-\item{make}{List string, a list of make names for vehicles}
+\item{make}{List of make or manufacturer names. Case insensitive.}
 
-\item{manufacturer}{A boolean, flag indicating if manufacturer should be used instead of make for the API call}
+\item{manufacturer}{Logical; if TRUE, manufacturer is searched on instead
+of make.}
 
-\item{start_year}{An integer, start of year range, defaults to 1900.}
+\item{start_year}{Start of year range (optional).}
 
-\item{end_year}{An integer, end of year range, defaults to 2100.}
+\item{end_year}{End of year range (optional).}
 
-\item{limit}{An integer, how many entries to get from the website, default is no limit.}
+\item{limit}{Number indicating how many recall entries should be returned.
+Defaults to 25 which is the default of the API.}
 
-\item{partial}{A boolean, to ask the API for partial matches on the model name.}
+\item{partial}{Logical; if TRUE, returns all partial search term matches.}
 
-\item{api_key}{A string, optional}
+\item{api_key}{API access key to use, if not set in environment.}
 }
 \value{
-A dataframe, collection of responses from the API
+A data.frame of recall summary information from the Vehicle Recalls
+Database. Includes six columns.
 }
 \description{
-Queries the API with a url that it generates from it's parameters.
+Returns summary information of recalls in the Vehicle Recalls Database based
+on a make or manufacturer search term.
 }
 \details{
 This function asks the VRD API for recalls for a specific make or manufacturer.
@@ -45,6 +49,8 @@ it will use the API key in the R environment.
 \examples{
 \dontrun{
 recall_by_make('Nissan')
-recall_by_make('Maz', end_year=2000, limit=100, partial=TRUE, api_key=API_KEY)
+recall_by_make(c('Mazda', 'Toyota'), start_year = 2008, partial = FALSE)
+API_KEY <- 'xxxxxxxxxxx'
+recall_by_make('Maz', end_year = 2000, limit = 100, api_key = API_KEY)
 }
 }

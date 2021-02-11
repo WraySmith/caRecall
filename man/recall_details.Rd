@@ -2,22 +2,22 @@
 % Please edit documentation in R/recall_data.R
 \name{recall_details}
 \alias{recall_details}
-\title{recall_details}
+\title{Detailed information on recalls searching by recall number(s)}
 \usage{
-recall_details(recall_number, limit = 25, api_key = NULL)
+recall_details(recall_number, api_key = NULL)
 }
 \arguments{
-\item{recall_number}{List integer}
+\item{recall_number}{List of recall numbers.}
 
-\item{limit}{An integer, how many entries to get from the website, default is no limit.}
-
-\item{api_key}{A string, optional}
+\item{api_key}{API access key to use, if not set in environment.}
 }
 \value{
-A dataframe, collection of responses from the API
+A data.frame of detailed recall information from the Vehicle Recalls
+Database. Includes 15 columns.
 }
 \description{
-Queries the API with a url that it generates from it's parameters.
+Returns detailed information on recalls in the Vehicle Recalls Database
+based on recall numbers(s).
 }
 \details{
 This function asks the API for details for recall numbers. Recall numbers can be
@@ -28,6 +28,7 @@ it will use the API key in the R environment.
 \examples{
 \dontrun{
 recall_details(1977044)
-recall_details(c(2014216, 2013022))
+API_KEY <- 'xxxxxxxxxxx'
+recall_details(c(2014216, 2013022), api_key = API_KEY)
 }
 }

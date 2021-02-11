@@ -2,24 +2,27 @@
 % Please edit documentation in R/recall_data.R
 \name{recall_by_years}
 \alias{recall_by_years}
-\title{recall_by_years}
+\title{Summary of recalls searching by years}
 \usage{
 recall_by_years(start_year = 1900, end_year = 2100, limit = 25, api_key = NULL)
 }
 \arguments{
-\item{start_year}{An integer, start of year range, defaults to 1900.}
+\item{start_year}{Start of year range (optional).}
 
-\item{end_year}{An integer, end of year range, defaults to 2100.}
+\item{end_year}{End of year range (optional).}
 
-\item{limit}{An integer, how many entries to get from the website, default is no limit.}
+\item{limit}{Number indicating how many recall entries should be returned.
+Defaults to 25 which is the default of the API.}
 
-\item{api_key}{A string, optional}
+\item{api_key}{API access key to use, if not set in environment.}
 }
 \value{
-A dataframe, collection of responses from the API
+A data.frame of recall summary information from the Vehicle Recalls
+Database. Includes six columns.
 }
 \description{
-Queries the API with a url that it generates from it's parameters.
+Returns summary information of recalls in the Vehicle Recalls Database based
+on a year range search term.
 }
 \details{
 This function asks the VRD API for recalls for a year range.
@@ -30,7 +33,8 @@ it will use the API key in the R environment.
 }
 \examples{
 \dontrun{
-recall_by_years(2010, 2012, limit=100)
-recall_by_years(2010, 2012, api_key=API_KEY)
+recall_by_years(2010, 2012, limit = 100)
+API_KEY <- 'xxxxxxxxxxx'
+recall_by_years(end_year = 1970, api_key = API_KEY)
 }
 }

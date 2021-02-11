@@ -2,15 +2,17 @@
 % Please edit documentation in R/utils.R
 \name{get_vrd_key}
 \alias{get_vrd_key}
-\title{get_vrd_key}
+\title{Retrieves API key from environment}
 \usage{
 get_vrd_key()
 }
 \value{
-A string that is your VRD_API key
+VRD_API access key if set in environment. If access key is not
+available, returns an error that the API key is not found and needs to
+either be set in the environment or passed as an argument into functions.
 }
 \description{
-Retrieves your API key from the R environment variables
+Retrieves API key from environment if available.
 }
 \examples{
 \dontrun{
