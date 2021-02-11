@@ -1,7 +1,7 @@
 on:
   workflow_dispatch:
 
-name: test-coverage
+name: test-coverage-manual
 
 jobs:
   test-coverage:
