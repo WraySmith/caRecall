@@ -1,5 +1,6 @@
 ---
-title: "vrd_vignette"
+title: "Introduction to caRecall"
+authors: Nathan Smith, Mitch Harris, Ryan Koenig
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{vrd_vignette}
@@ -12,23 +13,24 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+library(caRecall)
 ```
 
-# Pulling Data from the API
+## Pulling Data from the API
 
-This package allows access to the Canada Governments Vehicle Recall Database.  It provides information of items that have been recalled that are or pertain to vehicles (such as tires, or child carriers).  The API provides information on the manufacturer, make, model, year manufactured, recall date, number of recalls, as well as information on why the recall happened.
+This package is an API wrapper for the Government of Canada Vehicle Recalls Database. The Vehicles Recall Database is used by the Defect Investigations and Recalls Division to record and publish recalls of vehicles, tires, and child car seats. The API provides information on the manufacturer, make, model, year manufactured, recall date, number of recalls, as well as information on why the recall happened.
 
-It includes eight functions as listed below.  To load the simply install the package `caRecall` and put
+It includes eight functions as listed below.  First you must install the package `caRecall` and then load it into your R document by entering: 
 ```{r, eval=FALSE}
 library(caRecall)
 ```
-in your R document.
+
 
 ## Functions
 
 #### recall_by_make()
 
-Used to retrieve a data frame listing recalls of provided make or manufacturer. It has **seven** inputs:
+Used to retrieve a data frame listing recalls of provided make or manufacturer. It has **seven** inputs which are described as
 
 - make: A string of the make (or manufacturer) of the item you would like to find recall information on. Case insensitive. Can be a list of makes (or manufacturers).
 - manufacturer: A boolean, where FALSE is default and TRUE means that you are searching by manufacturer not make.
@@ -38,217 +40,129 @@ Used to retrieve a data frame listing recalls of provided make or manufacturer. 
 - partial: A boolean, where FALSE is default and TRUE means that you receive back any partial matches (ie. "Su" would return "Suzuki", and "Subaru" matches).
 - api_key: A string of the api key needed to access the database. If left empty will error and not provide requested data frame.
 
-**Example:** If you wanted to search for the first five car recalls by the Ford make in the year 1998, you could search the following.
-```{r recall_by_make, eval=FALSE}
-recall_by_make("Ford", start_year = 1998, limit = 5)
-#>   Recall number Manufacturer Name Model name Make name Year Recall date
-#> 1       1997118              FORD   WINDSTAR      FORD 1998  1997-06-16
-#> 2       1997119              FORD   B SERIES      FORD 1998  1997-06-17
-#> 3       1997124              FORD   WINDSTAR      FORD 1998  1997-06-23
-#> 4       1997165              FORD    MUSTANG      FORD 1998  1997-09-30
-#> 5       1997165              FORD   WINDSTAR      FORD 1998  1997-09-30
-```
 
-
-#### count_recall_by_make()
-
-Used to retrieve a data frame that provides the count of recalls of provided make or manufacturer. It has **seven** inputs:
-
-- make: A string of the make (or manufacturer) of the item you would like to find recall information on. Case insensitive. Can be a list of makes (or manufacturers).
-- manufacturer: A boolean, where FALSE is default and TRUE means that you are searching by manufacturer not make.
-- start_year: An integer that specifies the year, which the item was manufactured, that you want to start searching. Note that vehicles year is always a year later than when they were manufactured. If left empty defaults to 1900.
-- end_year: An integer that specifies the year, which the item was manufactured, that you want to end your search on. Note that vehicles year is always a year later than when they were manufactured. If left empty defaults to 2100.
-- limit: An integer that specifies how recalls you want to return. If left empty defaults to 25.
-- partial: A boolean, where FALSE is default and TRUE means that you receive back any partial matches (ie. "Su" would return "Suzuki", and "Subaru" matches).
-- api_key: A string of the api key needed to access the database. If left empty will error and not provide requested data frame.
-
-**Example:** If we want to search for how many items manufactured by the brand "Goodbaby" you could use the following.
-```{r count_recall_by_make, eval=FALSE}
-count_recall_by_make("GOODBABY", manufacturer = TRUE, end_year = 1998)
-#>   Result Count
-#> 1           47
+If you wanted to search for the first five car recalls by the Ford make in the year 1998, you could search the following.
+```{r recall_by_make}
+caRecall::recall_by_make("Ford", start_year = 1998, limit = 5)
 ```
 
 #### recall_by_model()
 
-Used to retrieve a data frame listing recalls of provided model. It has **six** inputs:
-
-- model: A string of the model of the item you would like to find recall information on. Case insensitive. Can be a list of models.
-- start_year: An integer that specifies the year, which the item was manufactured, that you want to start searching. Note that vehicles year is always a year later than when they were manufactured. If left empty defaults to 1900.
-- end_year: An integer that specifies the year, which the item was manufactured, that you want to end your search on. Note that vehicles year is always a year later than when they were manufactured. If left empty defaults to 2100.
-- limit: An integer that specifies how recalls you want to return. If left empty defaults to 25.
-- partial: A boolean, where FALSE is default and TRUE means that you receive back any partial matches (ie. "Co" would return "Colorado", "Corvette", etc. matches).
-- api_key: A string of the api key needed to access the database. If left empty will error and not provide requested data frame.
-
-**Example:** If you wanted to search for the model "Maverick" but not have any variations of that name you would use the following.
-```{r recall_by_model, eval=FALSE}
-recall_by_model("Maverick", partial = FALSE)
-#>    Recall number Manufacturer Name Model name   Make name Year Recall date
-#> 1        1975007              FORD   MAVERICK        FORD 1972  1975-01-31
-#> 2        1976004              FORD   MAVERICK        FORD 1976  1976-01-09
-#> 3        1976057              FORD   MAVERICK        FORD 1976  1976-04-27
-#> 4        1976125              FORD   MAVERICK        FORD 1977  1976-11-10
-#> 5        1977004              FORD   MAVERICK        FORD 1977  1977-04-07
-#> 6        1977122              FORD   MAVERICK        FORD 1977  1977-12-19
-#> 7        1979183              FORD   MAVERICK        FORD 1975  1979-11-06
-#> 8        1979183              FORD   MAVERICK        FORD 1976  1979-11-06
-#> 9        2002154       GEORGIE BOY   MAVERICK GEORGIE BOY 2000  2002-08-21
-#> 10       2002154       GEORGIE BOY   MAVERICK GEORGIE BOY 1999  2002-08-21
-#> 11       2002154       GEORGIE BOY   MAVERICK GEORGIE BOY 2001  2002-08-21
-#> 12       2007053          COACHMEN   MAVERICK GEORGIE BOY 2000  2007-03-08
-#> 13       2007053          COACHMEN   MAVERICK GEORGIE BOY 1997  2007-03-08
-#> 14       2007053          COACHMEN   MAVERICK GEORGIE BOY 1998  2007-03-08
-#> 15       2007053          COACHMEN   MAVERICK GEORGIE BOY 1999  2007-03-08
-#> 16       2007053          COACHMEN   MAVERICK GEORGIE BOY 2001  2007-03-08
-#> 17       2007053          COACHMEN   MAVERICK GEORGIE BOY 2002  2007-03-08
-#> 18       2008210          COACHMEN   MAVERICK GEORGIE BOY 2000  2008-06-16
-#> 19       2008210          COACHMEN   MAVERICK GEORGIE BOY 1999  2008-06-16
-#> 20       2008210          COACHMEN   MAVERICK GEORGIE BOY 2001  2008-06-16
-#> 21       2008220          COACHMEN   MAVERICK GEORGIE BOY 2006  2008-06-24
-#> 22       2008220          COACHMEN   MAVERICK GEORGIE BOY 2007  2008-06-24
-#> 23       2008220          COACHMEN   MAVERICK GEORGIE BOY 2008  2008-06-24
-#> 24       2008439          COACHMEN   MAVERICK GEORGIE BOY 2006  2008-12-15
-#> 25       2008439          COACHMEN   MAVERICK GEORGIE BOY 2007  2008-12-15
-```
-
-#### count_recall_by_model()
-
-Used to retrieve a data frame that provides the count of recalls of the provided model. It has **six** inputs:
-
-- model: A string of the model of the item you would like to find recall information on. Case insensitive. Can be a list of models.
-- start_year: An integer that specifies the year, which the item was manufactured, that you want to start searching. Note that vehicles year is always a year later than when they were manufactured. If left empty defaults to 1900.
-- end_year: An integer that specifies the year, which the item was manufactured, that you want to end your search on. Note that vehicles year is always a year later than when they were manufactured. If left empty defaults to 2100.
-- limit: An integer that specifies how recalls you want to return. If left empty defaults to 25.
-- partial: A boolean, where FALSE is default and TRUE means that you receive back any partial matches (ie. "Co" would return "Colorado", "Corvette", etc. matches).
-- api_key: A string of the api key needed to access the database. If left empty will error and not provide requested data frame.
-
-
-**Example:** If you wanted to search for how many times there was a recall on models that contain the letter "LTX" you could use the following.
-```{r count_recall_by_model, eval=FALSE}
-count_recall_by_model("LTX")
-#>   Result Count
-#> 1           11
-```
-
-#### recall_by_years()
-
-Used to retrieve a data frame listing recalls between the provided years. It has **four** inputs:
-
-- start_year: An integer that specifies the year, which the item was manufactured, that you want to start searching. Note that vehicles year is always a year later than when they were manufactured. If left empty defaults to 1900.
-- end_year: An integer that specifies the year, which the item was manufactured, that you want to end your search on. Note that vehicles year is always a year later than when they were manufactured. If left empty defaults to 2100.
-- limit: An integer that specifies how recalls you want to return. If left empty defaults to 25.
-- api_key: A string of the api key needed to access the database. If left empty will error and not provide requested data frame.
-
-**Example:** If you wanted to search for the first 10 items with a manufacturing date between 1998 and 2001 you could use the following.
-```{r recall_by_years, eval=FALSE}
-recall_by_years(start_year = 1998, end_year = 2001, limit = 10)
-#>    Recall number                Manufacturer Name    Model name     Make name Year Recall date
-#> 1        1993076                    MERCEDES-BENZ           300 MERCEDES-BENZ 2000  1993-05-31
-#> 2        1997118                             FORD      WINDSTAR          FORD 1998  1997-06-16
-#> 3        1997119                             FORD      B SERIES          FORD 1998  1997-06-17
-#> 4        1997124                             FORD      WINDSTAR          FORD 1998  1997-06-23
-#> 5        1997130                          POLARIS        XLT SP       POLARIS 1998  1997-07-04
-#> 6        1997130                          POLARIS       600 RMK       POLARIS 1998  1997-07-04
-#> 7        1997130                          POLARIS       600 XCR       POLARIS 1998  1997-07-04
-#> 8        1997130                          POLARIS       700 RMK       POLARIS 1998  1997-07-04
-#> 9        1997130                          POLARIS       700 XCR       POLARIS 1998  1997-07-04
-#> 10       1997142 ROLLS-ROYCE & BENTLEY MOTOR CARS PASSENGER CAR       BENTLEY 1998  1997-08-15
-```
-
-#### count_recall_by_years()
-
-Used to retrieve a data frame that provides the count of recalls between the provided years. It has **four** inputs:
-
-- start_year: An integer that specifies the year, which the item was manufactured, that you want to start searching. Note that vehicles year is always a year later than when they were manufactured. If left empty defaults to 1900.
-- end_year: An integer that specifies the year, which the item was manufactured, that you want to end your search on. Note that vehicles year is always a year later than when they were manufactured. If left empty defaults to 2100.
-- limit: An integer that specifies how recalls you want to return. If left empty defaults to 25.
-- api_key: A string of the api key needed to access the database. If left empty will error and not provide requested data frame.
-
-**Example:** If you wanted to search how many items were recalled from the start of the database to the manufacturing year of 2010 you could use the following.
-```{r count_recall_by_years, eval=FALSE}
-count_recall_by_years(start_year = 2010)
-#>   Result Count
-#> 1        32030
-```
+This function is very similar to the `recall_by_make()` function the only difference being that it searches by model(s) instead of make(s). 
 
 #### recall_by_number()
 
-Used to retrieve a data frame listing of recalls between for the provided recall numbers. It has **three** inputs:
+Once again very similar to the previous two functions but will search by specific recall number. Not as versatile as most would not have the 7-digit recall number on hand but still available for those that do.
 
-- recall_number: A seven digit number of an item recall. Can be a list.
-- limit: An integer that specifies how recalls you want to return. If left empty defaults to 25.
-- api_key: A string of the api key needed to access the database. If left empty will error and not provide requested data frame.
+#### recall_by_years()
 
-**Example:** If you knew the recall numbers of you wanted to search for you could use the following.
-```{r recall_by_number, eval=FALSE}
-recall_by_number(c(1977044,1977045, 1977046))
-#>   Recall number Manufacturer Name    Model name  Make name Year Recall date
-#> 1       1977044              FORD         PINTO       FORD 1977  1977-08-09
-#> 2       1977045   CLARKE SIMPKINS    850 LEMANS MOTO GUZZI 1977  1977-08-10
-#> 3       1977045   CLARKE SIMPKINS 1000 CIVILIAN MOTO GUZZI 1977  1977-08-10
-#> 4       1977046    GENERAL MOTORS      C SERIES        GMC 1977  1977-08-16
-#> 5       1977046    GENERAL MOTORS      C SERIES  CHEVROLET 1977  1977-08-16
+If you only wanted to search by manufacturer year then this function would best suite you.  It pulls all the recalls for any make or model and compiles it to a data frame. Lets say you wanted to search for the first 10 items with a manufacturing date between 1998 and 2001 you could use the following.
+```{r recall_by_years}
+caRecall::recall_by_years(start_year = 1998, end_year = 2001, limit = 10)
 ```
-
 
 #### recall_details()
 
-Used to retrieve a data frame listing summary data of recall(s) involving an item between for the provided recall number(s). It has **three** inputs:
+This function provides the most information on the actual recall as it state the reason for the recall.  If you have found the recall number using any of the previous functions then you can enter it (or multiples) into this function to retrieve more information about it. Lets say we use the recall number from the previous example that affected the Ford Windstar with recall number 1997118.
+```{r recall_details}
+caRecall::recall_details(1997118)
+```
+You can see we get several extra columns such as how many units this recall affected, what safety system it impacted, and a detailed comment explaining the recall.
 
-- recall_number: A seven digit number of the item recall. Can be a list.
-- limit: An integer that specifies how recalls you want to return. If left empty defaults to 25.
-- api_key: A string of the api key needed to access the database. If left empty will error and not provide requested data frame.
 
-**Example:** If you wanted to search how many items were recalled from the start of the database to the manufacturing year of 2010 you could use the following.
-```{r recall_details, eval=FALSE}
-recall_details(1977044)
-#>   RECALL_NUMBER_NUM MANUFACTURER_RECALL_NO_TXT CATEGORY_ETXT CATEGORY_FTXT MODEL_NAME_NM MAKE_NAME_NM UNIT_AFFECTED_NBR SYSTEM_TYPE_ETXT SYSTEM_TYPE_FTXT
-#> 1           1977044                                      Car       Voiture         PINTO         FORD                28      Not Entered       Non Saisie
-#>   NOTIFICATION_TYPE_ETXT NOTIFICATION_TYPE_FTXT
-#> 1            Not Entered             Non Saisie
-#>                                                                                                                                               COMMENT_ETXT
-#> 1 VEHICLES WERE BUILT WITH INCORRECT NUTS ATTACHING THE REAR BUMPER LEFT ISOLATOR TO THE FRAME.  THESE NUTS COULD CONTACT AND PUNCTURE THE FUEL TANK. \r\n
-#>                COMMENT_FTXT DATE_YEAR_CD RECALL_DATE_DTE
-#> 1 Translation not available         1977      1977-08-09
+### Count Functions
+
+The next three functions are used to quickly tally up the amount of results you would get back using `recall_by_make()`, `recall_by_model()`, or `recall_by_years()`. 
+
+#### count_recall_by_make(), count_recall_by_model(), count_recall_by_years()
+These functions all have the same input parameters as their counter parts, but only return the amount of recalls obtained in the query.  Mostly useful for quick tallying. If we were to specifically look for the amount of recalls that the manufacturer Goodbaby for all of its products manufactured up to 1998 we could use the following.
+```{r count_recall_by_make}
+caRecall::count_recall_by_make("GOODBABY", manufacturer = TRUE, end_year = 1998)
 ```
 
+### Example of How to Use the Package
 
-### Example of How to Use the Data
+#### Setting up API key
+
+You can enter your API key for this API in manually for each query or you can automate it.First we want to check if your database has the appropriate API key in it's environment by using: 
+```{r, eval = FALSE}
+caRecall::get_vrd_key()
+```
+This should return a string with your key.  If it does not you will need to either set your API key to the environment by the function:
+```{r, eval = FALSE}
+Sys.setenv(VRD_API = "YOUR KEY HERE")
+```
+Once it is set up you should be able to leave the `api_key` parameter empty in each query.
+
+#### Plotting
 
 Lets say we want to look in the data base for the companies that did the most recalls with the items they manufactured in the year 2000.  First we would start with querying the API for all items recalled that were manufactured in the year 2000.
+```{r recall, eval = TRUE}
+recall_2000 <- caRecall::recall_by_years(start_year = 2000, end_year = 2000, limit = 10000)
+```
+We are putting the limit sufficiently high to assume there weren't more than 10,000 recalls that year in Canada. We can count up the data for each company by grouping by the `Manufacturer name` column and counting it. Let's look at only counts about 65 to slim down our variables.
+```{r data, eval = TRUE, warning = FALSE, message=FALSE}
+library(dplyr)
 
-```{r recall, eval = FALSE}
-recall_2000 <- recall_by_years(start_year = 2000, end_year = 2000, limit = 10000)
+counts_df <- count(group_by(recall_2000, `Manufacturer Name`))
+counts_df <-counts_df[counts_df$n>=64,]
+```
+This reduces us to 7 companies. We could then plot this using `ggplot2` in a bar plot as seen below.
+```{r plot, fig.width=7, fig.height=5, fig.align='center', warning=FALSE, message=FALSE}
+library(ggplot2)
+
+plot <- ggplot(counts_df) + 
+  aes(
+    x=`Manufacturer Name`,
+    y=n,
+    fill=`Manufacturer Name`) +
+  geom_col() +
+  geom_text(
+    aes(label=n),
+    vjust=-.5
+  ) +
+  labs(y="Total Recalls") +
+  theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.line = element_line(color = "black"),
+        ) +
+  scale_y_continuous(expand = c(0,0),
+                     limits = c(0,250)) +
+  ggtitle("Top Companies by Recall Count in 2000")
+  
+plot
 ```
 
-We are putting the limit sufficiently high to assume there weren't more than 10,000 recalls that year in Canada. We can count up the data for each company by putting the `Make name` column into a table. We can then just look at only the table values that are larger than 65.
 
-```{r count, eval = FALSE}
-counts <- table(recall_2000$`Manufacturer Name`)
-counts <- counts[counts>=65]
+We could also look at how many recalls vehicles of the make Ford has done compared to Nissan for vehicles manufactured over the last 10 years.
+We would start by querying a list with both "Ford" and "Nissan" in it.  We would want the start year to be 2011 and once again we would want to set the limit high enough to contain all our queries. We would need to set partial to be true in this case otherwise it will try to find makes that contain "Ford" and "Nissan".
+```{r}
+recall_2010 <- caRecall::recall_by_make(c("Ford","Nissan"), start_year = 2011, limit = 10000, partial = TRUE)
 ```
 
-```{r hidden, echo=FALSE}
-COA <- rep("COACHMEN", 70)
-DAIM <- rep("DAIMLERCHRYSLER", 66)
-FORD <- rep("FORD", 151)
-FRE <- rep("FREIGHTLINER", 189)
-GM <- rep("GENERAL MOTORS", 239)
-INT <- rep("INTERNATIONAL", 170)
+We can then plot the total amount of recalls for each manufacturers year and add a trend line to it. I would recommend reading up on the the ggplot2 package for more details on how to create these plots.
 
-counts <- table(c(COA, DAIM, FORD, FRE, GM, INT))
-```
+```{r plot2, fig.width=7, fig.height=5, fig.align='center', warnings = FALSE, message = FALSE}
+plot2 <- recall_2010 %>%
+  ggplot() +
+  aes(x=`Year`,
+      color = `Make name`) + 
+  geom_point(stat='count', size=6 ) 
 
-This reduces us to 11 companies. We could then plot this in a bar plot as seen below.
-
-```{r plot, fig.width=7, fig.height=5, fig.align='center'}
-barplot(counts,
-        main="Top Company Recalls in 2000",
-        xlab="Companies",
-        ylab= "Total Recalls",
-        cex.names = 0.5,
-        border = TRUE,
-        col = "lightblue")
+dat <- layer_data(plot2)
+plot2 + stat_smooth(data = dat,
+                    aes(x,
+                        y,
+                        colour=colour),
+                    method="lm",
+                    se=FALSE) + 
+  scale_size(guide="none") + 
+  scale_color_manual(
+    values = c("#00BFC4","#F8766D","#F8766D","#00BFC4"),
+    breaks=c("FORD", "NISSAN")) +
+      labs(y="Recalls per Year") +
+  scale_x_continuous(breaks = seq(2010,2021,1)) +
+  ggtitle("Amount of Recalls per Year")
 ```
 
 
