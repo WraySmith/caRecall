@@ -30,7 +30,7 @@ in your R document.
 
 Used to retrieve a data frame listing recalls of provided make or manufacturer. It has **seven** inputs:
 
-- make: A string of make of the vehicle you would like to find recall information on (or manufacturer). Case insensitive. Can be a list of makes (or manufacturers).
+- make: A string of the make (or manufacturer) of the item you would like to find recall information on. Case insensitive. Can be a list of makes (or manufacturers).
 - manufacturer: A boolean, where FALSE is default and TRUE means that you are searching by manufacturer not make.
 - start_year: An integer that specifies the year, which the item was manufactured, that you want to start searching. Note that vehicles year is always a year later than when they were manufactured. If left empty defaults to 1900.
 - end_year: An integer that specifies the year, which the item was manufactured, that you want to end your search on. Note that vehicles year is always a year later than when they were manufactured. If left empty defaults to 2100.
@@ -54,7 +54,7 @@ recall_by_make("Ford", start_year = 1998, limit = 5)
 
 Used to retrieve a data frame that provides the count of recalls of provided make or manufacturer. It has **seven** inputs:
 
-- make: A string of make of the vehicle you would like to find recall information on (or manufacturer). Case insensitive. Can be a list of makes (or manufacturers).
+- make: A string of the make (or manufacturer) of the item you would like to find recall information on. Case insensitive. Can be a list of makes (or manufacturers).
 - manufacturer: A boolean, where FALSE is default and TRUE means that you are searching by manufacturer not make.
 - start_year: An integer that specifies the year, which the item was manufactured, that you want to start searching. Note that vehicles year is always a year later than when they were manufactured. If left empty defaults to 1900.
 - end_year: An integer that specifies the year, which the item was manufactured, that you want to end your search on. Note that vehicles year is always a year later than when they were manufactured. If left empty defaults to 2100.
@@ -73,7 +73,7 @@ count_recall_by_make("GOODBABY", manufacturer = TRUE, end_year = 1998)
 
 Used to retrieve a data frame listing recalls of provided model. It has **six** inputs:
 
-- model: A string of model of the vehicle you would like to find recall information on. Case insensitive. Can be a list of models.
+- model: A string of the model of the item you would like to find recall information on. Case insensitive. Can be a list of models.
 - start_year: An integer that specifies the year, which the item was manufactured, that you want to start searching. Note that vehicles year is always a year later than when they were manufactured. If left empty defaults to 1900.
 - end_year: An integer that specifies the year, which the item was manufactured, that you want to end your search on. Note that vehicles year is always a year later than when they were manufactured. If left empty defaults to 2100.
 - limit: An integer that specifies how recalls you want to return. If left empty defaults to 25.
@@ -115,7 +115,7 @@ recall_by_model("Maverick", partial = FALSE)
 
 Used to retrieve a data frame that provides the count of recalls of the provided model. It has **six** inputs:
 
-- model: A string of model of the vehicle you would like to find recall information on. Case insensitive. Can be a list of models.
+- model: A string of the model of the item you would like to find recall information on. Case insensitive. Can be a list of models.
 - start_year: An integer that specifies the year, which the item was manufactured, that you want to start searching. Note that vehicles year is always a year later than when they were manufactured. If left empty defaults to 1900.
 - end_year: An integer that specifies the year, which the item was manufactured, that you want to end your search on. Note that vehicles year is always a year later than when they were manufactured. If left empty defaults to 2100.
 - limit: An integer that specifies how recalls you want to return. If left empty defaults to 25.
@@ -175,7 +175,7 @@ count_recall_by_years(start_year = 2010)
 
 Used to retrieve a data frame listing of recalls between for the provided recall numbers. It has **three** inputs:
 
-- recall_number: A seven digit number of a vehicle recall. Can be a list.
+- recall_number: A seven digit number of an item recall. Can be a list.
 - limit: An integer that specifies how recalls you want to return. If left empty defaults to 25.
 - api_key: A string of the api key needed to access the database. If left empty will error and not provide requested data frame.
 
@@ -193,9 +193,9 @@ recall_by_number(c(1977044,1977045, 1977046))
 
 #### recall_details()
 
-Used to retrieve a data frame listing summary data of recall(s) involving a vehicle between for the provided recall number(s). It has **three** inputs:
+Used to retrieve a data frame listing summary data of recall(s) involving an item between for the provided recall number(s). It has **three** inputs:
 
-- recall_number: A seven digit number of a vehicle recall. Can be a list.
+- recall_number: A seven digit number of the item recall. Can be a list.
 - limit: An integer that specifies how recalls you want to return. If left empty defaults to 25.
 - api_key: A string of the api key needed to access the database. If left empty will error and not provide requested data frame.
 
