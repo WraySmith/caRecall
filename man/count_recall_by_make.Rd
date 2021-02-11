@@ -35,9 +35,10 @@ Returns the count of recalls in the Vehicle Recalls Database based on a
 make or manufacturer search term.
 }
 \details{
-Asks the API for the number of recalls for a given make or manufacturer's name.
-A year range can be specified. The API key can be passed manually, or if it is not passed
-it will use the API key in the R environment.
+Queries the Vehicle Recalls Database API by make or manufacturer and returns
+the count of recalls in the database. The year range of the search can be
+specified and is based on the manufactured year and not the year a recall
+occurred.
 
 An API key is required to run the function and query the Vehicle Recalls
 Database. The key can be acquired at

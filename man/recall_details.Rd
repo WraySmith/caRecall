@@ -20,10 +20,12 @@ Returns detailed information on recalls in the Vehicle Recalls Database
 based on recall numbers(s).
 }
 \details{
-This function asks the API for details for recall numbers. Recall numbers can be
-passed as an integer or a list of integers. Response detail columns are given in
-English and in French. The API key can be passed manually, or if it is not passed
-it will use the API key in the R environment.
+Queries the Vehicle Recalls Database API by recall number and returns
+detailed recall information for each number. Note that each recall number
+provided to the function results in a separate API call. Accordingly,
+the rate of API calls is limited to one call per second to stay within the
+API limit. For example, providing a list of 60 recall numbers to the function
+would take approximately 1 minute to complete.
 
 An API key is required to run the function and query the Vehicle Recalls
 Database. The key can be acquired at

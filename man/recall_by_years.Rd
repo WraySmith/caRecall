@@ -7,9 +7,9 @@
 recall_by_years(start_year = 1900, end_year = 2100, limit = 25, api_key = NULL)
 }
 \arguments{
-\item{start_year}{Start of year range (optional).}
+\item{start_year}{Start of year range.}
 
-\item{end_year}{End of year range (optional).}
+\item{end_year}{End of year range.}
 
 \item{limit}{Number indicating how many recall entries should be returned.
 Defaults to 25 which is the default of the API.}
@@ -25,11 +25,11 @@ Returns summary information of recalls in the Vehicle Recalls Database based
 on a year range search term.
 }
 \details{
-This function asks the VRD API for recalls for a year range.
-It will return a list of vehicles, car seats, tires, etc. Can be given a start year
-and or a end year. The default for the start and end year are 1900 and 2100.
-The API key can be passed manually, or if it is not passed
-it will use the API key in the R environment.
+Queries the Vehicle Recalls Database API by year range and returns
+summary recall information. If \code{start_year} and/or \code{end_year} are
+not specified, the function will default to the start and/or end years
+available in the database. Note that the year range is based on the
+manufactured year and not the year a recall occurred.
 
 An API key is required to run the function and query the Vehicle Recalls
 Database. The key can be acquired at

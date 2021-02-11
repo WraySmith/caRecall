@@ -4,9 +4,10 @@
 #' make or manufacturer search term.
 #'
 #' @details
-#' Asks the API for the number of recalls for a given make or manufacturer's name.
-#' A year range can be specified. The API key can be passed manually, or if it is not passed
-#' it will use the API key in the R environment.
+#' Queries the Vehicle Recalls Database API by make or manufacturer and returns
+#' the count of recalls in the database. The year range of the search can be
+#' specified and is based on the manufactured year and not the year a recall
+#' occurred.
 #'
 #' An API key is required to run the function and query the Vehicle Recalls
 #' Database. The key can be acquired at
@@ -83,9 +84,9 @@ count_recall_by_make <- function(make, manufacturer = FALSE, start_year = NULL,
 #' model search term.
 #'
 #' @details
-#' Asks the API for the number of recalls for a given model name.
-#' A year range can be specified. The API key can be passed manually, or if it is not passed
-#' it will use the API key in the R environment.
+#' Queries the Vehicle Recalls Database API by model and returns the count of
+#' recalls in the database. The year range of the search can be specified and
+#' is based on the manufactured year and not the year a recall occurred.
 #'
 #' An API key is required to run the function and query the Vehicle Recalls
 #' Database. The key can be acquired at
@@ -151,10 +152,11 @@ count_recall_by_model <- function(model, start_year = NULL, end_year = NULL,
 #' year range search term.
 #'
 #' @details
-#' Asks the API for the number of recalls for a given year range.
-#' The year range can be specified, or the defaults can be used.
-#' The API key can be passed manually, or if it is not passed
-#' it will use the API key in the R environment.
+#' Queries the Vehicle Recalls Database API by year range and returns the count
+#' of recalls in the database. If \code{start_year} and/or \code{end_year} are
+#' not specified, the function will default to the start and/or end years
+#' available in the database. Note that the year range is based on the
+#' manufactured year and not the year a recall occurred.
 #'
 #' An API key is required to run the function and query the Vehicle Recalls
 #' Database. The key can be acquired at

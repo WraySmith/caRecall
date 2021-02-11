@@ -36,11 +36,14 @@ Returns summary information of recalls in the Vehicle Recalls Database based
 on a model search term.
 }
 \details{
-This function asks the VRD API for recalls for a specific model.
-The API can be asked for model names of vehicle , car seats, tires, etc.
-This function can be given a partial name with the partial boolean parameter set to true, and
-the year range can be specified. The API key can be passed manually, or if it is not passed
-it will use the API key in the R environment.
+Queries the Vehicle Recalls Database API by model and returns summary recall
+information. The year range of the search can be specified and is based on
+the manufactured year and not the year a recall occurred. Partial search
+term matches can also be returned by the function and is the default. Note
+that if \code{partial = False} is used, the number of entries returned by the
+function may be less than the count provided by
+\code{\link{count_recall_by_model}} which returns a count for all partial
+matches.
 
 An API key is required to run the function and query the Vehicle Recalls
 Database. The key can be acquired at

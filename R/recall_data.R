@@ -4,11 +4,14 @@
 #' on a make or manufacturer search term.
 #'
 #' @details
-#' This function asks the VRD API for recalls for a specific make or manufacturer.
-#' The API can be asked for vehicle names, car seats, tires, etc.
-#' This function can be given a partial name with the partial boolean parameter set to true, and
-#' the year range can be specified. The API key can be passed manually, or if it is not passed
-#' it will use the API key in the R environment.
+#' Queries the Vehicle Recalls Database API by make or manufacturer and returns
+#' summary recall information. The year range of the search can be specified
+#' and is based on the manufactured year and not the year a recall occurred.
+#' Partial search term matches can also be returned by the function and is the
+#' default. Note that if \code{partial = False} is used, the number of entries
+#' returned by the function may be less than the count provided by
+#' \code{\link{count_recall_by_make}} which returns a count for all partial
+#' matches.
 #'
 #' An API key is required to run the function and query the Vehicle Recalls
 #' Database. The key can be acquired at
@@ -94,11 +97,14 @@ recall_by_make <- function(make, manufacturer = FALSE,
 #' on a model search term.
 #'
 #' @details
-#' This function asks the VRD API for recalls for a specific model.
-#' The API can be asked for model names of vehicle , car seats, tires, etc.
-#' This function can be given a partial name with the partial boolean parameter set to true, and
-#' the year range can be specified. The API key can be passed manually, or if it is not passed
-#' it will use the API key in the R environment.
+#' Queries the Vehicle Recalls Database API by model and returns summary recall
+#' information. The year range of the search can be specified and is based on
+#' the manufactured year and not the year a recall occurred. Partial search
+#' term matches can also be returned by the function and is the default. Note
+#' that if \code{partial = False} is used, the number of entries returned by the
+#' function may be less than the count provided by
+#' \code{\link{count_recall_by_model}} which returns a count for all partial
+#' matches.
 #'
 #' An API key is required to run the function and query the Vehicle Recalls
 #' Database. The key can be acquired at
@@ -172,11 +178,11 @@ recall_by_model <- function(model,
 #' on a year range search term.
 #'
 #' @details
-#' This function asks the VRD API for recalls for a year range.
-#' It will return a list of vehicles, car seats, tires, etc. Can be given a start year
-#' and or a end year. The default for the start and end year are 1900 and 2100.
-#' The API key can be passed manually, or if it is not passed
-#' it will use the API key in the R environment.
+#' Queries the Vehicle Recalls Database API by year range and returns
+#' summary recall information. If \code{start_year} and/or \code{end_year} are
+#' not specified, the function will default to the start and/or end years
+#' available in the database. Note that the year range is based on the
+#' manufactured year and not the year a recall occurred.
 #'
 #' An API key is required to run the function and query the Vehicle Recalls
 #' Database. The key can be acquired at
@@ -187,8 +193,8 @@ recall_by_model <- function(model,
 #' function, or can be passed into the function using the \code{api_key}
 #' argument.
 #'
-#' @param start_year Start of year range (optional).
-#' @param end_year End of year range (optional).
+#' @param start_year Start of year range.
+#' @param end_year End of year range.
 #' @param limit Number indicating how many recall entries should be returned.
 #' Defaults to 25 which is the default of the API.
 #' @param api_key API access key to use, if not set in environment.
@@ -230,9 +236,8 @@ recall_by_years <- function(start_year = 1900, end_year = 2100,
 #' on recall numbers(s).
 #'
 #' @details
-#' This function asks the VRD API for recalls for list of given recall numbers. It can be given
-#' either a single recall number or a list of recall numbers. The API key can be passed manually, or if it is not passed
-#' it will use the API key in the R environment.
+#' Queries the Vehicle Recalls Database API by recall number and returns
+#' summary recall information.
 #'
 #' An API key is required to run the function and query the Vehicle Recalls
 #' Database. The key can be acquired at
@@ -285,10 +290,12 @@ recall_by_number <- function(recall_number, limit = 25, api_key = NULL) {
 #' based on recall numbers(s).
 #'
 #' @details
-#' This function asks the API for details for recall numbers. Recall numbers can be
-#' passed as an integer or a list of integers. Response detail columns are given in
-#' English and in French. The API key can be passed manually, or if it is not passed
-#' it will use the API key in the R environment.
+#' Queries the Vehicle Recalls Database API by recall number and returns
+#' detailed recall information for each number. Note that each recall number
+#' provided to the function results in a separate API call. Accordingly,
+#' the rate of API calls is limited to one call per second to stay within the
+#' API limit. For example, providing a list of 60 recall numbers to the function
+#' would take approximately 1 minute to complete.
 #'
 #' An API key is required to run the function and query the Vehicle Recalls
 #' Database. The key can be acquired at

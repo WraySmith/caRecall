@@ -23,9 +23,8 @@ Returns summary information of recalls in the Vehicle Recalls Database based
 on recall numbers(s).
 }
 \details{
-This function asks the VRD API for recalls for list of given recall numbers. It can be given
-either a single recall number or a list of recall numbers. The API key can be passed manually, or if it is not passed
-it will use the API key in the R environment.
+Queries the Vehicle Recalls Database API by recall number and returns
+summary recall information.
 
 An API key is required to run the function and query the Vehicle Recalls
 Database. The key can be acquired at
