@@ -24,6 +24,15 @@ This function asks the API for details for recall numbers. Recall numbers can be
 passed as an integer or a list of integers. Response detail columns are given in
 English and in French. The API key can be passed manually, or if it is not passed
 it will use the API key in the R environment.
+
+An API key is required to run the function and query the Vehicle Recalls
+Database. The key can be acquired at
+\url{https://tc.api.canada.ca/en/detail?api=VRDB}.
+
+The API key can be set in the environment using
+\code{Sys.setenv(VRD_API = 'your_API_key_here')} and will be used by the
+function, or can be passed into the function using the \code{api_key}
+argument.
 }
 \examples{
 \dontrun{

@@ -30,6 +30,15 @@ It will return a list of vehicles, car seats, tires, etc. Can be given a start y
 and or a end year. The default for the start and end year are 1900 and 2100.
 The API key can be passed manually, or if it is not passed
 it will use the API key in the R environment.
+
+An API key is required to run the function and query the Vehicle Recalls
+Database. The key can be acquired at
+\url{https://tc.api.canada.ca/en/detail?api=VRDB}.
+
+The API key can be set in the environment using
+\code{Sys.setenv(VRD_API = 'your_API_key_here')} and will be used by the
+function, or can be passed into the function using the \code{api_key}
+argument.
 }
 \examples{
 \dontrun{

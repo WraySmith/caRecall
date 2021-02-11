@@ -10,6 +10,15 @@
 #' the year range can be specified. The API key can be passed manually, or if it is not passed
 #' it will use the API key in the R environment.
 #'
+#' An API key is required to run the function and query the Vehicle Recalls
+#' Database. The key can be acquired at
+#' \url{https://tc.api.canada.ca/en/detail?api=VRDB}.
+#'
+#' The API key can be set in the environment using
+#' \code{Sys.setenv(VRD_API = 'your_API_key_here')} and will be used by the
+#' function, or can be passed into the function using the \code{api_key}
+#' argument.
+#'
 #' @param make List of make or manufacturer names. Case insensitive.
 #' @param manufacturer Logical; if TRUE, manufacturer is searched on instead
 #' of make.
@@ -91,6 +100,15 @@ recall_by_make <- function(make, manufacturer = FALSE,
 #' the year range can be specified. The API key can be passed manually, or if it is not passed
 #' it will use the API key in the R environment.
 #'
+#' An API key is required to run the function and query the Vehicle Recalls
+#' Database. The key can be acquired at
+#' \url{https://tc.api.canada.ca/en/detail?api=VRDB}.
+#'
+#' The API key can be set in the environment using
+#' \code{Sys.setenv(VRD_API = 'your_API_key_here')} and will be used by the
+#' function, or can be passed into the function using the \code{api_key}
+#' argument.
+#'
 #' @param model List of model names.
 #' @param start_year Start of year range (optional).
 #' @param end_year End of year range (optional).
@@ -160,6 +178,15 @@ recall_by_model <- function(model,
 #' The API key can be passed manually, or if it is not passed
 #' it will use the API key in the R environment.
 #'
+#' An API key is required to run the function and query the Vehicle Recalls
+#' Database. The key can be acquired at
+#' \url{https://tc.api.canada.ca/en/detail?api=VRDB}.
+#'
+#' The API key can be set in the environment using
+#' \code{Sys.setenv(VRD_API = 'your_API_key_here')} and will be used by the
+#' function, or can be passed into the function using the \code{api_key}
+#' argument.
+#'
 #' @param start_year Start of year range (optional).
 #' @param end_year End of year range (optional).
 #' @param limit Number indicating how many recall entries should be returned.
@@ -207,6 +234,15 @@ recall_by_years <- function(start_year = 1900, end_year = 2100,
 #' either a single recall number or a list of recall numbers. The API key can be passed manually, or if it is not passed
 #' it will use the API key in the R environment.
 #'
+#' An API key is required to run the function and query the Vehicle Recalls
+#' Database. The key can be acquired at
+#' \url{https://tc.api.canada.ca/en/detail?api=VRDB}.
+#'
+#' The API key can be set in the environment using
+#' \code{Sys.setenv(VRD_API = 'your_API_key_here')} and will be used by the
+#' function, or can be passed into the function using the \code{api_key}
+#' argument.
+#'
 #' @param recall_number List of recall numbers.
 #' @param limit Number indicating how many recall entries should be returned.
 #' Defaults to 25 which is the default of the API.
@@ -253,6 +289,15 @@ recall_by_number <- function(recall_number, limit = 25, api_key = NULL) {
 #' passed as an integer or a list of integers. Response detail columns are given in
 #' English and in French. The API key can be passed manually, or if it is not passed
 #' it will use the API key in the R environment.
+#'
+#' An API key is required to run the function and query the Vehicle Recalls
+#' Database. The key can be acquired at
+#' \url{https://tc.api.canada.ca/en/detail?api=VRDB}.
+#'
+#' The API key can be set in the environment using
+#' \code{Sys.setenv(VRD_API = 'your_API_key_here')} and will be used by the
+#' function, or can be passed into the function using the \code{api_key}
+#' argument.
 #'
 #' @param recall_number List of recall numbers.
 #' @param api_key API access key to use, if not set in environment.

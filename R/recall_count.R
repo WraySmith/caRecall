@@ -8,6 +8,15 @@
 #' A year range can be specified. The API key can be passed manually, or if it is not passed
 #' it will use the API key in the R environment.
 #'
+#' An API key is required to run the function and query the Vehicle Recalls
+#' Database. The key can be acquired at
+#' \url{https://tc.api.canada.ca/en/detail?api=VRDB}.
+#'
+#' The API key can be set in the environment using
+#' \code{Sys.setenv(VRD_API = 'your_API_key_here')} and will be used by the
+#' function, or can be passed into the function using the \code{api_key}
+#' argument.
+#'
 #' @param make List of make or manufacturer names.
 #' @param manufacturer Logical; if TRUE, manufacturer is searched on instead
 #' of make.
@@ -78,6 +87,15 @@ count_recall_by_make <- function(make, manufacturer = FALSE, start_year = NULL,
 #' A year range can be specified. The API key can be passed manually, or if it is not passed
 #' it will use the API key in the R environment.
 #'
+#' An API key is required to run the function and query the Vehicle Recalls
+#' Database. The key can be acquired at
+#' \url{https://tc.api.canada.ca/en/detail?api=VRDB}.
+#'
+#' The API key can be set in the environment using
+#' \code{Sys.setenv(VRD_API = 'your_API_key_here')} and will be used by the
+#' function, or can be passed into the function using the \code{api_key}
+#' argument.
+#'
 #' @param model List of model names.
 #' @param start_year Start of year range (optional).
 #' @param end_year End of year range (optional).
@@ -137,6 +155,15 @@ count_recall_by_model <- function(model, start_year = NULL, end_year = NULL,
 #' The year range can be specified, or the defaults can be used.
 #' The API key can be passed manually, or if it is not passed
 #' it will use the API key in the R environment.
+#'
+#' An API key is required to run the function and query the Vehicle Recalls
+#' Database. The key can be acquired at
+#' \url{https://tc.api.canada.ca/en/detail?api=VRDB}.
+#'
+#' The API key can be set in the environment using
+#' \code{Sys.setenv(VRD_API = 'your_API_key_here')} and will be used by the
+#' function, or can be passed into the function using the \code{api_key}
+#' argument.
 #'
 #' @param start_year Start of year range (optional).
 #' @param end_year End of year range (optional).

@@ -14,6 +14,16 @@ either be set in the environment or passed as an argument into functions.
 \description{
 Retrieves API key from environment if available.
 }
+\details{
+An API key is required to use the functions in \code{caRecall} and query the
+Vehicle Recalls Database. The key can be acquired at
+\url{https://tc.api.canada.ca/en/detail?api=VRDB}.
+
+The key can be set in the environment using
+\code{Sys.setenv(VRD_API = 'your_API_key_here')}. Alternatively, instead of
+setting the API key in the environment, the key can be passed into the
+functions as an argument.
+}
 \examples{
 \dontrun{
 get_vrd_key()
