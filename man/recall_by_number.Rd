@@ -38,7 +38,7 @@ argument.
 \examples{
 \dontrun{
 recall_by_number(1977044)
-API_KEY <- 'xxxxxxxxxxx'
+API_KEY <- "xxxxxxxxxxx"
 recall_by_number(c(2014216, 2013022), api_key = API_KEY)
 }
 }

@@ -39,7 +39,7 @@ argument.
 \examples{
 \dontrun{
 recall_details(1977044)
-API_KEY <- 'xxxxxxxxxxx'
+API_KEY <- "xxxxxxxxxxx"
 recall_details(c(2014216, 2013022), api_key = API_KEY)
 }
 }

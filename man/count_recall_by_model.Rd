@@ -43,9 +43,9 @@ argument.
 }
 \examples{
 \dontrun{
-count_recall_by_model('civic')
-count_recall_by_model(c('Subaru', 'Toyota'), start_year = 2008)
-API_KEY <- 'xxxxxxxxxxx'
-count_recall_by_model('Sub', end_year = 2000, api_key = API_KEY)
+count_recall_by_model("civic")
+count_recall_by_model(c("Subaru", "Toyota"), start_year = 2008)
+API_KEY <- "xxxxxxxxxxx"
+count_recall_by_model("Sub", end_year = 2000, api_key = API_KEY)
 }
 }

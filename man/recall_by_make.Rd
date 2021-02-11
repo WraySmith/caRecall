@@ -60,9 +60,9 @@ argument.
 }
 \examples{
 \dontrun{
-recall_by_make('Nissan')
-recall_by_make(c('Mazda', 'Toyota'), start_year = 2008, partial = FALSE)
-API_KEY <- 'xxxxxxxxxxx'
-recall_by_make('Maz', end_year = 2000, limit = 100, api_key = API_KEY)
+recall_by_make("Nissan")
+recall_by_make(c("Mazda", "Toyota"), start_year = 2008, partial = FALSE)
+API_KEY <- "xxxxxxxxxxx"
+recall_by_make("Maz", end_year = 2000, limit = 100, api_key = API_KEY)
 }
 }

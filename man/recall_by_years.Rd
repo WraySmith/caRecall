@@ -43,7 +43,7 @@ argument.
 \examples{
 \dontrun{
 recall_by_years(2010, 2012, limit = 100)
-API_KEY <- 'xxxxxxxxxxx'
+API_KEY <- "xxxxxxxxxxx"
 recall_by_years(end_year = 1970, api_key = API_KEY)
 }
 }
