@@ -2,32 +2,44 @@
 % Please edit documentation in R/recall_count.R
 \name{count_recall_by_years}
 \alias{count_recall_by_years}
-\title{count_recall_by_years}
+\title{Count of recalls searching by year}
 \usage{
 count_recall_by_years(start_year = 1900, end_year = 2100, api_key = NULL)
 }
 \arguments{
-\item{start_year}{An integer, start of year range, defaults to 1900.}
+\item{start_year}{Start of year range (optional).}
 
-\item{end_year}{An integer, end of year range, defaults to 2100.}
+\item{end_year}{End of year range (optional).}
 
-\item{api_key}{A string, optional.}
+\item{api_key}{API access key to use, if not set in environment.}
 }
 \value{
-A dataframe of vehicles for the year range.
+A data.frame providing the count of recalls from the Vehicle Recalls.
 }
 \description{
-Queries the API with a url that it generates from it's parameters.
+Returns the count of recalls in the Vehicle Recalls Database based on a
+year range search term.
 }
 \details{
-Asks the API for the number of recalls for a given year range.
-The year range can be specified, or the defaults can be used.
-The API key can be passed manually, or if it is not passed
-it will use the API key in the R environment.
+Queries the Vehicle Recalls Database API by year range and returns the count
+of recalls in the database. If \code{start_year} and/or \code{end_year} are
+not specified, the function will default to the start and/or end years
+available in the database. Note that the year range is based on the
+manufactured year and not the year a recall occurred.
+
+An API key is required to run the function and query the Vehicle Recalls
+Database. The key can be acquired at
+\url{https://tc.api.canada.ca/en/detail?api=VRDB}.
+
+The API key can be set in the environment using
+\code{Sys.setenv(VRD_API = 'your_API_key_here')} and will be used by the
+function, or can be passed into the function using the \code{api_key}
+argument.
 }
 \examples{
 \dontrun{
 count_recall_by_years(2010, 2012)
-count_recall_by_years(2010, 2012, api_key=API_KEY)
+API_KEY <- "xxxxxxxxxxx"
+count_recall_by_years(end_year = 1970, api_key = API_KEY)
 }
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/recall_count.R
 \name{count_recall_by_make}
 \alias{count_recall_by_make}
-\title{count_recall_by_make}
+\title{Count of recalls searching by make or manufacturer}
 \usage{
 count_recall_by_make(
   make,
@@ -13,31 +13,47 @@ count_recall_by_make(
 )
 }
 \arguments{
-\item{make}{List string, make or manufacturer name(s)}
+\item{make}{List of make or manufacturer names.}
 
-\item{manufacturer}{A boolean, flag indicating if manufacturer should be used instead of make for the API call}
+\item{manufacturer}{Logical; if TRUE, manufacturer is searched on instead
+of make.}
 
-\item{start_year}{An integer, start of year range, defaults to 1900.}
+\item{start_year}{Start of year range (optional).}
 
-\item{end_year}{An integer, end of year range, defaults to 2100.}
+\item{end_year}{End of year range (optional).}
 
-\item{api_key}{A string, optional}
+\item{api_key}{API access key to use, if not set in environment.
+
+A data.frame of recall summary information from the Vehicle Recalls
+Database. Includes six columns.}
 }
 \value{
-An integer, the number of recalls for input make in given year range.
+A data.frame providing the count of recalls from the Vehicle Recalls.
 }
 \description{
-Queries the API with a url that it generates from it's parameters.
+Returns the count of recalls in the Vehicle Recalls Database based on a
+make or manufacturer search term.
 }
 \details{
-Asks the API for the number of recalls for a given make or manufacturer's name.
-A year range can be specified. The API key can be passed manually, or if it is not passed
-it will use the API key in the R environment.
+Queries the Vehicle Recalls Database API by make or manufacturer and returns
+the count of recalls in the database. The year range of the search can be
+specified and is based on the manufactured year and not the year a recall
+occurred.
+
+An API key is required to run the function and query the Vehicle Recalls
+Database. The key can be acquired at
+\url{https://tc.api.canada.ca/en/detail?api=VRDB}.
+
+The API key can be set in the environment using
+\code{Sys.setenv(VRD_API = 'your_API_key_here')} and will be used by the
+function, or can be passed into the function using the \code{api_key}
+argument.
 }
 \examples{
 \dontrun{
-count_recall_by_make('Nissan')
-count_recall_by_make('Firestone', manufacturer=TRUE)
-count_recall_by_make('Firestone', api_key=API_KEY)
+count_recall_by_make("Nissan")
+count_recall_by_make(c("Mazda", "Toyota"), start_year = 2008)
+API_KEY <- "xxxxxxxxxxx"
+count_recall_by_make("Maz", end_year = 2000, api_key = API_KEY)
 }
 }

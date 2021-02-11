@@ -2,15 +2,27 @@
 % Please edit documentation in R/utils.R
 \name{get_vrd_key}
 \alias{get_vrd_key}
-\title{get_vrd_key}
+\title{Retrieves API key from environment}
 \usage{
 get_vrd_key()
 }
 \value{
-A string that is your VRD_API key
+VRD_API access key if set in environment. If access key is not
+available, returns an error that the API key is not found and needs to
+either be set in the environment or passed as an argument into functions.
 }
 \description{
-Retrieves your api key from the R environment variables
+Retrieves API key from environment if available.
+}
+\details{
+An API key is required to use the functions in \code{caRecall} and query the
+Vehicle Recalls Database. The key can be acquired at
+\url{https://tc.api.canada.ca/en/detail?api=VRDB}.
+
+The key can be set in the environment using
+\code{Sys.setenv(VRD_API = 'your_API_key_here')}. Alternatively, instead of
+setting the API key in the environment, the key can be passed into the
+functions as an argument.
 }
 \examples{
 \dontrun{
