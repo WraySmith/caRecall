@@ -12,22 +12,28 @@ count_recall_by_model(
 )
 }
 \arguments{
-\item{model}{list string}
+\item{model}{List string, make or manufacturer name(s)}
 
-\item{start_year}{An integer}
+\item{start_year}{An integer, start of year range, defaults to 1900.}
 
-\item{end_year}{An integer}
+\item{end_year}{An integer, end of year range, defaults to 2100.}
 
-\item{api_key}{A string, optional}
+\item{api_key}{A string, optional.}
 }
 \value{
-integer
+integer, the number of recalls for input model in given year range.
 }
 \description{
-count_recall_by_model
+Queries the API with a url that it generates from it's parameters.
+}
+\details{
+Asks the API for the number of recalls for a given model name.
+A year range can be specified. The API key can be passed manually, or if it is not passed
+it will use the API key in the R environment.
 }
 \examples{
 \dontrun{
 count_recall_by_model('488')
+count_recall_by_model('911', start_year=1980, end_year=2005)
 }
 }

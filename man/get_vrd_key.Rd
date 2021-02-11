@@ -10,7 +10,7 @@ get_vrd_key()
 A string that is your VRD_API key
 }
 \description{
-get_vrd_key
+Retrieves your api key from the R environment variables
 }
 \examples{
 \dontrun{

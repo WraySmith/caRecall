@@ -1,5 +1,7 @@
 #' get_vrd_key
 #'
+#' Retrieves your api key from the R environment variables
+#'
 #' @return A string that is your VRD_API key
 #' @export
 #'
@@ -15,22 +17,6 @@ get_vrd_key <- function() {
     x
 }
 
-
-#' call_vrd_api()
-#'
-#'helper function for querying api database
-#'
-#' @param url_ api url to be hit
-#' @param query names the resulting object
-#' @param limit how many items to get from the api, default to no limit
-#' @param api_key defaults to the one set in the environment, can be pass one manually
-#'
-#' @return vrd_api class
-#'
-#' @examples
-#' \dontrun{
-#' call_vrd_api()
-#' }
 call_vrd_api <- function(url_, query = NULL, limit = NULL,
                          api_key = NULL){
 
@@ -82,19 +68,6 @@ call_vrd_api <- function(url_, query = NULL, limit = NULL,
 
 }
 
-
-#' clean_vrd_api()
-#'
-#'helper function for cleaning api database
-#'
-#' @param api_output api response to be cleaned
-#'
-#' @return dataframe
-#'
-#' @examples
-#' \dontrun{
-#' clean_vrd_api()
-#' }
 clean_vrd_api <- function(api_output){
 
     # makes dataframe of output
@@ -136,5 +109,3 @@ clean_vrd_api <- function(api_output){
     # output dataframe
     df3
 }
-
-

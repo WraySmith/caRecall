@@ -9,18 +9,25 @@ recall_details(recall_number, limit = 25, api_key = NULL)
 \arguments{
 \item{recall_number}{List integer}
 
-\item{limit}{An integer}
+\item{limit}{An integer, how many entries to get from the website, default is no limit.}
 
 \item{api_key}{A string, optional}
 }
 \value{
-dataframe
+A dataframe, collection of responses from the api
 }
 \description{
-recall_details
+Queries the API with a url that it generates from it's parameters.
+}
+\details{
+This function asks the API for details for recall numbers. Recall numbers can be
+passed as an integer or a list of integers. Response detail columns are given in
+English and in French. The API key can be passed manually, or if it is not passed
+it will use the API key in the R environment.
 }
 \examples{
 \dontrun{
 recall_details(1977044)
+recall_details(c(2014216, 2013022))
 }
 }

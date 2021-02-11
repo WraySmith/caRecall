@@ -1,19 +1,29 @@
 #' recall_by_make
 #'
-#' @param make List string
-#' @param manufacturer A bool, with this flag we are asking for the manufacturer not the make
-#' @param start_year An integer
-#' @param end_year An integer
-#' @param limit An integer
-#' @param partial A bool
+#' Queries the API with a url that it generates from it's parameters.
+#'
+#' @details
+#' This function asks the VRD api for recalls for a specific make or manufacturer.
+#' The API can be asked for vehicle names, car seats, tires, etc.
+#' This function can be given a partial name with the partial boolean parameter set to true, and
+#' the year range can be specified. The API key can be passed manually, or if it is not passed
+#' it will use the API key in the R environment.
+#'
+#' @param make List string, a list of make names for vehicles
+#' @param manufacturer A boolean, flag indicating if manufacturer should be used instead of make for the API call
+#' @param start_year An integer, start of year range, defaults to 1900.
+#' @param end_year An integer, end of year range, defaults to 2100.
+#' @param limit An integer, how many entries to get from the website, default is no limit.
+#' @param partial A boolean, to ask the API for partial matches on the model name.
 #' @param api_key A string, optional
 #'
-#' @return dataframe
+#' @return A dataframe, collection of responses from the api
 #' @export
 #'
 #' @examples
 #' \dontrun{
 #' recall_by_make('Nissan')
+#' recall_by_make('Maz', end_year=2000, limit=100, partial=TRUE, api_key=API_KEY)
 #' }
 recall_by_make <- function(make, manufacturer = FALSE,
                            start_year = NULL, end_year = NULL,
@@ -65,19 +75,29 @@ recall_by_make <- function(make, manufacturer = FALSE,
 
 #' recall_by_model
 #'
-#' @param model List string
-#' @param start_year An integer
-#' @param end_year An integer
-#' @param limit An integer
-#' @param partial A bool
+#' Queries the API with a url that it generates from it's parameters.
+#'
+#' @details
+#' This function asks the VRD api for recalls for a specific model.
+#' The API can be asked for model names of vehicle , car seats, tires, etc.
+#' This function can be given a partial name with the partial boolean parameter set to true, and
+#' the year range can be specified. The API key can be passed manually, or if it is not passed
+#' it will use the API key in the R environment.
+#'
+#' @param model List string, a list of make names
+#' @param start_year An integer, start of year range, defaults to 1900.
+#' @param end_year An integer, end of year range, defaults to 2100.
+#' @param limit An integer, how many entries to get from the website, default is no limit.
+#' @param partial A bool, to ask the API for partial matches on the model name.
 #' @param api_key A string, optional
 #'
-#' @return dataframe
+#' @return A dataframe, collection of responses from the api
 #' @export
 #'
 #' @examples
 #' \dontrun{
 #' recall_by_model('Civic')
+#' recall_by_model('Sub', limit=100, partial=TRUE, api_key=API_KEY)
 #' }
 recall_by_model <- function(model,
                            start_year = NULL, end_year = NULL,
@@ -119,17 +139,27 @@ recall_by_model <- function(model,
 
 #' recall_by_years
 #'
-#' @param start_year An integer
-#' @param end_year An integer
-#' @param limit An integer
+#' Queries the API with a url that it generates from it's parameters.
+#'
+#' @details
+#' This function asks the VRD api for recalls for a year range.
+#' It will return a list of vehicles, car seats, tires, etc. Can be given a start year
+#' and or a end year. The default for the start and end year are 1900 and 2100.
+#' The API key can be passed manually, or if it is not passed
+#' it will use the API key in the R environment.
+#'
+#' @param start_year An integer, start of year range, defaults to 1900.
+#' @param end_year An integer, end of year range, defaults to 2100.
+#' @param limit An integer, how many entries to get from the website, default is no limit.
 #' @param api_key A string, optional
 #'
-#' @return dataframe
+#' @return A dataframe, collection of responses from the api
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' recall_by_years(2010, 2012)
+#' recall_by_years(2010, 2012, limit=100)
+#' recall_by_years(2010, 2012, api_key=API_KEY)
 #' }
 recall_by_years <- function(start_year = 1900, end_year = 2100,
                             limit = 25, api_key = NULL) {
@@ -154,16 +184,24 @@ recall_by_years <- function(start_year = 1900, end_year = 2100,
 
 #' recall_by_number
 #'
-#' @param recall_number List integer
-#' @param limit An integer
+#' Queries the API with a url that it generates from it's parameters.
+#'
+#' @details
+#' This function asks the VRD api for recalls for list of given recall numbers. It can be given
+#' either a single recall number or a list of recall numbers. The API key can be passed manually, or if it is not passed
+#' it will use the API key in the R environment.
+#'
+#' @param recall_number List integer, list of recalls numbers to get information on
+#' @param limit An integer, how many entries to get from the website, default is no limit.
 #' @param api_key A string, optional
 #'
-#' @return dataframe
+#' @return A dataframe, collection of responses from the api
 #' @export
 #'
 #' @examples
 #' \dontrun{
 #' recall_by_number(1977044)
+#' recall_by_number(c(2014216, 2013022))
 #' }
 recall_by_number <- function(recall_number, limit = 25, api_key = NULL) {
 
@@ -188,16 +226,25 @@ recall_by_number <- function(recall_number, limit = 25, api_key = NULL) {
 
 #' recall_details
 #'
+#' Queries the API with a url that it generates from it's parameters.
+#'
+#' @details
+#' This function asks the API for details for recall numbers. Recall numbers can be
+#' passed as an integer or a list of integers. Response detail columns are given in
+#' English and in French. The API key can be passed manually, or if it is not passed
+#' it will use the API key in the R environment.
+#'
 #' @param recall_number List integer
-#' @param limit An integer
+#' @param limit An integer, how many entries to get from the website, default is no limit.
 #' @param api_key A string, optional
 #'
-#' @return dataframe
+#' @return A dataframe, collection of responses from the api
 #' @export
 #'
 #' @examples
 #' \dontrun{
 #' recall_details(1977044)
+#' recall_details(c(2014216, 2013022))
 #' }
 recall_details <- function(recall_number, limit = 25, api_key = NULL) {
 

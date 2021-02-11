@@ -1,17 +1,26 @@
 #' count_recall_by_make
 #'
-#' @param make list string
-#' @param manufacturer A bool, with this flag we are asking for the manufacturer not the make
-#' @param start_year An integer
-#' @param end_year An integer
+#' Queries the API with a url that it generates from it's parameters.
+#'
+#' @details
+#' Asks the API for the number of recalls for a given make or manufacturer's name.
+#' A year range can be specified. The API key can be passed manually, or if it is not passed
+#' it will use the API key in the R environment.
+#'
+#' @param make List string, make or manufacturer name(s)
+#' @param manufacturer A boolean, flag indicating if manufacturer should be used instead of make for the API call
+#' @param start_year An integer, start of year range, defaults to 1900.
+#' @param end_year An integer, end of year range, defaults to 2100.
 #' @param api_key A string, optional
 #'
-#' @return integer
+#' @return An integer, the number of recalls for input make in given year range.
 #' @export
 #'
 #' @examples
 #' \dontrun{
 #' count_recall_by_make('Nissan')
+#' count_recall_by_make('Firestone', manufacturer=TRUE)
+#' count_recall_by_make('Firestone', api_key=API_KEY)
 #' }
 count_recall_by_make <- function(make, manufacturer = FALSE, start_year = NULL,
                                  end_year = NULL, api_key = NULL) {
@@ -55,17 +64,25 @@ count_recall_by_make <- function(make, manufacturer = FALSE, start_year = NULL,
 
 #' count_recall_by_model
 #'
-#' @param model list string
-#' @param start_year An integer
-#' @param end_year An integer
-#' @param api_key A string, optional
+#' Queries the API with a url that it generates from it's parameters.
 #'
-#' @return integer
+#' @details
+#' Asks the API for the number of recalls for a given model name.
+#' A year range can be specified. The API key can be passed manually, or if it is not passed
+#' it will use the API key in the R environment.
+#'
+#' @param model List string, make or manufacturer name(s)
+#' @param start_year An integer, start of year range, defaults to 1900.
+#' @param end_year An integer, end of year range, defaults to 2100.
+#' @param api_key A string, optional.
+#'
+#' @return integer, the number of recalls for input model in given year range.
 #' @export
 #'
 #' @examples
 #' \dontrun{
 #' count_recall_by_model('488')
+#' count_recall_by_model('911', start_year=1980, end_year=2005)
 #' }
 count_recall_by_model <- function(model, start_year = NULL, end_year = NULL,
                                   api_key = NULL) {
@@ -103,16 +120,25 @@ count_recall_by_model <- function(model, start_year = NULL, end_year = NULL,
 
 #' count_recall_by_years
 #'
-#' @param start_year An integer
-#' @param end_year An integer
-#' @param api_key A string, optional
+#' Queries the API with a url that it generates from it's parameters.
 #'
-#' @return dataframe
+#' @details
+#' Asks the API for the number of recalls for a given year range.
+#' The year range can be specified, or the defaults can be used.
+#' The API key can be passed manually, or if it is not passed
+#' it will use the API key in the R environment.
+#'
+#' @param start_year An integer, start of year range, defaults to 1900.
+#' @param end_year An integer, end of year range, defaults to 2100.
+#' @param api_key A string, optional.
+#'
+#' @return A dataframe of vehicles for the year range.
 #' @export
 #'
 #' @examples
 #' \dontrun{
 #' count_recall_by_years(2010, 2012)
+#' count_recall_by_years(2010, 2012, api_key=API_KEY)
 #' }
 count_recall_by_years <- function(start_year = 1900, end_year = 2100,
                                   api_key = NULL) {

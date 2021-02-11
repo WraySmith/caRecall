@@ -7,20 +7,27 @@
 count_recall_by_years(start_year = 1900, end_year = 2100, api_key = NULL)
 }
 \arguments{
-\item{start_year}{An integer}
+\item{start_year}{An integer, start of year range, defaults to 1900.}
 
-\item{end_year}{An integer}
+\item{end_year}{An integer, end of year range, defaults to 2100.}
 
-\item{api_key}{A string, optional}
+\item{api_key}{A string, optional.}
 }
 \value{
-dataframe
+A dataframe of vehicles for the year range.
 }
 \description{
-count_recall_by_years
+Queries the API with a url that it generates from it's parameters.
+}
+\details{
+Asks the API for the number of recalls for a given year range.
+The year range can be specified, or the defaults can be used.
+The API key can be passed manually, or if it is not passed
+it will use the API key in the R environment.
 }
 \examples{
 \dontrun{
 count_recall_by_years(2010, 2012)
+count_recall_by_years(2010, 2012, api_key=API_KEY)
 }
 }
