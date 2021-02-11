@@ -51,7 +51,7 @@ count_recall_by_make <- function(make, manufacturer = FALSE, start_year = NULL,
     # add count to url
     url_ <- paste (url_, "/count", sep = "")
 
-    # api call, returns class vrd_api
+    # API call, returns class vrd_api
     api_output <- call_vrd_api(url_, make, api_key = api_key)
 
     # convert content to a dataframe
@@ -107,7 +107,7 @@ count_recall_by_model <- function(model, start_year = NULL, end_year = NULL,
     # add count to url
     url_ <- paste (url_, "/count", sep = "")
 
-    # api call, returns class vrd_api
+    # API call, returns class vrd_api
     api_output <- call_vrd_api(url_, model, api_key = api_key)
 
     # convert content to a dataframe

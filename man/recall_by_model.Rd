@@ -22,18 +22,18 @@ recall_by_model(
 
 \item{limit}{An integer, how many entries to get from the website, default is no limit.}
 
-\item{partial}{A bool, to ask the API for partial matches on the model name.}
+\item{partial}{A boolean, to ask the API for partial matches on the model name.}
 
 \item{api_key}{A string, optional}
 }
 \value{
-A dataframe, collection of responses from the api
+A dataframe, collection of responses from the API
 }
 \description{
 Queries the API with a url that it generates from it's parameters.
 }
 \details{
-This function asks the VRD api for recalls for a specific model.
+This function asks the VRD API for recalls for a specific model.
 The API can be asked for model names of vehicle , car seats, tires, etc.
 This function can be given a partial name with the partial boolean parameter set to true, and
 the year range can be specified. The API key can be passed manually, or if it is not passed

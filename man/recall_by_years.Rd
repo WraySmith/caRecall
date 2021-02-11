@@ -16,13 +16,13 @@ recall_by_years(start_year = 1900, end_year = 2100, limit = 25, api_key = NULL)
 \item{api_key}{A string, optional}
 }
 \value{
-A dataframe, collection of responses from the api
+A dataframe, collection of responses from the API
 }
 \description{
 Queries the API with a url that it generates from it's parameters.
 }
 \details{
-This function asks the VRD api for recalls for a year range.
+This function asks the VRD API for recalls for a year range.
 It will return a list of vehicles, car seats, tires, etc. Can be given a start year
 and or a end year. The default for the start and end year are 1900 and 2100.
 The API key can be passed manually, or if it is not passed

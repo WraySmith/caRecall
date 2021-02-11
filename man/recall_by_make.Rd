@@ -30,13 +30,13 @@ recall_by_make(
 \item{api_key}{A string, optional}
 }
 \value{
-A dataframe, collection of responses from the api
+A dataframe, collection of responses from the API
 }
 \description{
 Queries the API with a url that it generates from it's parameters.
 }
 \details{
-This function asks the VRD api for recalls for a specific make or manufacturer.
+This function asks the VRD API for recalls for a specific make or manufacturer.
 The API can be asked for vehicle names, car seats, tires, etc.
 This function can be given a partial name with the partial boolean parameter set to true, and
 the year range can be specified. The API key can be passed manually, or if it is not passed

@@ -14,7 +14,7 @@ recall_details(recall_number, limit = 25, api_key = NULL)
 \item{api_key}{A string, optional}
 }
 \value{
-A dataframe, collection of responses from the api
+A dataframe, collection of responses from the API
 }
 \description{
 Queries the API with a url that it generates from it's parameters.

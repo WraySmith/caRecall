@@ -3,7 +3,7 @@
 #' Queries the API with a url that it generates from it's parameters.
 #'
 #' @details
-#' This function asks the VRD api for recalls for a specific make or manufacturer.
+#' This function asks the VRD API for recalls for a specific make or manufacturer.
 #' The API can be asked for vehicle names, car seats, tires, etc.
 #' This function can be given a partial name with the partial boolean parameter set to true, and
 #' the year range can be specified. The API key can be passed manually, or if it is not passed
@@ -17,7 +17,7 @@
 #' @param partial A boolean, to ask the API for partial matches on the model name.
 #' @param api_key A string, optional
 #'
-#' @return A dataframe, collection of responses from the api
+#' @return A dataframe, collection of responses from the API
 #' @export
 #'
 #' @examples
@@ -53,7 +53,7 @@ recall_by_make <- function(make, manufacturer = FALSE,
         url_ <- paste(url_, '/year-range/', year_range, sep = "")
     }
 
-    # api call, returns class vrd_api
+    # API call, returns class vrd_api
     api_output <- call_vrd_api(url_, make, limit, api_key = api_key)
 
     # convert content to a dataframe
@@ -78,7 +78,7 @@ recall_by_make <- function(make, manufacturer = FALSE,
 #' Queries the API with a url that it generates from it's parameters.
 #'
 #' @details
-#' This function asks the VRD api for recalls for a specific model.
+#' This function asks the VRD API for recalls for a specific model.
 #' The API can be asked for model names of vehicle , car seats, tires, etc.
 #' This function can be given a partial name with the partial boolean parameter set to true, and
 #' the year range can be specified. The API key can be passed manually, or if it is not passed
@@ -88,10 +88,10 @@ recall_by_make <- function(make, manufacturer = FALSE,
 #' @param start_year An integer, start of year range, defaults to 1900.
 #' @param end_year An integer, end of year range, defaults to 2100.
 #' @param limit An integer, how many entries to get from the website, default is no limit.
-#' @param partial A bool, to ask the API for partial matches on the model name.
+#' @param partial A boolean, to ask the API for partial matches on the model name.
 #' @param api_key A string, optional
 #'
-#' @return A dataframe, collection of responses from the api
+#' @return A dataframe, collection of responses from the API
 #' @export
 #'
 #' @examples
@@ -121,7 +121,7 @@ recall_by_model <- function(model,
         year_range <- paste(toString(start_year), toString(end_year), sep = "-")
         url_ <- paste(url_, '/year-range/', year_range, sep = "")
     }
-    # api call, returns class vrd_api
+    # API call, returns class vrd_api
     api_output <- call_vrd_api(url_, model, limit, api_key = api_key)
 
     # convert content to a dataframe
@@ -142,7 +142,7 @@ recall_by_model <- function(model,
 #' Queries the API with a url that it generates from it's parameters.
 #'
 #' @details
-#' This function asks the VRD api for recalls for a year range.
+#' This function asks the VRD API for recalls for a year range.
 #' It will return a list of vehicles, car seats, tires, etc. Can be given a start year
 #' and or a end year. The default for the start and end year are 1900 and 2100.
 #' The API key can be passed manually, or if it is not passed
@@ -153,7 +153,7 @@ recall_by_model <- function(model,
 #' @param limit An integer, how many entries to get from the website, default is no limit.
 #' @param api_key A string, optional
 #'
-#' @return A dataframe, collection of responses from the api
+#' @return A dataframe, collection of responses from the API
 #' @export
 #'
 #' @examples
@@ -169,7 +169,7 @@ recall_by_years <- function(start_year = 1900, end_year = 2100,
     url_ <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/year-range/"
     url_ <- paste(url_, year_range, sep = "")
 
-    # api call, returns class vrd_api
+    # API call, returns class vrd_api
     api_output <- call_vrd_api(url_, year_range, limit,
                                api_key = api_key)
 
@@ -187,7 +187,7 @@ recall_by_years <- function(start_year = 1900, end_year = 2100,
 #' Queries the API with a url that it generates from it's parameters.
 #'
 #' @details
-#' This function asks the VRD api for recalls for list of given recall numbers. It can be given
+#' This function asks the VRD API for recalls for list of given recall numbers. It can be given
 #' either a single recall number or a list of recall numbers. The API key can be passed manually, or if it is not passed
 #' it will use the API key in the R environment.
 #'
@@ -195,7 +195,7 @@ recall_by_years <- function(start_year = 1900, end_year = 2100,
 #' @param limit An integer, how many entries to get from the website, default is no limit.
 #' @param api_key A string, optional
 #'
-#' @return A dataframe, collection of responses from the api
+#' @return A dataframe, collection of responses from the API
 #' @export
 #'
 #' @examples
@@ -212,7 +212,7 @@ recall_by_number <- function(recall_number, limit = 25, api_key = NULL) {
     url_ <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/recall-number/"
     url_ <- paste(url_, input_request, sep = "")
 
-    # api call, returns class vrd_api
+    # API call, returns class vrd_api
     api_output <- call_vrd_api(url_, recall_number, limit,
                                api_key = api_key)
 
@@ -238,7 +238,7 @@ recall_by_number <- function(recall_number, limit = 25, api_key = NULL) {
 #' @param limit An integer, how many entries to get from the website, default is no limit.
 #' @param api_key A string, optional
 #'
-#' @return A dataframe, collection of responses from the api
+#' @return A dataframe, collection of responses from the API
 #' @export
 #'
 #' @examples
@@ -264,7 +264,7 @@ recall_details <- function(recall_number, limit = 25, api_key = NULL) {
         url_ <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall-summary/recall-number/"
         url_ <- paste(url_, toString(single_number), sep = "")
 
-        # api call, returns class vrd_api
+        # API call, returns class vrd_api
         api_output <- call_vrd_api(url_, single_number,
                                    api_key = api_key)
 

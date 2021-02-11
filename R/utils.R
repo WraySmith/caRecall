@@ -1,6 +1,6 @@
 #' get_vrd_key
 #'
-#' Retrieves your api key from the R environment variables
+#' Retrieves your API key from the R environment variables
 #'
 #' @return A string that is your VRD_API key
 #' @export
@@ -12,7 +12,7 @@
 get_vrd_key <- function() {
     x <- Sys.getenv("VRD_API")
     if (x == "") {
-        stop("You must provide an API key to the function or use `Sys.setenv(VRD_API = 'your_api_key_here')`")
+        stop("You must provide an API key to the function or use `Sys.setenv(VRD_API = 'your_API_key_here')`")
     }
     x
 }
@@ -32,7 +32,7 @@ call_vrd_api <- function(url_, query = NULL, limit = NULL,
     # set headers (currently only user-key is set)
     headers <- httr::add_headers("user-key" = api_key)
 
-    # query the api
+    # query the API
     response <- httr::GET(url_, headers, ua)
 
     ### NEED TO PROVIDE MORE ERROR OUTPUT HERE

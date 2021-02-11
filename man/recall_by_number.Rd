@@ -14,13 +14,13 @@ recall_by_number(recall_number, limit = 25, api_key = NULL)
 \item{api_key}{A string, optional}
 }
 \value{
-A dataframe, collection of responses from the api
+A dataframe, collection of responses from the API
 }
 \description{
 Queries the API with a url that it generates from it's parameters.
 }
 \details{
-This function asks the VRD api for recalls for list of given recall numbers. It can be given
+This function asks the VRD API for recalls for list of given recall numbers. It can be given
 either a single recall number or a list of recall numbers. The API key can be passed manually, or if it is not passed
 it will use the API key in the R environment.
 }
