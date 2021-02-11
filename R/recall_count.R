@@ -1,19 +1,24 @@
-#' count_recall_by_make
+#' Count of recalls searching on make or manufacturer
 #'
-#' Queries the API with a url that it generates from it's parameters.
+#' Returns the count of recalls in the Vehicle Recalls Database based on a
+#' make or manufacturer search term.
 #'
 #' @details
 #' Asks the API for the number of recalls for a given make or manufacturer's name.
 #' A year range can be specified. The API key can be passed manually, or if it is not passed
 #' it will use the API key in the R environment.
 #'
-#' @param make List string, make or manufacturer name(s)
-#' @param manufacturer A boolean, flag indicating if manufacturer should be used instead of make for the API call
-#' @param start_year An integer, start of year range, defaults to 1900.
-#' @param end_year An integer, end of year range, defaults to 2100.
-#' @param api_key A string, optional
+#' @param make List of make or manufacturer names.
+#' @param manufacturer Logical; if TRUE, manufacturer is searched on instead
+#' of make.
+#' @param start_year Start of year range (optional).
+#' @param end_year End of year range (optional).
+#' @param api_key API access key if not set in environment.
 #'
-#' @return An integer, the number of recalls for input make in given year range.
+#' A data.frame of recall summary information from the Vehicle Recalls
+#' Database. Includes six columns.
+#'
+#' @return A data.frame providing the count of recalls from the Vehicle Recalls.
 #' @export
 #'
 #' @examples
@@ -62,21 +67,22 @@ count_recall_by_make <- function(make, manufacturer = FALSE, start_year = NULL,
 
 }
 
-#' count_recall_by_model
+#' Count of recalls searching on model
 #'
-#' Queries the API with a url that it generates from it's parameters.
+#' Returns the count of recalls in the Vehicle Recalls Database based on a
+#' model search term.
 #'
 #' @details
 #' Asks the API for the number of recalls for a given model name.
 #' A year range can be specified. The API key can be passed manually, or if it is not passed
 #' it will use the API key in the R environment.
 #'
-#' @param model List string, make or manufacturer name(s)
-#' @param start_year An integer, start of year range, defaults to 1900.
-#' @param end_year An integer, end of year range, defaults to 2100.
-#' @param api_key A string, optional.
+#' @param model List of model names.
+#' @param start_year Start of year range (optional).
+#' @param end_year End of year range (optional).
+#' @param api_key API access key if not set in environment.
 #'
-#' @return integer, the number of recalls for input model in given year range.
+#' @return A data.frame providing the count of recalls from the Vehicle Recalls.
 #' @export
 #'
 #' @examples
@@ -118,9 +124,10 @@ count_recall_by_model <- function(model, start_year = NULL, end_year = NULL,
 
 }
 
-#' count_recall_by_years
+#' Count of recalls searching on year
 #'
-#' Queries the API with a url that it generates from it's parameters.
+#' Returns the count of recalls in the Vehicle Recalls Database based on a
+#' year range search term.
 #'
 #' @details
 #' Asks the API for the number of recalls for a given year range.
@@ -128,11 +135,11 @@ count_recall_by_model <- function(model, start_year = NULL, end_year = NULL,
 #' The API key can be passed manually, or if it is not passed
 #' it will use the API key in the R environment.
 #'
-#' @param start_year An integer, start of year range, defaults to 1900.
-#' @param end_year An integer, end of year range, defaults to 2100.
-#' @param api_key A string, optional.
+#' @param start_year Start of year range (optional).
+#' @param end_year End of year range (optional).
+#' @param api_key API access key if not set in environment.
 #'
-#' @return A dataframe of vehicles for the year range.
+#' @return A data.frame providing the count of recalls from the Vehicle Recalls.
 #' @export
 #'
 #' @examples

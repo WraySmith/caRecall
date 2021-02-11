@@ -1,6 +1,7 @@
-#' recall_by_make
+#' Summary of recalls searching on make or manufacturer
 #'
-#' Queries the API with a url that it generates from it's parameters.
+#' Returns summary information of recalls in the Vehicle Recalls Database based
+#' on a make or manufacturer search term.
 #'
 #' @details
 #' This function asks the VRD API for recalls for a specific make or manufacturer.
@@ -9,15 +10,17 @@
 #' the year range can be specified. The API key can be passed manually, or if it is not passed
 #' it will use the API key in the R environment.
 #'
-#' @param make List string, a list of make names for vehicles
-#' @param manufacturer A boolean, flag indicating if manufacturer should be used instead of make for the API call
-#' @param start_year An integer, start of year range, defaults to 1900.
-#' @param end_year An integer, end of year range, defaults to 2100.
-#' @param limit An integer, how many entries to get from the website, default is no limit.
-#' @param partial A boolean, to ask the API for partial matches on the model name.
-#' @param api_key A string, optional
+#' @param make List of make or manufacturer names.
+#' @param manufacturer Logical; if TRUE, manufacturer is searched on instead
+#' of make.
+#' @param start_year Start of year range (optional).
+#' @param end_year End of year range (optional).
+#' @param limit Number indicating how many recall entries should be returned.
+#' @param partial Logical; if TRUE, returns all partial search term matches.
+#' @param api_key API access key if not set in environment.
 #'
-#' @return A dataframe, collection of responses from the API
+#' @return A data.frame of recall summary information from the Vehicle Recalls
+#' Database. Includes six columns.
 #' @export
 #'
 #' @examples
@@ -73,9 +76,10 @@ recall_by_make <- function(make, manufacturer = FALSE,
 
 }
 
-#' recall_by_model
+#' Summary of recalls searching on model
 #'
-#' Queries the API with a url that it generates from it's parameters.
+#' Returns summary information of recalls in the Vehicle Recalls Database based
+#' on a model search term.
 #'
 #' @details
 #' This function asks the VRD API for recalls for a specific model.
@@ -84,14 +88,15 @@ recall_by_make <- function(make, manufacturer = FALSE,
 #' the year range can be specified. The API key can be passed manually, or if it is not passed
 #' it will use the API key in the R environment.
 #'
-#' @param model List string, a list of make names
-#' @param start_year An integer, start of year range, defaults to 1900.
-#' @param end_year An integer, end of year range, defaults to 2100.
-#' @param limit An integer, how many entries to get from the website, default is no limit.
-#' @param partial A boolean, to ask the API for partial matches on the model name.
-#' @param api_key A string, optional
+#' @param model List of model names.
+#' @param start_year Start of year range (optional).
+#' @param end_year End of year range (optional).
+#' @param limit Number indicating how many recall entries should be returned.
+#' @param partial Logical; if TRUE, returns all partial search term matches.
+#' @param api_key API access key if not set in environment.
 #'
-#' @return A dataframe, collection of responses from the API
+#' @return A data.frame of recall summary information from the Vehicle Recalls
+#' Database. Includes six columns.
 #' @export
 #'
 #' @examples
@@ -137,9 +142,10 @@ recall_by_model <- function(model,
 
 }
 
-#' recall_by_years
+#' Summary of recalls searching on years
 #'
-#' Queries the API with a url that it generates from it's parameters.
+#' Returns summary information of recalls in the Vehicle Recalls Database based
+#' on a year range search term.
 #'
 #' @details
 #' This function asks the VRD API for recalls for a year range.
@@ -148,12 +154,13 @@ recall_by_model <- function(model,
 #' The API key can be passed manually, or if it is not passed
 #' it will use the API key in the R environment.
 #'
-#' @param start_year An integer, start of year range, defaults to 1900.
-#' @param end_year An integer, end of year range, defaults to 2100.
-#' @param limit An integer, how many entries to get from the website, default is no limit.
-#' @param api_key A string, optional
+#' @param start_year Start of year range (optional).
+#' @param end_year End of year range (optional).
+#' @param limit Number indicating how many recall entries should be returned.
+#' @param api_key API access key if not set in environment.
 #'
-#' @return A dataframe, collection of responses from the API
+#' @return A data.frame of recall summary information from the Vehicle Recalls
+#' Database. Includes six columns.
 #' @export
 #'
 #' @examples
@@ -182,20 +189,22 @@ recall_by_years <- function(start_year = 1900, end_year = 2100,
 
 }
 
-#' recall_by_number
+#' Summary of recalls searching on recall number(s)
 #'
-#' Queries the API with a url that it generates from it's parameters.
+#' Returns summary information of recalls in the Vehicle Recalls Database based
+#' on recall numbers(s).
 #'
 #' @details
 #' This function asks the VRD API for recalls for list of given recall numbers. It can be given
 #' either a single recall number or a list of recall numbers. The API key can be passed manually, or if it is not passed
 #' it will use the API key in the R environment.
 #'
-#' @param recall_number List integer, list of recalls numbers to get information on
-#' @param limit An integer, how many entries to get from the website, default is no limit.
-#' @param api_key A string, optional
+#' @param recall_number List of recall numbers.
+#' @param limit Number indicating how many recall entries should be returned.
+#' @param api_key API access key if not set in environment.
 #'
-#' @return A dataframe, collection of responses from the API
+#' @return A data.frame of recall summary information from the Vehicle Recalls
+#' Database. Includes six columns.
 #' @export
 #'
 #' @examples
@@ -224,9 +233,10 @@ recall_by_number <- function(recall_number, limit = 25, api_key = NULL) {
 
 }
 
-#' recall_details
+#' Detailed information on recalls searching on recall number(s)
 #'
-#' Queries the API with a url that it generates from it's parameters.
+#' Returns detailed information on recalls in the Vehicle Recalls Database
+#' based on recall numbers(s).
 #'
 #' @details
 #' This function asks the API for details for recall numbers. Recall numbers can be
@@ -234,11 +244,11 @@ recall_by_number <- function(recall_number, limit = 25, api_key = NULL) {
 #' English and in French. The API key can be passed manually, or if it is not passed
 #' it will use the API key in the R environment.
 #'
-#' @param recall_number List integer
-#' @param limit An integer, how many entries to get from the website, default is no limit.
-#' @param api_key A string, optional
+#' @param recall_number List of recall numbers.
+#' @param api_key API access key if not set in environment.
 #'
-#' @return A dataframe, collection of responses from the API
+#' @return A data.frame of detailed recall information from the Vehicle Recalls
+#' Database. Includes 15 columns.
 #' @export
 #'
 #' @examples
@@ -246,7 +256,7 @@ recall_by_number <- function(recall_number, limit = 25, api_key = NULL) {
 #' recall_details(1977044)
 #' recall_details(c(2014216, 2013022))
 #' }
-recall_details <- function(recall_number, limit = 25, api_key = NULL) {
+recall_details <- function(recall_number, api_key = NULL) {
 
     # a limit of 60 calls are allowed per minute
     # this function rate limits and a call with 600 numbers would take > 10 min

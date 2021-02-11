@@ -1,8 +1,10 @@
-#' get_vrd_key
+#' Retrieves API key from environment
 #'
-#' Retrieves your API key from the R environment variables
+#' Retrieves API key from environment if available.
 #'
-#' @return A string that is your VRD_API key
+#' @return VRD_API access key if set in environment. If access key is not
+#' available, returns an error that the API key is not found and needs to
+#' either be set in the environment or passed as an argument into functions.
 #' @export
 #'
 #' @examples
@@ -17,6 +19,8 @@ get_vrd_key <- function() {
     x
 }
 
+# function used to query the API
+# not a user facing function
 call_vrd_api <- function(url_, query = NULL, limit = NULL,
                          api_key = NULL){
 
@@ -68,6 +72,8 @@ call_vrd_api <- function(url_, query = NULL, limit = NULL,
 
 }
 
+# function used to clean the response from the API call
+# not a user facing function
 clean_vrd_api <- function(api_output){
 
     # makes dataframe of output
