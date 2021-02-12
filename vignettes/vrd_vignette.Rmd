@@ -104,7 +104,7 @@ We are putting the limit sufficiently high to assume there weren't more than 10,
 ```{r data, eval = TRUE, warning = FALSE, message=FALSE}
 library(dplyr)
 
-counts_df <- count(group_by(recall_2000, `Manufacturer Name`))
+counts_df <- count(dplyr::group_by(recall_2000, `Manufacturer Name`))
 counts_df <-counts_df[counts_df$n>=64,]
 ```
 This reduces us to 7 companies. We could then plot this using `ggplot2` in a bar plot as seen below.
@@ -144,12 +144,12 @@ We can then plot the total amount of recalls for each manufacturers year and add
 
 ```{r plot2, fig.width=7, fig.height=5, fig.align='center', warnings = FALSE, message = FALSE}
 plot2 <- recall_2010 %>%
-  ggplot() +
+  ggplot2::ggplot() +
   aes(x=`Year`,
       color = `Make name`) + 
   geom_point(stat='count', size=6 ) 
 
-dat <- layer_data(plot2)
+dat <- ggplot2::layer_data(plot2)
 plot2 + stat_smooth(data = dat,
                     aes(x,
                         y,

@@ -7,3 +7,5 @@
 ^cran-comments\.md$
 ^CONTRIBUTING\.md$
 ^CODE_OF_CONDUCT\.md$
+^doc$
+^Meta$
