@@ -20,7 +20,7 @@ library(RColorBrewer)
 
 The `caRecall` package is an API wrapper for the Government of Canada [Vehicle Recalls Database (VRD)](https://tc.api.canada.ca/en/detail?api=VRDB) used by the Defect Investigations and Recalls Division for vehicles, tires, and child car seats. The API wrapper provides access to recall summary information searchable by make, model, and year range, as well as detailed recall information searchable by recall number.
 
-This vignette provides an overview of the functions available in `caRecall` and provides a demonstration of using the package to extract information from the VRD. In addition to `caRecall`, this vignette makes use of the [dplyr](https://dplyr.tidyverse.org/) and [ggplot2](https://ggplot2.tidyverse.org/) packages. The `caRecall` functions return data.frames but the vignette presents most function outputs as a tibble for presentation.
+This vignette provides an overview of the functions available in `caRecall` and provides a demonstration of using the package to extract information from the VRD. In addition to `caRecall`, this vignette makes use of the [dplyr](https://dplyr.tidyverse.org/) and [ggplot2](https://ggplot2.tidyverse.org/) packages.
 
 ```{r warning = FALSE, message=FALSE}
 library(caRecall)
@@ -54,14 +54,12 @@ The `recall_by_make()`, `recall_by_model()`, `recall_by_years()`, and `recall_by
 
 An example of using `recall_by_model()` to search for the first five recalls by 'Ford' in 1998 would be as follows:
 ```{r recall_by_make}
-ford_1998_recalls <- recall_by_make("Ford", start_year = 1998, limit = 5)
-tibble(ford_1998_recalls)
+recall_by_make("Ford", start_year = 1998, limit = 5)
 ```
 
 Or if a user wanted to search by manufactured year and return the first 10 entries between 1999 and 2001, `recall_by_years()` could be used:
 ```{r recall_by_years}
-recalls_1998_2001 <- recall_by_years(start_year = 1999, end_year = 2001, limit = 10)
-tibble(recalls_1998_2001)
+recall_by_years(start_year = 1999, end_year = 2001, limit = 10)
 ```
 
 ### Recall Counts
@@ -82,7 +80,7 @@ Note that each recall number provided to the function results in a separate API 
 For example, if a Ford Windstar with recall number of 1997118 was of interest:
 ```{r recall_details}
 recall_windstar <- recall_details(1997118)
-tibble(t(recall_windstar))
+t(recall_windstar) # transpose for readability
 ```
 
 ## Example
@@ -107,7 +105,7 @@ count_recall_by_years(start_year = 2000, end_year = 2000)
 We could then query the database for the summary information associated with these recalls.
 ```{r eval = TRUE}
 recall_summary_2000 <- recall_by_years(start_year = 2000, end_year = 2000, limit = 3000)
-tibble(recall_summary_2000)
+recall_summary_2000
 ```
 
 Note that we also could have also just set the `limit` argument to a high enough value that all entries in the database would likely be included in the summary information query; however, this could also result in returning a very large dataset if the number of available entries is very high.
@@ -118,7 +116,6 @@ counts_manu_2000 <- recall_summary_2000 %>%
   group_by(`Manufacturer Name`) %>%
   tally() %>%
   filter(n >= 50)
-
 counts_manu_2000
 ```
 
@@ -150,7 +147,7 @@ We would start by querying the API for entries with the two manufacturers. This 
 ```{r}
 manu_comparison_list <- c("Ford", "Toyota")
 recall_comparison <- recall_by_make(manu_comparison_list, start_year = 2011, end_year = 2020, limit = 10000)
-tibble(recall_comparison)
+recall_comparison
 ```
 
 We can then plot the total amount of recalls for each year grouped by manufacturer.

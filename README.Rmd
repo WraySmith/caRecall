@@ -50,7 +50,7 @@ A simple example of using the `recall_by_years()` function in the package to ret
 
 ```{r example}
 recall_summary_2000 <- recall_by_years(start_year = 2000, end_year = 2000, limit = 3000)
-tibble(recall_summary_2000)
+recall_summary_2000
 ```
 
 The data could then be used to summarize manufacturers with the highest recall counts in the year:
@@ -71,10 +71,13 @@ fig <- counts_manu_2000 %>%
   geom_text(aes(label=n), vjust=-.5, size=3) +
   labs(y="Recall Count") +
   theme(axis.text.x = element_blank(),
+        axis.title.x = element_blank(),
         axis.ticks.x = element_blank(),
+        axis.title.y = element_text(size = 10),
         axis.line = element_line(color = "black"),
-        legend.title = element_text(size = 12),
-        axis.title.x=element_blank()) +
+        legend.title = element_text(size = 10),
+        legend.text = element_text(size = 7),
+        plot.title = element_text(size = 12)) +
   scale_y_continuous(expand = c(0,0),
                      limits = c(0,250)) +
   ggtitle("Manufactureres with Most Recalls in 2000")
@@ -88,7 +91,7 @@ Additionally, detailed recall information can be queried from the API using the 
 
 ```{r}
 recall_windstar <- recall_details(1997118)
-tibble(t(recall_windstar))
+t(recall_windstar) #transpose for readability here
 ```
 
 ## Getting Help or Reporting an Issue

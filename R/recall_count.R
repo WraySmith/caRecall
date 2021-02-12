@@ -28,7 +28,7 @@
 #' A data.frame of recall summary information from the Vehicle Recalls
 #' Database. Includes six columns.
 #'
-#' @return A data.frame providing the count of recalls from the Vehicle Recalls.
+#' @return A tibble providing the count of recalls from the Vehicle Recalls.
 #' @export
 #'
 #' @examples
@@ -101,7 +101,7 @@ count_recall_by_make <- function(make, manufacturer = FALSE, start_year = NULL,
 #' @param end_year End of year range (optional).
 #' @param api_key API access key to use, if not set in environment.
 #'
-#' @return A data.frame providing the count of recalls from the Vehicle Recalls.
+#' @return A tibble providing the count of recalls from the Vehicle Recalls.
 #' @export
 #'
 #' @examples
@@ -169,7 +169,7 @@ count_recall_by_model <- function(model, start_year = NULL, end_year = NULL,
 #' @param end_year End of year range (optional).
 #' @param api_key API access key to use, if not set in environment.
 #'
-#' @return A data.frame providing the count of recalls from the Vehicle Recalls.
+#' @return A tibble providing the count of recalls from the Vehicle Recalls.
 #' @export
 #'
 #' @examples
