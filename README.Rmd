@@ -34,7 +34,7 @@ The package focuses on querying data from the VRD API to return the following:
 
 ## Installation
 
-The development version of the `caRecall package can be installed from [GitHub](https://github.com/) with:
+The development version of the `caRecall` package can be installed from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
@@ -53,7 +53,7 @@ recall_summary_2000 <- recall_by_years(start_year = 2000, end_year = 2000, limit
 tibble(recall_summary_2000)
 ```
 
-The data could then be used to summarize manufacturers with the highest recalls counts in the year:
+The data could then be used to summarize manufacturers with the highest recall counts in the year:
 ```{r include=FALSE}
 counts_manu_2000 <- recall_summary_2000 %>%
   group_by(`Manufacturer Name`) %>%
@@ -80,7 +80,7 @@ fig <- counts_manu_2000 %>%
   ggtitle("Manufactureres with Most Recalls in 2000")
 ```
 
-```{r fig1, echo = FALSE}
+```{r fig1, fig.width=7, fig.height=5, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE}
 fig
 ```
 

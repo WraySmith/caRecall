@@ -27,7 +27,7 @@ following:
 
 ## Installation
 
-The development version of the \`caRecall package can be installed from
+The development version of the `caRecall` package can be installed from
 [GitHub](https://github.com/) with:
 
 ``` r
@@ -68,9 +68,9 @@ tibble(recall_summary_2000)
 ```
 
 The data could then be used to summarize manufacturers with the highest
-recalls counts in the year:
+recall counts in the year:
 
-<img src="man/figures/README-fig1-1.png" width="100%" />
+<img src="man/figures/README-fig1-1.png" width="100%" style="display: block; margin: auto;" />
 
 Additionally, detailed recall information can be queried from the API
 using the `recall_details()` function:
