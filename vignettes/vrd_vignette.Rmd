@@ -16,29 +16,40 @@ knitr::opts_chunk$set(
 library(caRecall)
 ```
 
-## Pulling Data from the API
+## Introduction
 
-This package is an API wrapper for the Government of Canada Vehicle Recalls Database. The Vehicles Recall Database is used by the Defect Investigations and Recalls Division to record and publish recalls of vehicles, tires, and child car seats. The API provides information on the manufacturer, make, model, year manufactured, recall date, number of recalls, as well as information on why the recall happened.
+The `caRecall` package is an API wrapper for the Government of Canada [Vehicle Recalls Database (VRD)](https://tc.api.canada.ca/en/detail?api=VRDB) used by the Defect Investigations and Recalls Division for vehicles, tires, and child car seats. The API wrapper provides access to recall summary information searchable by make, model, and year range, as well as detailed recall information searchable by recall number.
 
-It includes eight functions as listed below.  First you must install the package `caRecall` and then load it into your R document by entering: 
-```{r, eval=FALSE}
+This vignette provides an overview of the functions available in `caRecall` and provides a demonstration of using the package to extract information from the VRD. In addition to `caRecall`, this vignette makes use of the [dplyr](https://dplyr.tidyverse.org/) and [ggplot2](https://ggplot2.tidyverse.org/) packages.
+
+```{r warning = FALSE, message=FALSE}
 library(caRecall)
+library(dplyr)
+library(ggplot2)
 ```
 
+## API Access Key
 
-## Functions
+An API key is required to run the functions in `caRecall` and query the Vehicle Recalls Database. The key can be acquired at https://tc.api.canada.ca/en/detail?api=VRDB. The API key can be set in the environment using `Sys.setenv(VRD_API = 'your_API_key_here')`. Alternatively, instead of setting the API key in the environment, the key can be passed into the `caRecall` functions as an argument.
 
-#### recall_by_make()
 
-Used to retrieve a data frame listing recalls of provided make or manufacturer. It has **seven** inputs which are described as
+## `caRecall` Functions
 
-- make: A string of the make (or manufacturer) of the item you would like to find recall information on. Case insensitive. Can be a list of makes (or manufacturers).
-- manufacturer: A boolean, where FALSE is default and TRUE means that you are searching by manufacturer not make.
-- start_year: An integer that specifies the year, which the item was manufactured, that you want to start searching. Note that vehicles year is always a year later than when they were manufactured. If left empty defaults to 1900.
-- end_year: An integer that specifies the year, which the item was manufactured, that you want to end your search on. Note that vehicles year is always a year later than when they were manufactured. If left empty defaults to 2100.
-- limit: An integer that specifies how recalls you want to return. If left empty defaults to 25.
-- partial: A boolean, where FALSE is default and TRUE means that you receive back any partial matches (ie. "Su" would return "Suzuki", and "Subaru" matches).
-- api_key: A string of the api key needed to access the database. If left empty will error and not provide requested data frame.
+The `caRecall` package focuses on querying data from the Vehicle Recalls Database and fall into the following categories:
+
+- Recall summary information
+- Recall counts
+- Detailed recall information
+
+#### Recall Summary Information
+
+The `recall_by_make()`, `recall_by_model()`, `recall_by_years()`, and `recall_by_number()` functions all retrieve recall summary information from the VRD based on user search terms. An overview of the search terms and function arguments includes:
+
+- **make or model**: List of make, manufacturer, or model depending on the function used to search on. Note that the search terms are not case sensitive.
+- **start_year and end_year**: The year range of the search can be specified and is based on the manufactured year and not the year a recall occurred. If the argument(s) are left empty, the search will include the start and end of the data available, respectively. Note that a vehicle year is typically a year later than the manufactured year (for example, a 2009 Ford would be entered in the database as being manufactured in 2008).
+- **limit**: The VRD  API default number of items to return for a query is 25. There does not a appear to be a maximum limit associated with the API but all functions in `caRecall` also default to a limit of 25.
+- **partial**: The `caRecall` functions allow the user to specify if partial matches on the seach terms are used or not (for example, "Su" would return "Suzuki", and "Subaru" matches). Note that if `partial = FALSE` is used, the number of entries returned by the functions may be less than the count provided by the 'count' functions described in the following section which return counts for all partial matches (and is the default behaviour of the VRD API. 
+- **api_key**: A string of the api key needed to access the database. If left empty will error and not provide requested data frame.
 
 
 If you wanted to search for the first five car recalls by the Ford make in the year 1998, you could search the following.
