@@ -1,0 +1,10 @@
+pandoc: 2.7.3
+pkgdown: 1.6.1
+pkgdown_sha: ~
+articles:
+  vrd_vignette: vrd_vignette.html
+last_built: 2021-02-12T18:30Z
+urls:
+  reference: https://wraysmith.github.io/caRecall//reference
+  article: https://wraysmith.github.io/caRecall//articles
+

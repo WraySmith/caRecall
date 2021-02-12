@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://wraysmith.github.io/caRecall//index.html</loc>
+  </url>
+  <url>
+    <loc>https://wraysmith.github.io/caRecall//reference/count_recall_by_make.html</loc>
+  </url>
+  <url>
+    <loc>https://wraysmith.github.io/caRecall//reference/count_recall_by_model.html</loc>
+  </url>
+  <url>
+    <loc>https://wraysmith.github.io/caRecall//reference/count_recall_by_years.html</loc>
+  </url>
+  <url>
+    <loc>https://wraysmith.github.io/caRecall//reference/get_vrd_key.html</loc>
+  </url>
+  <url>
+    <loc>https://wraysmith.github.io/caRecall//reference/recall_by_make.html</loc>
+  </url>
+  <url>
+    <loc>https://wraysmith.github.io/caRecall//reference/recall_by_model.html</loc>
+  </url>
+  <url>
+    <loc>https://wraysmith.github.io/caRecall//reference/recall_by_number.html</loc>
+  </url>
+  <url>
+    <loc>https://wraysmith.github.io/caRecall//reference/recall_by_years.html</loc>
+  </url>
+  <url>
+    <loc>https://wraysmith.github.io/caRecall//reference/recall_details.html</loc>
+  </url>
+  <url>
+    <loc>https://wraysmith.github.io/caRecall//articles/vrd_vignette.html</loc>
+  </url>
+</urlset>
