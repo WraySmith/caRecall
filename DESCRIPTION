@@ -22,9 +22,14 @@ RoxygenNote: 7.1.1
 Suggests: 
     testthat (>= 3.0.0),
     covr,
+    knitr,
+    rmarkdown,
+    dplyr,
+    ggplot2,
     spelling
 Config/testthat/edition: 3
 Imports: 
     httr,
     jsonlite
+VignetteBuilder: knitr
 Language: en-US
