@@ -40,3 +40,9 @@ test_that("Clean API returns formatted dataframe", {
   expect_equal(nrow(clean_vrd_api(response2)), 1)
   expect_equal(as.vector(sapply(clean_vrd_api(response2), typeof)), coltype2)
 })
+
+test_that("Url format is correct",{
+  url_with_broken_year <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/make-name/Maz/year-range/2005-2000/count"
+  expect_error(check_url(url_with_broken_year))
+
+})
