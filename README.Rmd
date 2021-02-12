@@ -91,7 +91,7 @@ Additionally, detailed recall information can be queried from the API using the 
 
 ```{r}
 recall_windstar <- recall_details(1997118)
-t(recall_windstar) #transpose for readability here
+tibble(t(recall_windstar)) #transpose for readability here
 ```
 
 ## Getting Help or Reporting an Issue
