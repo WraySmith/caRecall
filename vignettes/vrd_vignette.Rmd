@@ -20,7 +20,7 @@ library(caRecall)
 
 The `caRecall` package is an API wrapper for the Government of Canada [Vehicle Recalls Database (VRD)](https://tc.api.canada.ca/en/detail?api=VRDB) used by the Defect Investigations and Recalls Division for vehicles, tires, and child car seats. The API wrapper provides access to recall summary information searchable by make, model, and year range, as well as detailed recall information searchable by recall number.
 
-This vignette provides an overview of the functions available in `caRecall` and provides a demonstration of using the package to extract information from the VRD. In addition to `caRecall`, this vignette makes use of the [dplyr](https://dplyr.tidyverse.org/) and [ggplot2](https://ggplot2.tidyverse.org/) packages.
+This vignette provides an overview of the functions available in `caRecall` and provides a demonstration of using the package to extract information from the VRD. In addition to `caRecall`, this vignette makes use of the [dplyr](https://dplyr.tidyverse.org/) and [ggplot2](https://ggplot2.tidyverse.org/) packages. The `caRecall` functions return data.frames but the vignette presents most function outputs as a tibble for presentation.
 
 ```{r warning = FALSE, message=FALSE}
 library(caRecall)
@@ -46,92 +46,92 @@ The `caRecall` package focuses on querying data from the Vehicle Recalls Databas
 The `recall_by_make()`, `recall_by_model()`, `recall_by_years()`, and `recall_by_number()` functions all retrieve recall summary information from the VRD based on user search terms. An overview of the search terms and function arguments includes:
 
 - **make or model**: List of make, manufacturer, or model depending on the function used to search on. Note that the search terms are not case sensitive.
-- **start_year and end_year**: The year range of the search can be specified and is based on the manufactured year and not the year a recall occurred. If the argument(s) are left empty, the search will include the start and end of the data available, respectively. Note that a vehicle year is typically a year later than the manufactured year (for example, a 2009 Ford would be entered in the database as being manufactured in 2008).
+- **recall_number**: List of recall numbers to search on (however, this is typically unknown unless previous searches have been conducted). 
+- **start_year and end_year**: The year range of the search can be specified and is based on the manufactured year and not the year a recall occurred. If the argument(s) are left empty, the search will include the start and end of the data available, respectively. Note that a vehicle year is typically a year later than the manufactured year (for example, a 2009 Ford would be entered in the database as being manufactured in 2008). This also means that a recall date may occur prior to the year of a vehicle.
 - **limit**: The VRD  API default number of items to return for a query is 25. There does not a appear to be a maximum limit associated with the API but all functions in `caRecall` also default to a limit of 25.
-- **partial**: The `caRecall` functions allow the user to specify if partial matches on the seach terms are used or not (for example, "Su" would return "Suzuki", and "Subaru" matches). Note that if `partial = FALSE` is used, the number of entries returned by the functions may be less than the count provided by the 'count' functions described in the following section which return counts for all partial matches (and is the default behaviour of the VRD API. 
-- **api_key**: A string of the api key needed to access the database. If left empty will error and not provide requested data frame.
+- **partial**: The `caRecall` functions allow the user to specify if partial matches on the search terms are used or not (for example, "Su" would return "Suzuki", and "Subaru" matches). Note that if `partial = FALSE` is used, the number of entries returned by the functions may be less than the count provided by the `count` functions described in the following section which return counts for all partial matches (and is the default behavior of the VRD API). 
+- **api_key**: If an API key is not set in the environment, an access key can be passed directly into a function.
 
-
-If you wanted to search for the first five car recalls by the Ford make in the year 1998, you could search the following.
+An example of using `recall_by_model()` to search for the first five recalls by 'Ford' in 1998 would be as follows:
 ```{r recall_by_make}
-caRecall::recall_by_make("Ford", start_year = 1998, limit = 5)
+ford_1998_recalls <- recall_by_make("Ford", start_year = 1998, limit = 5)
+tibble(ford_1998_recalls)
 ```
 
-#### recall_by_model()
-
-This function is very similar to the `recall_by_make()` function the only difference being that it searches by model(s) instead of make(s). 
-
-#### recall_by_number()
-
-Once again very similar to the previous two functions but will search by specific recall number. Not as versatile as most would not have the 7-digit recall number on hand but still available for those that do.
-
-#### recall_by_years()
-
-If you only wanted to search by manufacturer year then this function would best suite you.  It pulls all the recalls for any make or model and compiles it to a data frame. Lets say you wanted to search for the first 10 items with a manufacturing date between 1998 and 2001 you could use the following.
+Or if a user wanted to search by manufactured year and return the first 10 entries between 1999 and 2001, `recall_by_years()` could be used:
 ```{r recall_by_years}
-caRecall::recall_by_years(start_year = 1998, end_year = 2001, limit = 10)
+recalls_1998_2001 <- recall_by_years(start_year = 1999, end_year = 2001, limit = 10)
+tibble(recalls_1998_2001)
 ```
 
-#### recall_details()
+### Recall Counts
 
-This function provides the most information on the actual recall as it state the reason for the recall.  If you have found the recall number using any of the previous functions then you can enter it (or multiples) into this function to retrieve more information about it. Lets say we use the recall number from the previous example that affected the Ford Windstar with recall number 1997118.
-```{r recall_details}
-t(caRecall::recall_details(1997118))
-```
-You can see we get several extra columns such as how many units this recall affected, what safety system it impacted, and a detailed comment explaining the recall.
+The `count_recall_by_make()`, `count_recall_by_model()`, and `count_recall_by_years()` all return the number of recalls available in the VRD based on the search terms. It can be used to quickly get a count of recalls prior to making a query for summary information.
 
-
-### Count Functions
-
-The next three functions are used to quickly tally up the amount of results you would get back using `recall_by_make()`, `recall_by_model()`, or `recall_by_years()`. 
-
-#### count_recall_by_make(), count_recall_by_model(), count_recall_by_years()
-These functions all have the same input parameters as their counter parts, but only return the amount of recalls obtained in the query.  Mostly useful for quick tallying. If we were to specifically look for the amount of recalls that the manufacturer Goodbaby for all of its products manufactured up to 1998 we could use the following.
+For example, if a user is interesting in first determining the total number of recalls by the manufacturer 'GOODBABY' for all products manufactured up to 2008, the `count_recall_by_make()` could be used.
 ```{r count_recall_by_make}
 caRecall::count_recall_by_make("GOODBABY", manufacturer = TRUE, end_year = 1998)
 ```
 
-### Example of How to Use the Package
+#### Detailed Recall Information
 
-#### Setting up API key
+The `recall_details()` function provides detailed recall information for a specified recall number. The information includes details of what the recall is for (for example, 'Seats and Restraints') as well as a description on the reason for the recall. This function can only use a recall number search term and therefore likely requires prior searching using the summary recall functions to determine recall numbers of interest. 
 
-You can enter your API key for this API in manually for each query or you can automate it. First we want to check if your database has the appropriate API key in it's environment by using: 
+Note that each recall number provided to the function results in a separate API call. Accordingly, the rate of API calls is limited to one call per second to stay within the API limit. For example, providing a list of 60 recall numbers to the function would take approximately 1 minute to complete.
+
+For example, if a Ford Windstar with recall number of 1997118 was of interest:
+```{r recall_details}
+recall_windstar <- recall_details(1997118)
+tibble(t(recall_windstar))
+```
+
+## Example
+In this section, several examples will be shown using `caRecall` to extract and visualize information of interest.
+
+### Setting up API key
+After getting an API access key from https://tc.api.canada.ca/en/detail?api=VRDB, the key needs to either be set in the environment (as `VRD_API`) or passed as an argument into each `caRecall` function.
+
+To check if the VRD API key is in the environment, the following `caRecall` function can be used:
 ```{r, eval = FALSE}
-caRecall::get_vrd_key()
+get_vrd_key()
 ```
-This should return a string with your key.  If it does not you will need to either set your API key to the environment by the function:
-```{r, eval = FALSE}
-Sys.setenv(VRD_API = "YOUR KEY HERE")
-```
-Once it is set up you should be able to leave the `api_key` parameter empty in each query.
 
-#### Plotting
+If the key is in the environment as `VRD_API` it will return the key value. If not, the function will return an error that the key is not set. The key can be set in the environment using `Sys.setenv(VRD_API = "YOUR KEY HERE")`. Once it is set, you should be able to leave the `api_key` argument empty in a `caRecall` function call.
 
-Lets say we want to look in the data base for the companies that did the most recalls with the items they manufactured in the year 2000.  First we would start with querying the API for all items recalled that were manufactured in the year 2000.
-```{r recall, eval = TRUE}
-recall_2000 <- caRecall::recall_by_years(start_year = 2000, end_year = 2000, limit = 10000)
+### Getting Data from the VRD
+Lets say we want to look in the VRD for the companies that had the most recalls with the items they manufactured in the year 2000. Fist we could see how many items manufactured in 2000 were recalled in the database.
+```{r eval = TRUE}
+count_recall_by_years(start_year = 2000, end_year = 2000)
 ```
-We are putting the limit sufficiently high to assume there weren't more than 10,000 recalls that year in Canada. We can count up the data for each company by grouping by the `Manufacturer name` column and counting it. Let's look at only counts about 65 to slim down our variables.
-```{r data, eval = TRUE, warning = FALSE, message=FALSE}
-library(dplyr)
 
-counts_df <- count(dplyr::group_by(recall_2000, `Manufacturer Name`))
-counts_df <-counts_df[counts_df$n>=64,]
+We could then query the database for the summary information associated with these recalls.
+```{r eval = TRUE}
+recall_summary_2000 <- recall_by_years(start_year = 2000, end_year = 2000, limit = 3000)
+tibble(recall_summary_2000)
 ```
-This reduces us to 7 companies. We could then plot this using `ggplot2` in a bar plot as seen below.
+
+Note that we also could have also just set the `limit` argument to a high enough value that all entries in the database would likely be included in the summary information query; however, this could also result in returning a very large dataset if the number of available entries is very high.
+
+We can count the number of recalls for each company by grouping on the `Manufacturer name` column and summarizing the count. We'll only look at manufacturers with recalls counts above 50.
+```{r data}
+counts_manu_2000 <- recall_summary_2000 %>%
+  group_by(`Manufacturer Name`) %>%
+  tally() %>%
+  filter(n >= 50)
+
+counts_manu_2000
+```
+
+There are 10 manufacturers with greater than 50 recalls for products manufactured in 2000.
+
 ```{r plot, fig.width=7, fig.height=5, fig.align='center', warning=FALSE, message=FALSE}
 library(ggplot2)
 
-plot <- ggplot(counts_df) + 
-  aes(
-    x=`Manufacturer Name`,
-    y=n,
-    fill=`Manufacturer Name`) +
+counts_manu_2000 %>% 
+  ggplot() + 
+  aes(x=`Manufacturer Name`, y=n, fill=`Manufacturer Name`) +
   geom_col() +
-  geom_text(
-    aes(label=n),
-    vjust=-.5
-  ) +
+  geom_text(aes(label=n), vjust=-.5) +
   labs(y="Total Recalls") +
   theme(axis.text.x = element_blank(),
         axis.ticks.x = element_blank(),

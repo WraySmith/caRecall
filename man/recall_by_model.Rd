@@ -9,7 +9,7 @@ recall_by_model(
   start_year = NULL,
   end_year = NULL,
   limit = 25,
-  partial = FALSE,
+  partial = TRUE,
   api_key = NULL
 )
 }
@@ -40,7 +40,7 @@ Queries the Vehicle Recalls Database API by model and returns summary recall
 information. The year range of the search can be specified and is based on
 the manufactured year and not the year a recall occurred. Partial search
 term matches can also be returned by the function and is the default. Note
-that if \code{partial = False} is used, the number of entries returned by the
+that if \code{partial = FALSE} is used, the number of entries returned by the
 function may be less than the count provided by
 \code{\link{count_recall_by_model}} which returns a count for all partial
 matches.
