@@ -34,11 +34,15 @@ get_vrd_key <- function() {
 call_vrd_api <- function(url_, query = NULL, limit = NULL,
                          api_key = NULL) {
 
+
+
   # retrieve API key if no user key input to function call
   if (is.null(api_key)) api_key <- get_vrd_key()
 
   # add limit to url (limit does not go in header)
   url_ <- paste(url_, "?limit=", toString(limit), sep = "")
+
+  print(url_)
 
   # set the user agent
   ua <- httr::user_agent("https://github.com/WraySmith/caRecall")
@@ -134,8 +138,8 @@ clean_vrd_api <- function(api_output) {
 check_url <- function(url_){
 
     # check year range
-    year_range_substring <- gregexpr(pattern ='year-range',"https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/make-name/Maz/year-range/2100-2000/count")
-    sub_string <- substring(url_, year_range)
+    year_range_substring <- gregexpr(pattern ='year-range',url_)
+    sub_string <- substring(url_, year_range_substring)
     years_as_string <- unlist(as.list(strsplit(sub_string, '/')[[1]])[2])
     years <- as.list(strsplit(years_as_string, '-')[[1]])
     start_year <- unlist(years[1])
@@ -144,4 +148,15 @@ check_url <- function(url_){
         stop("Start year must be less than or equal to the end year")
     }
 
+    # test limit
+    if (grepl("limit", url_, fixed = TRUE)){
+        limit_substring <- gregexpr(pattern ='limit',url_)
+        sub_string <- substring(url_, limit_substring)
+        limit_as_string <- unlist(as.list(strsplit(sub_string, '=')[[1]])[2])
+        if (as.integer((limit_as_string)) < 1){
+          stop("Limit has to be greater or equal to 1")
+        }
+    }
+
 }
+
