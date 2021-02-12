@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-library(caRecall)
+library(RColorBrewer)
 ```
 
 ## Introduction
@@ -88,7 +88,7 @@ tibble(t(recall_windstar))
 ## Example
 In this section, several examples will be shown using `caRecall` to extract and visualize information of interest.
 
-### Setting up API key
+### Setup API key
 After getting an API access key from https://tc.api.canada.ca/en/detail?api=VRDB, the key needs to either be set in the environment (as `VRD_API`) or passed as an argument into each `caRecall` function.
 
 To check if the VRD API key is in the environment, the following `caRecall` function can be used:
@@ -112,7 +112,7 @@ tibble(recall_summary_2000)
 
 Note that we also could have also just set the `limit` argument to a high enough value that all entries in the database would likely be included in the summary information query; however, this could also result in returning a very large dataset if the number of available entries is very high.
 
-We can count the number of recalls for each company by grouping on the `Manufacturer name` column and summarizing the count. We'll only look at manufacturers with recalls counts above 50.
+We can count the number of recalls for each company by grouping on the `Manufacturer name` column and summarizing the count. We'll only look at manufacturers with recall counts above 50.
 ```{r data}
 counts_manu_2000 <- recall_summary_2000 %>%
   group_by(`Manufacturer Name`) %>%
@@ -122,52 +122,49 @@ counts_manu_2000 <- recall_summary_2000 %>%
 counts_manu_2000
 ```
 
-There are 10 manufacturers with greater than 50 recalls for products manufactured in 2000.
-
+There are 11 manufacturers with greater than 50 recalls for products manufactured in 2000.
 ```{r plot, fig.width=7, fig.height=5, fig.align='center', warning=FALSE, message=FALSE}
-library(ggplot2)
+nb.cols <- 11
+mycolors <- colorRampPalette(brewer.pal(8, "Set2"))(nb.cols)
 
 counts_manu_2000 %>% 
   ggplot() + 
   aes(x=`Manufacturer Name`, y=n, fill=`Manufacturer Name`) +
+  scale_fill_manual(values = mycolors) +
   geom_col() +
-  geom_text(aes(label=n), vjust=-.5) +
-  labs(y="Total Recalls") +
+  geom_text(aes(label=n), vjust=-.5, size=3) +
+  labs(y="Recall Count") +
   theme(axis.text.x = element_blank(),
         axis.ticks.x = element_blank(),
         axis.line = element_line(color = "black"),
-        ) +
+        legend.title = element_text(size = 12)) +
   scale_y_continuous(expand = c(0,0),
                      limits = c(0,250)) +
-  ggtitle("Top Companies by Recall Count in 2000")
-  
-plot
+  ggtitle("Manufactureres with Most Recalls in 2000")
 ```
 
+We could also look at how many recalls two manufacturers have had compared with each other over the over the last 10 years (2011 to 2020).
 
-We could also look at how many recalls vehicles of the make Ford has done compared to Nissan for vehicles manufactured over the last 10 years.
-We would start by querying a list with both "Ford" and "Nissan" in it.  We would want the start year to be 2011 and once again we would want to set the limit high enough to contain all our queries. We would need to set partial to be true in this case otherwise it will try to find makes that contain "Ford" and "Nissan".
+We would start by querying the API for entries with the two manufacturers. This time, we'll just set the limit to be reasonably high instead of checking the count available in the database first.
 ```{r}
-recall_2010 <- caRecall::recall_by_make(c("Ford","Nissan"), start_year = 2011, limit = 10000, partial = TRUE)
+manu_comparison_list <- c("Ford", "Toyota")
+recall_comparison <- recall_by_make(manu_comparison_list, start_year = 2011, end_year = 2020, limit = 10000)
+tibble(recall_comparison)
 ```
 
-We can then plot the total amount of recalls for each manufacturers year. I would recommend reading up on the the ggplot2 package for more details on how to create these plots.
+We can then plot the total amount of recalls for each year grouped by manufacturer.
 
 ```{r plot2, fig.width=7, fig.height=5, fig.align='center', warnings = FALSE, message = FALSE}
-plot2 <- recall_2010 %>%
-  ggplot2::ggplot() +
-  aes(x=`Year`,
-      color = `Make name`) + 
+recall_comparison %>%
+  ggplot() +
+  aes(x=`Year`, color = `Make name`) + 
   geom_point(stat='count', size=4) + 
   scale_x_continuous(breaks = seq(2010,2021,1)) +
-  ggtitle("Amount of Recalls per Year")
-
-plot2
+  labs(title = 'Recall Count per Year',
+       y = 'Annual Count', 
+       color = 'Manufacturer') +
+  theme(axis.title.x=element_blank()) 
 ```
 
-
-### Documentation for the wrapped API can be found at:
-
-https://tc.api.canada.ca/en/detail?api=VRDB
-
+The plot shows a much lower number of recalls in 2020 for both manufactures; however, this is likely because there has not been sufficient time for recalls to have occurred on more recent products.
 

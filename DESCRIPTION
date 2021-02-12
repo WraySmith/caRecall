@@ -26,7 +26,8 @@ Suggests:
     rmarkdown,
     dplyr,
     ggplot2,
-    spelling
+    spelling,
+    RColorBrewer
 Config/testthat/edition: 3
 Imports: 
     httr,
