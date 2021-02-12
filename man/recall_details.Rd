@@ -2,25 +2,44 @@
 % Please edit documentation in R/recall_data.R
 \name{recall_details}
 \alias{recall_details}
-\title{recall_details}
+\title{Detailed information on recalls searching by recall number(s)}
 \usage{
-recall_details(recall_number, limit = 25, api_key = NULL)
+recall_details(recall_number, api_key = NULL)
 }
 \arguments{
-\item{recall_number}{List integer}
+\item{recall_number}{List of recall numbers.}
 
-\item{limit}{An integer}
-
-\item{api_key}{A string, optional}
+\item{api_key}{API access key to use, if not set in environment.}
 }
 \value{
-dataframe
+A data.frame of detailed recall information from the Vehicle Recalls
+Database. Includes 15 columns.
 }
 \description{
-recall_details
+Returns detailed information on recalls in the Vehicle Recalls Database
+based on recall numbers(s).
+}
+\details{
+Queries the Vehicle Recalls Database API by recall number and returns
+detailed recall information for each number. Note that each recall number
+provided to the function results in a separate API call. Accordingly,
+the rate of API calls is limited to one call per second to stay within the
+API limit. For example, providing a list of 60 recall numbers to the function
+would take approximately 1 minute to complete.
+
+An API key is required to run the function and query the Vehicle Recalls
+Database. The key can be acquired at
+\url{https://tc.api.canada.ca/en/detail?api=VRDB}.
+
+The API key can be set in the environment using
+\code{Sys.setenv(VRD_API = 'your_API_key_here')} and will be used by the
+function, or can be passed into the function using the \code{api_key}
+argument.
 }
 \examples{
 \dontrun{
 recall_details(1977044)
+API_KEY <- "xxxxxxxxxxx"
+recall_details(c(2014216, 2013022), api_key = API_KEY)
 }
 }

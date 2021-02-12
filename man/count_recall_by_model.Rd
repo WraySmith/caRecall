@@ -2,7 +2,7 @@
 % Please edit documentation in R/recall_count.R
 \name{count_recall_by_model}
 \alias{count_recall_by_model}
-\title{count_recall_by_model}
+\title{Count of recalls searching by model}
 \usage{
 count_recall_by_model(
   model,
@@ -12,22 +12,40 @@ count_recall_by_model(
 )
 }
 \arguments{
-\item{model}{list string}
+\item{model}{List of model names.}
 
-\item{start_year}{An integer}
+\item{start_year}{Start of year range (optional).}
 
-\item{end_year}{An integer}
+\item{end_year}{End of year range (optional).}
 
-\item{api_key}{A string, optional}
+\item{api_key}{API access key to use, if not set in environment.}
 }
 \value{
-integer
+A data.frame providing the count of recalls from the Vehicle Recalls.
 }
 \description{
-count_recall_by_model
+Returns the count of recalls in the Vehicle Recalls Database based on a
+model search term.
+}
+\details{
+Queries the Vehicle Recalls Database API by model and returns the count of
+recalls in the database. The year range of the search can be specified and
+is based on the manufactured year and not the year a recall occurred.
+
+An API key is required to run the function and query the Vehicle Recalls
+Database. The key can be acquired at
+\url{https://tc.api.canada.ca/en/detail?api=VRDB}.
+
+The API key can be set in the environment using
+\code{Sys.setenv(VRD_API = 'your_API_key_here')} and will be used by the
+function, or can be passed into the function using the \code{api_key}
+argument.
 }
 \examples{
 \dontrun{
-count_recall_by_model('488')
+count_recall_by_model("civic")
+count_recall_by_model(c("Subaru", "Toyota"), start_year = 2008)
+API_KEY <- "xxxxxxxxxxx"
+count_recall_by_model("Sub", end_year = 2000, api_key = API_KEY)
 }
 }

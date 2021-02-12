@@ -2,7 +2,7 @@
 % Please edit documentation in R/recall_count.R
 \name{count_recall_by_make}
 \alias{count_recall_by_make}
-\title{count_recall_by_make}
+\title{Count of recalls searching by make or manufacturer}
 \usage{
 count_recall_by_make(
   make,
@@ -13,24 +13,47 @@ count_recall_by_make(
 )
 }
 \arguments{
-\item{make}{list string}
+\item{make}{List of make or manufacturer names.}
 
-\item{manufacturer}{A bool, with this flag we are asking for the manufacturer not the make}
+\item{manufacturer}{Logical; if TRUE, manufacturer is searched on instead
+of make.}
 
-\item{start_year}{An integer}
+\item{start_year}{Start of year range (optional).}
 
-\item{end_year}{An integer}
+\item{end_year}{End of year range (optional).}
 
-\item{api_key}{A string, optional}
+\item{api_key}{API access key to use, if not set in environment.
+
+A data.frame of recall summary information from the Vehicle Recalls
+Database. Includes six columns.}
 }
 \value{
-integer
+A data.frame providing the count of recalls from the Vehicle Recalls.
 }
 \description{
-count_recall_by_make
+Returns the count of recalls in the Vehicle Recalls Database based on a
+make or manufacturer search term.
+}
+\details{
+Queries the Vehicle Recalls Database API by make or manufacturer and returns
+the count of recalls in the database. The year range of the search can be
+specified and is based on the manufactured year and not the year a recall
+occurred.
+
+An API key is required to run the function and query the Vehicle Recalls
+Database. The key can be acquired at
+\url{https://tc.api.canada.ca/en/detail?api=VRDB}.
+
+The API key can be set in the environment using
+\code{Sys.setenv(VRD_API = 'your_API_key_here')} and will be used by the
+function, or can be passed into the function using the \code{api_key}
+argument.
 }
 \examples{
 \dontrun{
-count_recall_by_make('Nissan')
+count_recall_by_make("Nissan")
+count_recall_by_make(c("Mazda", "Toyota"), start_year = 2008)
+API_KEY <- "xxxxxxxxxxx"
+count_recall_by_make("Maz", end_year = 2000, api_key = API_KEY)
 }
 }

@@ -1,16 +1,15 @@
-# For help debugging build failures open an issue on the RStudio community with the 'github-actions' tag.
-# https://community.rstudio.com/new-topic?category=Package%20development&tags=github-actions
-on: [push, pull_request]
+on:
+  workflow_dispatch:
 
-name: R-CMD-check-single
+name: test-coverage-manual
 
 jobs:
-  R-CMD-check:
+  test-coverage:
     runs-on: macOS-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       VRD_API: ${{ secrets.VRD_API }}
-
+      
     steps:
       - uses: actions/checkout@v2
 
@@ -34,12 +33,11 @@ jobs:
 
       - name: Install dependencies
         run: |
-          install.packages(c("remotes", "rcmdcheck"))
+          install.packages(c("remotes"))
           remotes::install_deps(dependencies = TRUE)
+          remotes::install_cran("covr")
         shell: Rscript {0}
 
-      - name: Check
-        run: |
-          options(crayon.enabled = TRUE)
-          rcmdcheck::rcmdcheck(args = "--no-manual", error_on = "error")
+      - name: Test coverage
+        run: covr::codecov()
         shell: Rscript {0}

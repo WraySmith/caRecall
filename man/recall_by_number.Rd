@@ -2,25 +2,43 @@
 % Please edit documentation in R/recall_data.R
 \name{recall_by_number}
 \alias{recall_by_number}
-\title{recall_by_number}
+\title{Summary of recalls searching by recall number(s)}
 \usage{
 recall_by_number(recall_number, limit = 25, api_key = NULL)
 }
 \arguments{
-\item{recall_number}{List integer}
+\item{recall_number}{List of recall numbers.}
 
-\item{limit}{An integer}
+\item{limit}{Number indicating how many recall entries should be returned.
+Defaults to 25 which is the default of the API.}
 
-\item{api_key}{A string, optional}
+\item{api_key}{API access key to use, if not set in environment.}
 }
 \value{
-dataframe
+A data.frame of recall summary information from the Vehicle Recalls
+Database. Includes six columns.
 }
 \description{
-recall_by_number
+Returns summary information of recalls in the Vehicle Recalls Database based
+on recall numbers(s).
+}
+\details{
+Queries the Vehicle Recalls Database API by recall number and returns
+summary recall information.
+
+An API key is required to run the function and query the Vehicle Recalls
+Database. The key can be acquired at
+\url{https://tc.api.canada.ca/en/detail?api=VRDB}.
+
+The API key can be set in the environment using
+\code{Sys.setenv(VRD_API = 'your_API_key_here')} and will be used by the
+function, or can be passed into the function using the \code{api_key}
+argument.
 }
 \examples{
 \dontrun{
 recall_by_number(1977044)
+API_KEY <- "xxxxxxxxxxx"
+recall_by_number(c(2014216, 2013022), api_key = API_KEY)
 }
 }
