@@ -83,6 +83,7 @@ call_vrd_api <- function(url_, query = NULL, limit = NULL,
 
 # function used to clean the response from the API call
 # not a user facing function
+# returns a tibble of output
 clean_vrd_api <- function(api_output) {
 
   # makes dataframe of output
@@ -126,5 +127,5 @@ clean_vrd_api <- function(api_output) {
     i <- i + 1
   }
   # output dataframe
-  df3
+  tibble::as_tibble(df3)
 }

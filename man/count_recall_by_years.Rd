@@ -14,7 +14,7 @@ count_recall_by_years(start_year = 1900, end_year = 2100, api_key = NULL)
 \item{api_key}{API access key to use, if not set in environment.}
 }
 \value{
-A data.frame providing the count of recalls from the Vehicle Recalls.
+A tibble providing the count of recalls from the Vehicle Recalls.
 }
 \description{
 Returns the count of recalls in the Vehicle Recalls Database based on a

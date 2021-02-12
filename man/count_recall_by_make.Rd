@@ -28,7 +28,7 @@ A data.frame of recall summary information from the Vehicle Recalls
 Database. Includes six columns.}
 }
 \value{
-A data.frame providing the count of recalls from the Vehicle Recalls.
+A tibble providing the count of recalls from the Vehicle Recalls.
 }
 \description{
 Returns the count of recalls in the Vehicle Recalls Database based on a

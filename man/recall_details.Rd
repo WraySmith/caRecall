@@ -12,7 +12,7 @@ recall_details(recall_number, api_key = NULL)
 \item{api_key}{API access key to use, if not set in environment.}
 }
 \value{
-A data.frame of detailed recall information from the Vehicle Recalls
+A tibble of detailed recall information from the Vehicle Recalls
 Database. Includes 15 columns.
 }
 \description{

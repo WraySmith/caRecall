@@ -15,7 +15,7 @@ Defaults to 25 which is the default of the API.}
 \item{api_key}{API access key to use, if not set in environment.}
 }
 \value{
-A data.frame of recall summary information from the Vehicle Recalls
+A tibble of recall summary information from the Vehicle Recalls
 Database. Includes six columns.
 }
 \description{
