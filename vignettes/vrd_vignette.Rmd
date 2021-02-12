@@ -65,7 +65,7 @@ caRecall::recall_by_years(start_year = 1998, end_year = 2001, limit = 10)
 
 This function provides the most information on the actual recall as it state the reason for the recall.  If you have found the recall number using any of the previous functions then you can enter it (or multiples) into this function to retrieve more information about it. Lets say we use the recall number from the previous example that affected the Ford Windstar with recall number 1997118.
 ```{r recall_details}
-caRecall::recall_details(1997118)
+t(caRecall::recall_details(1997118))
 ```
 You can see we get several extra columns such as how many units this recall affected, what safety system it impacted, and a detailed comment explaining the recall.
 
@@ -84,7 +84,7 @@ caRecall::count_recall_by_make("GOODBABY", manufacturer = TRUE, end_year = 1998)
 
 #### Setting up API key
 
-You can enter your API key for this API in manually for each query or you can automate it.First we want to check if your database has the appropriate API key in it's environment by using: 
+You can enter your API key for this API in manually for each query or you can automate it. First we want to check if your database has the appropriate API key in it's environment by using: 
 ```{r, eval = FALSE}
 caRecall::get_vrd_key()
 ```
@@ -140,29 +140,18 @@ We would start by querying a list with both "Ford" and "Nissan" in it.  We would
 recall_2010 <- caRecall::recall_by_make(c("Ford","Nissan"), start_year = 2011, limit = 10000, partial = TRUE)
 ```
 
-We can then plot the total amount of recalls for each manufacturers year and add a trend line to it. I would recommend reading up on the the ggplot2 package for more details on how to create these plots.
+We can then plot the total amount of recalls for each manufacturers year. I would recommend reading up on the the ggplot2 package for more details on how to create these plots.
 
 ```{r plot2, fig.width=7, fig.height=5, fig.align='center', warnings = FALSE, message = FALSE}
 plot2 <- recall_2010 %>%
   ggplot2::ggplot() +
   aes(x=`Year`,
       color = `Make name`) + 
-  geom_point(stat='count', size=6 ) 
-
-dat <- ggplot2::layer_data(plot2)
-plot2 + stat_smooth(data = dat,
-                    aes(x,
-                        y,
-                        colour=colour),
-                    method="lm",
-                    se=FALSE) + 
-  scale_size(guide="none") + 
-  scale_color_manual(
-    values = c("#00BFC4","#F8766D","#F8766D","#00BFC4"),
-    breaks=c("FORD", "NISSAN")) +
-      labs(y="Recalls per Year") +
+  geom_point(stat='count', size=4) + 
   scale_x_continuous(breaks = seq(2010,2021,1)) +
   ggtitle("Amount of Recalls per Year")
+
+plot2
 ```
 
 
