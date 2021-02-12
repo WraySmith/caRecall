@@ -35,7 +35,7 @@ An API key is required to run the functions in `caRecall` and query the Vehicle 
 
 ## `caRecall` Functions
 
-The `caRecall` package focuses on querying data from the Vehicle Recalls Database and fall into the following categories:
+The `caRecall` package focuses on querying data from the Vehicle Recalls Database and functions fall into the following categories:
 
 - Recall summary information
 - Recall counts
@@ -70,7 +70,7 @@ The `count_recall_by_make()`, `count_recall_by_model()`, and `count_recall_by_ye
 
 For example, if a user is interesting in first determining the total number of recalls by the manufacturer 'GOODBABY' for all products manufactured up to 2008, the `count_recall_by_make()` could be used.
 ```{r count_recall_by_make}
-caRecall::count_recall_by_make("GOODBABY", manufacturer = TRUE, end_year = 1998)
+count_recall_by_make("GOODBABY", manufacturer = TRUE, end_year = 1998)
 ```
 
 #### Detailed Recall Information
@@ -137,7 +137,8 @@ counts_manu_2000 %>%
   theme(axis.text.x = element_blank(),
         axis.ticks.x = element_blank(),
         axis.line = element_line(color = "black"),
-        legend.title = element_text(size = 12)) +
+        legend.title = element_text(size = 12),
+        axis.title.x=element_blank()) +
   scale_y_continuous(expand = c(0,0),
                      limits = c(0,250)) +
   ggtitle("Manufactureres with Most Recalls in 2000")
