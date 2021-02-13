@@ -80,7 +80,7 @@ fig <- counts_manu_2000 %>%
         plot.title = element_text(size = 12)) +
   scale_y_continuous(expand = c(0,0),
                      limits = c(0,250)) +
-  ggtitle("Manufactureres with Most Recalls in 2000")
+  ggtitle("Manufacturers with Most Recalls in 2000")
 ```
 
 ```{r fig1, fig.width=7, fig.height=4, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE}
