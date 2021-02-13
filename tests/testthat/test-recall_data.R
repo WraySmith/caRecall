@@ -1,4 +1,5 @@
 test_that("recall_by_make returns the correct shape", {
+  skip_if_no_auth()
   result <- recall_by_make("Nissan", partial = FALSE)
   expect_type(result, "list")
   expect_equal(nrow(result), 25)
@@ -44,6 +45,7 @@ test_that("recall_by_make returns the correct shape", {
 })
 
 test_that("recall_by_make using partial has the correct shape", {
+  skip_if_no_auth()
   result <- recall_by_make("N", partial = TRUE, manufacturer = FALSE)
   names <- unique(result$`Make name`)
   expect_gt(length(names), 1)
@@ -69,6 +71,7 @@ test_that("recall_by_make using partial has the correct shape", {
 })
 
 test_that("recall_by_model has the correct shape", {
+  skip_if_no_auth()
   result <- recall_by_model("Civic", limit = 25, partial = TRUE)
   expect_type(result, "list")
   expect_equal(nrow(result), 25)
@@ -104,6 +107,7 @@ test_that("recall_by_model has the correct shape", {
 })
 
 test_that("recall_by_year returns the correct shape", {
+  skip_if_no_auth()
   result <- recall_by_years(2010, 2012)
   expect_type(result, "list")
   expect_equal(nrow(result), 25)
@@ -125,6 +129,7 @@ test_that("recall_by_year returns the correct shape", {
 })
 
 test_that("recall_by_number returns the correct shape", {
+  skip_if_no_auth()
   result <- recall_by_number(1977044)
   expect_type(result, "list")
   expect_equal(nrow(result), 1)
@@ -141,6 +146,7 @@ test_that("recall_by_number returns the correct shape", {
 })
 
 test_that("recall_details returns the correct shape when given a list", {
+  skip_if_no_auth()
   recall_numbers <- c(1977044, 2009097)
   result <- recall_details(recall_numbers)
   expect_type(result, "list")

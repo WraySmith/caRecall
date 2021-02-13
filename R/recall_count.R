@@ -25,9 +25,6 @@
 #' @param end_year End of year range (optional).
 #' @param api_key API access key to use, if not set in environment.
 #'
-#' A data.frame of recall summary information from the Vehicle Recalls
-#' Database. Includes six columns.
-#'
 #' @return A tibble providing the count of recalls from the Vehicle Recalls.
 #' @export
 #'

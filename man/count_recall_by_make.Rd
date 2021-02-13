@@ -22,10 +22,7 @@ of make.}
 
 \item{end_year}{End of year range (optional).}
 
-\item{api_key}{API access key to use, if not set in environment.
-
-A data.frame of recall summary information from the Vehicle Recalls
-Database. Includes six columns.}
+\item{api_key}{API access key to use, if not set in environment.}
 }
 \value{
 A tibble providing the count of recalls from the Vehicle Recalls.
