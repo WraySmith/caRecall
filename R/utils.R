@@ -137,14 +137,16 @@ clean_vrd_api <- function(api_output) {
 check_url <- function(url_){
 
     # check year range
-    year_range_substring <- gregexpr(pattern ='year-range',url_)
-    sub_string <- substring(url_, year_range_substring)
-    years_as_string <- unlist(as.list(strsplit(sub_string, '/')[[1]])[2])
-    years <- as.list(strsplit(years_as_string, '-')[[1]])
-    start_year <- unlist(years[1])
-    end_year <- unlist(years[2])
-    if (start_year > end_year){
-        stop("Start year must be less than or equal to the end year")
+    if (grepl("year-range", url_, fixed = TRUE)){
+      year_range_substring <- gregexpr(pattern ='year-range',url_)
+      sub_string <- substring(url_, year_range_substring)
+      years_as_string <- unlist(as.list(strsplit(sub_string, '/')[[1]])[2])
+      years <- as.list(strsplit(years_as_string, '-')[[1]])
+      start_year <- unlist(years[1])
+      end_year <- unlist(years[2])
+      if (start_year > end_year){
+          stop("Start year must be less than or equal to the end year")
+      }
     }
 
     # test limit

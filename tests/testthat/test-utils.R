@@ -54,4 +54,6 @@ test_that("Url format is correct",{
   check_url(url_with_limit)
   url_with_null_limit <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/make-name/Maz/year-range/1995-2000/count?limit="
   check_url(url_with_null_limit)
+  url_with_no_years <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/make-name/Maz/count"
+  check_url(url_with_no_years)
 })

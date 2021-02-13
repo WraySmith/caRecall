@@ -59,7 +59,6 @@ recall_by_make <- function(make, manufacturer = FALSE,
   }
 
   url_ <- paste(url_, input_request, sep = "")
-
   # append year range criteria to url if input by user
   if (!is.null(start_year) | !is.null(end_year)) {
 
