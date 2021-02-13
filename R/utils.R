@@ -93,7 +93,7 @@ clean_vrd_api <- function(api_output) {
   unclean_df <- as.data.frame(unlist(api_output$content$ResultSet, recursive = FALSE))
 
   # checks to verify dataframe is not empty
-  if (length(unclean_df)==0) stop("API query had no results", call. = FALSE)
+  if (length(unclean_df) == 0) stop("API query had no results", call. = FALSE)
 
   # prepares for transpose by removing headers and data type values
   df <- unclean_df[, grep("Literal", colnames(unclean_df))]
@@ -161,7 +161,7 @@ check_url <- function(url_) {
     }
   }
   # return NULL if no errors thrown by function
-  return (NULL)
+  return(NULL)
 }
 
 # helper function to skip unit tests if API key is not available
