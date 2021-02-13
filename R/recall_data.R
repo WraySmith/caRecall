@@ -129,7 +129,7 @@ recall_by_make <- function(make, manufacturer = FALSE,
 #' @examples
 #' \dontrun{
 #' recall_by_model("civic")
-#' recall_by_model(c("Subaru", "Toyota"), start_year = 2008, partial = FALSE)
+#' recall_by_model(c("ranger", "brz"), start_year = 2008, partial = TRUE)
 #' API_KEY <- "xxxxxxxxxxx"
 #' recall_by_model("Sub", end_year = 2000, limit = 100, api_key = API_KEY)
 #' }

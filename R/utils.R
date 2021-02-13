@@ -42,8 +42,6 @@ call_vrd_api <- function(url_, query = NULL, limit = NULL,
   # add limit to url (limit does not go in header)
   url_ <- paste(url_, "?limit=", toString(limit), sep = "")
 
-  print(url_)
-
   # set the user agent
   ua <- httr::user_agent("https://github.com/WraySmith/caRecall")
 
@@ -51,6 +49,7 @@ call_vrd_api <- function(url_, query = NULL, limit = NULL,
   headers <- httr::add_headers("user-key" = api_key)
 
   # query the API
+  check_url(url_)
   response <- httr::GET(url_, headers, ua)
 
   ### NEED TO PROVIDE MORE ERROR OUTPUT HERE
@@ -153,8 +152,10 @@ check_url <- function(url_){
         limit_substring <- gregexpr(pattern ='limit',url_)
         sub_string <- substring(url_, limit_substring)
         limit_as_string <- unlist(as.list(strsplit(sub_string, '=')[[1]])[2])
-        if (as.integer((limit_as_string)) < 1){
-          stop("Limit has to be greater or equal to 1")
+        if(!is.null(limit_as_string)){
+          if (as.integer((limit_as_string)) < 1){
+            stop("Limit has to be greater or equal to 1")
+          }
         }
     }
 

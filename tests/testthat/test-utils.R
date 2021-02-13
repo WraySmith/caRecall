@@ -42,12 +42,16 @@ test_that("Clean API returns formatted dataframe", {
 })
 
 test_that("Url format is correct",{
-  url_with_broken_year <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/make-name/Maz/year-range/2005-2000/count"
-  expect_error(check_url(url_with_broken_year))
+  url_with_broken_years <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/make-name/Maz/year-range/2005-2000/count"
+  expect_error(check_url(url_with_broken_years))
 
   url_with_bad_limit <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/model-name/911|ranger/year-range/2008-2100?limit=-10"
   expect_error(check_url(url_with_bad_limit))
 
   url_with_proper_format <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/make-name/Maz/year-range/1995-2000/count"
   check_url(url_with_proper_format)
+  url_with_limit <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/make-name/Maz/year-range/1995-2000/count?limit=10"
+  check_url(url_with_limit)
+  url_with_null_limit <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/make-name/Maz/year-range/1995-2000/count?limit="
+  check_url(url_with_null_limit)
 })
