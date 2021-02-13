@@ -54,7 +54,7 @@ recall_summary_2000
 ```
 
 The data could then be used to summarize manufacturers with the highest recall counts in the year:
-```{r include=FALSE}
+```{r, include=FALSE}
 counts_manu_2000 <- recall_summary_2000 %>%
   group_by(`Manufacturer Name`) %>%
   tally() %>%

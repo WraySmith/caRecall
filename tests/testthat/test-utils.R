@@ -1,4 +1,5 @@
 test_that("API key is retreived", {
+  skip_if_no_auth()
   expect_type(get_vrd_key(), "character")
 })
 
@@ -11,6 +12,7 @@ test_that("Bad API key correctly fails", {
 })
 
 test_that("API call returns correct structure", {
+  skip_if_no_auth()
   url_test <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/make-name/ford"
   query_test <- "ford"
   response <- call_vrd_api(url_test, query = query_test)
@@ -20,6 +22,7 @@ test_that("API call returns correct structure", {
 })
 
 test_that("Clean API returns formatted dataframe", {
+  skip_if_no_auth()
   # setup for one of the output structures
   # used for all functions except `recall_details()`
   url_test1 <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/make-name/ford"
@@ -41,13 +44,14 @@ test_that("Clean API returns formatted dataframe", {
   expect_equal(as.vector(sapply(clean_vrd_api(response2), typeof)), coltype2)
 })
 
-test_that("Url format is correct",{
+test_that("Url format is correct", {
+  # bad url returns error
   url_with_broken_years <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/make-name/Maz/year-range/2005-2000/count"
   expect_error(check_url(url_with_broken_years))
-
+  # bad url returns error
   url_with_bad_limit <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/model-name/911|ranger/year-range/2008-2100?limit=-10"
   expect_error(check_url(url_with_bad_limit))
-
+  # good urls pass
   url_with_proper_format <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/make-name/Maz/year-range/1995-2000/count"
   expect_equal(check_url(url_with_proper_format), NULL)
   url_with_limit <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/make-name/Maz/year-range/1995-2000/count?limit=10"

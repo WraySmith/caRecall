@@ -133,33 +133,42 @@ clean_vrd_api <- function(api_output) {
   tibble::as_tibble(df3)
 }
 
+# helper function to check for errors in url prior to API call
+# not a user facing function
+check_url <- function(url_) {
 
-check_url <- function(url_){
+  # check year range
+  if (grepl("year-range", url_, fixed = TRUE)) {
+    year_range_substring <- gregexpr(pattern = "year-range", url_)
+    sub_string <- substring(url_, year_range_substring)
+    years_as_string <- unlist(as.list(strsplit(sub_string, "/")[[1]])[2])
+    years <- as.list(strsplit(years_as_string, "-")[[1]])
+    start_year <- unlist(years[1])
+    end_year <- unlist(years[2])
+    if (start_year > end_year) {
+      stop("Start year must be less than or equal to the end year")
+    }
+  }
 
-    # check year range
-    if (grepl("year-range", url_, fixed = TRUE)){
-      year_range_substring <- gregexpr(pattern ='year-range',url_)
-      sub_string <- substring(url_, year_range_substring)
-      years_as_string <- unlist(as.list(strsplit(sub_string, '/')[[1]])[2])
-      years <- as.list(strsplit(years_as_string, '-')[[1]])
-      start_year <- unlist(years[1])
-      end_year <- unlist(years[2])
-      if (start_year > end_year){
-          stop("Start year must be less than or equal to the end year")
+  # test limit
+  if (grepl("limit", url_, fixed = TRUE)) {
+    limit_substring <- gregexpr(pattern = "limit", url_)
+    sub_string <- substring(url_, limit_substring)
+    limit_as_string <- unlist(as.list(strsplit(sub_string, "=")[[1]])[2])
+    if (!is.null(limit_as_string)) {
+      if (as.integer((limit_as_string)) < 1) {
+        stop("Limit has to be greater or equal to 1")
       }
     }
-
-    # test limit
-    if (grepl("limit", url_, fixed = TRUE)){
-        limit_substring <- gregexpr(pattern ='limit',url_)
-        sub_string <- substring(url_, limit_substring)
-        limit_as_string <- unlist(as.list(strsplit(sub_string, '=')[[1]])[2])
-        if(!is.null(limit_as_string)){
-          if (as.integer((limit_as_string)) < 1){
-            stop("Limit has to be greater or equal to 1")
-          }
-        }
-    }
-
+  }
+  # return NULL if no errors thrown by function
+  return (NULL)
 }
 
+# helper function to skip unit tests if API key is not available
+# not a user facing function
+skip_if_no_auth <- function() {
+  if (identical(Sys.getenv("VRD_API"), "")) {
+    testthat::skip("No authentication available")
+  }
+}

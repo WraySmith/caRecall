@@ -9,9 +9,12 @@ vignette: >
 ---
 
 ```{r, include = FALSE}
+NOT_CRAN <- identical(tolower(Sys.getenv("NOT_CRAN")), "true")
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  purl = NOT_CRAN,
+  eval = NOT_CRAN
 )
 library(RColorBrewer)
 ```
@@ -53,12 +56,12 @@ The `recall_by_make()`, `recall_by_model()`, `recall_by_years()`, and `recall_by
 - **api_key**: If an API key is not set in the environment, an access key can be passed directly into a function.
 
 An example of using `recall_by_model()` to search for the first five recalls by 'Ford' in 1998 would be as follows:
-```{r recall_by_make}
+```{r recall_by_make, eval = NOT_CRAN}
 recall_by_make("Ford", start_year = 1998, limit = 5)
 ```
 
 Or if a user wanted to search by manufactured year and return the first 10 entries between 1999 and 2001, `recall_by_years()` could be used:
-```{r recall_by_years}
+```{r recall_by_years, eval = NOT_CRAN}
 recall_by_years(start_year = 1999, end_year = 2001, limit = 10)
 ```
 
@@ -67,7 +70,7 @@ recall_by_years(start_year = 1999, end_year = 2001, limit = 10)
 The `count_recall_by_make()`, `count_recall_by_model()`, and `count_recall_by_years()` all return the number of recalls available in the VRD based on the search terms. It can be used to quickly get a count of recalls prior to making a query for summary information.
 
 For example, if a user is interesting in first determining the total number of recalls by the manufacturer 'GOODBABY' for all products manufactured up to 2008, the `count_recall_by_make()` could be used.
-```{r count_recall_by_make}
+```{r count_recall_by_make, eval = NOT_CRAN}
 count_recall_by_make("GOODBABY", manufacturer = TRUE, end_year = 1998)
 ```
 
@@ -78,7 +81,7 @@ The `recall_details()` function provides detailed recall information for a speci
 Note that each recall number provided to the function results in a separate API call. Accordingly, the rate of API calls is limited to one call per second to stay within the API limit. For example, providing a list of 60 recall numbers to the function would take approximately 1 minute to complete.
 
 For example, if a Ford Windstar with recall number of 1997118 was of interest:
-```{r recall_details}
+```{r recall_details, eval = NOT_CRAN}
 recall_windstar <- recall_details(1997118)
 t(recall_windstar) # transpose for readability
 ```
@@ -98,12 +101,12 @@ If the key is in the environment as `VRD_API` it will return the key value. If n
 
 ### Getting Data from the VRD
 Lets say we want to look in the VRD for the companies that had the most recalls with the items they manufactured in the year 2000. Fist we could see how many items manufactured in 2000 were recalled in the database.
-```{r eval = TRUE}
+```{r, eval = NOT_CRAN}
 count_recall_by_years(start_year = 2000, end_year = 2000)
 ```
 
 We could then query the database for the summary information associated with these recalls.
-```{r eval = TRUE}
+```{r, eval = NOT_CRAN}
 recall_summary_2000 <- recall_by_years(start_year = 2000, end_year = 2000, limit = 3000)
 recall_summary_2000
 ```
@@ -111,7 +114,7 @@ recall_summary_2000
 Note that we also could have also just set the `limit` argument to a high enough value that all entries in the database would likely be included in the summary information query; however, this could also result in returning a very large dataset if the number of available entries is very high.
 
 We can count the number of recalls for each company by grouping on the `Manufacturer name` column and summarizing the count. We'll only look at manufacturers with recall counts above 50.
-```{r data}
+```{r, eval = NOT_CRAN}
 counts_manu_2000 <- recall_summary_2000 %>%
   group_by(`Manufacturer Name`) %>%
   tally() %>%
@@ -120,7 +123,7 @@ counts_manu_2000
 ```
 
 There are 11 manufacturers with greater than 50 recalls for products manufactured in 2000.
-```{r plot, fig.width=7, fig.height=5, fig.align='center', warning=FALSE, message=FALSE}
+```{r plot, eval = NOT_CRAN, fig.width=7, fig.height=5, fig.align='center', warning=FALSE, message=FALSE}
 nb.cols <- 11
 mycolors <- colorRampPalette(brewer.pal(8, "Set2"))(nb.cols)
 
@@ -144,7 +147,7 @@ counts_manu_2000 %>%
 We could also look at how many recalls two manufacturers have had compared with each other over the over the last 10 years (2011 to 2020).
 
 We would start by querying the API for entries with the two manufacturers. This time, we'll just set the limit to be reasonably high instead of checking the count available in the database first.
-```{r}
+```{r, eval = NOT_CRAN}
 manu_comparison_list <- c("Ford", "Toyota")
 recall_comparison <- recall_by_make(manu_comparison_list, start_year = 2011, end_year = 2020, limit = 10000)
 recall_comparison
@@ -152,7 +155,7 @@ recall_comparison
 
 We can then plot the total amount of recalls for each year grouped by manufacturer.
 
-```{r plot2, fig.width=7, fig.height=5, fig.align='center', warnings = FALSE, message = FALSE}
+```{r plot2, eval = NOT_CRAN, fig.width=7, fig.height=5, fig.align='center', warnings = FALSE, message = FALSE}
 recall_comparison %>%
   ggplot() +
   aes(x=`Year`, color = `Make name`) + 
