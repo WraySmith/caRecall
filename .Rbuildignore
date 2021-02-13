@@ -12,3 +12,5 @@
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
+^vignettes/vrd_vignette\.Rmd\.orig$
+^vignettes/precompile\.R$
