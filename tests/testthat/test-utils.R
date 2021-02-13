@@ -40,3 +40,20 @@ test_that("Clean API returns formatted dataframe", {
   expect_equal(nrow(clean_vrd_api(response2)), 1)
   expect_equal(as.vector(sapply(clean_vrd_api(response2), typeof)), coltype2)
 })
+
+test_that("Url format is correct",{
+  url_with_broken_years <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/make-name/Maz/year-range/2005-2000/count"
+  expect_error(check_url(url_with_broken_years))
+
+  url_with_bad_limit <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/model-name/911|ranger/year-range/2008-2100?limit=-10"
+  expect_error(check_url(url_with_bad_limit))
+
+  url_with_proper_format <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/make-name/Maz/year-range/1995-2000/count"
+  expect_equal(check_url(url_with_proper_format), NULL)
+  url_with_limit <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/make-name/Maz/year-range/1995-2000/count?limit=10"
+  expect_equal(check_url(url_with_limit), NULL)
+  url_with_null_limit <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/make-name/Maz/year-range/1995-2000/count?limit="
+  expect_equal(check_url(url_with_null_limit), NULL)
+  url_with_no_years <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/make-name/Maz/count"
+  expect_equal(check_url(url_with_no_years), NULL)
+})

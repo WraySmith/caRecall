@@ -34,6 +34,8 @@ get_vrd_key <- function() {
 call_vrd_api <- function(url_, query = NULL, limit = NULL,
                          api_key = NULL) {
 
+
+
   # retrieve API key if no user key input to function call
   if (is.null(api_key)) api_key <- get_vrd_key()
 
@@ -47,6 +49,7 @@ call_vrd_api <- function(url_, query = NULL, limit = NULL,
   headers <- httr::add_headers("user-key" = api_key)
 
   # query the API
+  check_url(url_)
   response <- httr::GET(url_, headers, ua)
 
   ### NEED TO PROVIDE MORE ERROR OUTPUT HERE
@@ -128,3 +131,34 @@ clean_vrd_api <- function(api_output) {
   # output as tibble
   tibble::as_tibble(df)
 }
+
+
+check_url <- function(url_){
+
+    # check year range
+    if (grepl("year-range", url_, fixed = TRUE)){
+      year_range_substring <- gregexpr(pattern ='year-range',url_)
+      sub_string <- substring(url_, year_range_substring)
+      years_as_string <- unlist(as.list(strsplit(sub_string, '/')[[1]])[2])
+      years <- as.list(strsplit(years_as_string, '-')[[1]])
+      start_year <- unlist(years[1])
+      end_year <- unlist(years[2])
+      if (start_year > end_year){
+          stop("Start year must be less than or equal to the end year")
+      }
+    }
+
+    # test limit
+    if (grepl("limit", url_, fixed = TRUE)){
+        limit_substring <- gregexpr(pattern ='limit',url_)
+        sub_string <- substring(url_, limit_substring)
+        limit_as_string <- unlist(as.list(strsplit(sub_string, '=')[[1]])[2])
+        if(!is.null(limit_as_string)){
+          if (as.integer((limit_as_string)) < 1){
+            stop("Limit has to be greater or equal to 1")
+          }
+        }
+    }
+
+}
+
