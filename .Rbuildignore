@@ -14,3 +14,4 @@
 ^pkgdown$
 ^vignettes/vrd_vignette\.Rmd\.orig$
 ^vignettes/precompile\.R$
+^CRAN-RELEASE$
