@@ -1,6 +1,6 @@
 Package: caRecall
 Title: Government of Canada Vehicle Recalls Database API Wrapper
-Version: 0.0.0.9000
+Version: 0.1.0
 Authors@R: c(
     person("Nathan", "Smith", role = c("aut", "cre"),
            email = "nwraysmith@gmail.com"),
