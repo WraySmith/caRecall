@@ -86,46 +86,45 @@ call_vrd_api <- function(url_, query = NULL, limit = NULL,
 # returns a tibble of output
 clean_vrd_api <- function(api_output) {
 
-  # makes dataframe of output
-  df1 <- as.data.frame(unlist(api_output$content$ResultSet, recursive = FALSE))
+  # change from json to dataframe format
+  unclean_df <- as.data.frame(unlist(api_output$content$ResultSet, recursive = FALSE))
 
-  # only keeps columns with values
-  df2 <- df1[, grep("Literal", colnames(df1))]
+  # checks to verify dataframe is not empty
+  if (length(unclean_df)==0) stop("API query had no results", call. = FALSE)
+
+  # prepares for transpose by removing headers and data type values
+  df <- unclean_df[, grep("Literal", colnames(unclean_df))]
 
   # transposes dataframe
-  df3 <- as.data.frame(t(df2), row.names = 1)
+  df <- as.data.frame(t(df), row.names = 1)
 
-  # adds back the correct column names
-  colnames(df3) <- df1$Name
+  # adds column names
+  colnames(df) <- unclean_df$Name
 
-  # checks column types
-  col_type <- df1[, grep("Type", colnames(df1))]
+  # checks data type values to change in data frame
+  col_type <- unclean_df[, grep("Type", colnames(unclean_df))]
 
-  # check for single row
-  if (is.list(col_type)) {
-    col_type <- col_type[[1]]
-  }
+  # check for single row which is not a list
+  if (is.list(col_type)) col_type <- col_type[[1]]
 
-  # assigns columns
+  # assigns columns types
   i <- 1
   for (element in col_type) {
 
-    # change df type
-    if (element == "System.Decimal") {
-      df3[[i]] <- as.integer(df3[[i]])
-    }
+    # change df column types
+    if (element == "System.Decimal") df[[i]] <- as.integer(df[[i]])
     if (element == "System.DateTime") {
-      df3[[i]] <- as.Date(
+      df[[i]] <- as.Date(
         substr(
-          df3[[i]],
+          df[[i]],
           1,
-          nchar(df3[[i]]) - 11
+          nchar(df[[i]]) - 11
         ),
         "%m/%d/%Y"
       )
     }
     i <- i + 1
   }
-  # output dataframe
-  tibble::as_tibble(df3)
+  # output as tibble
+  tibble::as_tibble(df)
 }
