@@ -49,11 +49,11 @@ test_that("Url format is correct",{
   expect_error(check_url(url_with_bad_limit))
 
   url_with_proper_format <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/make-name/Maz/year-range/1995-2000/count"
-  check_url(url_with_proper_format)
+  expect_equal(check_url(url_with_proper_format), NULL)
   url_with_limit <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/make-name/Maz/year-range/1995-2000/count?limit=10"
-  check_url(url_with_limit)
+  expect_equal(check_url(url_with_limit), NULL)
   url_with_null_limit <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/make-name/Maz/year-range/1995-2000/count?limit="
-  check_url(url_with_null_limit)
+  expect_equal(check_url(url_with_null_limit), NULL)
   url_with_no_years <- "https://vrdb-tc-apicast-production.api.canada.ca/eng/vehicle-recall-database/v1/recall/make-name/Maz/count"
-  check_url(url_with_no_years)
+  expect_equal(check_url(url_with_no_years), NULL)
 })
