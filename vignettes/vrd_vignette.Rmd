@@ -18,7 +18,7 @@ library(RColorBrewer)
 
 ## Introduction
 
-The `caRecall` package is an API wrapper for the Government of Canada [Vehicle Recalls Database (VRD)](https://tc.api.canada.ca/en/detail?api=VRDB) used by the Defect Investigations and Recalls Division for vehicles, tires, and child car seats. The API wrapper provides access to recall summary information searchable by make, model, and year range, as well as detailed recall information searchable by recall number.
+The `caRecall` package is an API wrapper for the Government of Canada [Vehicle Recalls Database (VRD)](https://tc.api.canada.ca/en/detail?api=VRDB) used by the Defect Investigations and Recalls Division for vehicles, tires, and child car seats. The API wrapper provides access to recall summary information searched using make, model, and year range, as well as detailed recall information searched using recall number.
 
 This vignette provides an overview of the functions available in `caRecall` and provides a demonstration of using the package to extract information from the VRD. In addition to `caRecall`, this vignette makes use of the [dplyr](https://dplyr.tidyverse.org/) and [ggplot2](https://ggplot2.tidyverse.org/) packages.
 

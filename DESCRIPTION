@@ -10,8 +10,8 @@ Description: Provides API access to the Government of Canada Vehicle Recalls
     Database <https://tc.api.canada.ca/en/detail?api=VRDB> used by the Defect 
     Investigations and Recalls Division for vehicles, tires, and child car 
     seats. The API wrapper provides access to recall summary information 
-    searchable by make, model, and year range, as well as detailed recall 
-    information searchable by recall number.
+    searched using make, model, and year range, as well as detailed recall 
+    information searched using recall number.
 URL: https://github.com/WraySmith/caRecall
 BugReports: https://github.com/WraySmith/caRecall/issues
 License: MIT + file LICENSE

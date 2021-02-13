@@ -15,8 +15,8 @@ The `caRecall` package is an API wrapper for the Government of Canada
 (VRD)](https://tc.api.canada.ca/en/detail?api=VRDB) used by the Defect
 Investigations and Recalls Division for vehicles, tires, and child car
 seats. The API wrapper provides access to recall summary information
-searchable by make, model, and year range, as well as detailed recall
-information searchable by recall number.
+searched using make, model, and year range, as well as detailed recall
+information searched using recall number.
 
 The package focuses on querying data from the VRD API to return the
 following:
