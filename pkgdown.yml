@@ -3,7 +3,7 @@ pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   vrd_vignette: vrd_vignette.html
-last_built: 2021-02-12T18:30Z
+last_built: 2021-02-13T01:17Z
 urls:
   reference: https://wraysmith.github.io/caRecall//reference
   article: https://wraysmith.github.io/caRecall//articles
