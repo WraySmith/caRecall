@@ -44,7 +44,7 @@ The `caRecall` package focuses on querying data from the Vehicle Recalls Databas
 - Recall counts
 - Detailed recall information
 
-#### Recall Summary Information
+### Recall Summary Information
 
 The `recall_by_make()`, `recall_by_model()`, `recall_by_years()`, and `recall_by_number()` functions all retrieve recall summary information from the VRD based on user search terms. An overview of the search terms and function arguments includes:
 
@@ -74,7 +74,7 @@ For example, if a user is interesting in first determining the total number of r
 count_recall_by_make("GOODBABY", manufacturer = TRUE, end_year = 1998)
 ```
 
-#### Detailed Recall Information
+### Detailed Recall Information
 
 The `recall_details()` function provides detailed recall information for a specified recall number. The information includes details of what the recall is for (for example, 'Seats and Restraints') as well as a description on the reason for the recall. This function can only use a recall number search term and therefore likely requires prior searching using the summary recall functions to determine recall numbers of interest. 
 
@@ -83,7 +83,7 @@ Note that each recall number provided to the function results in a separate API 
 For example, if a Ford Windstar with recall number of 1997118 was of interest:
 ```{r recall_details, eval = NOT_CRAN}
 recall_windstar <- recall_details(1997118)
-t(recall_windstar) # transpose for readability
+tibble(t(recall_windstar)) # transpose for readability
 ```
 
 ## Example
