@@ -66,7 +66,6 @@ count_recall_by_make <- function(make, manufacturer = FALSE, start_year = NULL,
 
   # add count to url
   url_ <- paste(url_, "/count", sep = "")
-  print(url_)
 
   # API call, returns class vrd_api
   api_output <- call_vrd_api(url_, make, api_key = api_key)
