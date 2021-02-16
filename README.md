@@ -8,6 +8,7 @@
 [![R-CMD-check](https://github.com/WraySmith/caRecall/workflows/R-CMD-check/badge.svg)](https://github.com/WraySmith/caRecall/actions)
 [![Codecov test
 coverage](https://codecov.io/gh/WraySmith/caRecall/branch/main/graph/badge.svg)](https://codecov.io/gh/WraySmith/caRecall?branch=main)
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/caRecall)](https://cran.r-project.org/package=caRecall)
 <!-- badges: end -->
 
 The `caRecall` package is an API wrapper for the Government of Canada
@@ -26,6 +27,13 @@ following:
 -   Detailed recall information
 
 ## Installation
+
+You can install the released version 0.1.0 of caRecall from
+[CRAN](https://CRAN.R-project.org) with:
+
+``` r
+install.packages("caRecall")
+```
 
 The development version of the `caRecall` package can be installed from
 [GitHub](https://github.com/) with:

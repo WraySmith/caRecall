@@ -22,6 +22,7 @@ library(RColorBrewer)
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/WraySmith/caRecall/workflows/R-CMD-check/badge.svg)](https://github.com/WraySmith/caRecall/actions)
 [![Codecov test coverage](https://codecov.io/gh/WraySmith/caRecall/branch/main/graph/badge.svg)](https://codecov.io/gh/WraySmith/caRecall?branch=main)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/caRecall)](https://cran.r-project.org/package=caRecall)
 <!-- badges: end -->
 
 The `caRecall` package is an API wrapper for the Government of Canada [Vehicle Recalls Database (VRD)](https://tc.api.canada.ca/en/detail?api=VRDB) used by the Defect Investigations and Recalls Division for vehicles, tires, and child car seats. The API wrapper provides access to recall summary information searched using make, model, and year range, as well as detailed recall information searched using recall number.
@@ -33,6 +34,12 @@ The package focuses on querying data from the VRD API to return the following:
 - Detailed recall information
 
 ## Installation
+
+You can install the released version 0.1.0 of caRecall from [CRAN](https://CRAN.R-project.org) with:
+
+``` r
+install.packages("caRecall")
+```
 
 The development version of the `caRecall` package can be installed from [GitHub](https://github.com/) with:
 
